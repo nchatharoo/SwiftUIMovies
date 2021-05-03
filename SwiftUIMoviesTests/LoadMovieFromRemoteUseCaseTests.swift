@@ -15,10 +15,15 @@ class RemoteMovieLoader {
         self.url = url
         self.client = client
     }
+    
+    func load(from url: URL) {
+        HTTPClientSpy.shared.requestedURL = URL(string: "https://a-url.com")
+    }
 }
 
 class HTTPClientSpy {
-    var requestedURLs = [Any]()
+    static let shared = HTTPClientSpy()
+    var requestedURL: URL?
 }
 
 class LoadMovieFromRemoteUseCaseTests: XCTestCase {
@@ -26,7 +31,15 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
         
-        XCTAssertTrue(client.requestedURLs.isEmpty)
+        XCTAssertNil(client.requestedURL)
+    }
+    
+    func test_load_requestDataFRomURL() {
+        let url = URL(string: "http://any-url.com")!
+        let (sut, client) = makeSUT()
+        
+        sut.load(from: url)
+        XCTAssertNil(client.requestedURL)
     }
     
     // MARK: - Helpers
