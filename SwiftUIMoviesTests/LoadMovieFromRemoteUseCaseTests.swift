@@ -17,12 +17,19 @@ class RemoteMovieLoader {
     }
     
     func load(from url: URL) {
-        HTTPClientSpy.shared.requestedURL = URL(string: "https://a-url.com")
+        HTTPClient.shared.get(from: URL(string: "https://a-url.com")!)
     }
 }
 
-class HTTPClientSpy {
-    static let shared = HTTPClientSpy()
+class HTTPClient {
+    static var shared = HTTPClient()
+    func get(from url: URL) {}
+}
+
+class HTTPClientSpy: HTTPClient {
+    override func get(from url: URL) {
+        requestedURL = url
+    }
     var requestedURL: URL?
 }
 
