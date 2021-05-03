@@ -17,6 +17,7 @@
 		8ECE10C926404693006B1E4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE10C826404693006B1E4D /* Preview Assets.xcassets */; };
 		8ECE10D526404693006B1E4D /* SwiftUIMoviesMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10D426404693006B1E4D /* SwiftUIMoviesMacTests.swift */; };
 		8ECE10EF2640753B006B1E4D /* LoadMovieFromRemoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10EE2640753B006B1E4D /* LoadMovieFromRemoteUseCaseTests.swift */; };
+		8ECE10F226408057006B1E4D /* RemoteMovieLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10F126408056006B1E4D /* RemoteMovieLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		8ECE10D626404693006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECE10ED2640753A006B1E4D /* SwiftUIMoviesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftUIMoviesTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8ECE10EE2640753B006B1E4D /* LoadMovieFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMovieFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
+		8ECE10F126408056006B1E4D /* RemoteMovieLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				8ECE10BA264044A0006B1E4D /* SwiftUIMovies.entitlements */,
 				8ECE108F26403E2C006B1E4D /* SwiftUIMoviesApp.swift */,
 				8ECE109126403E2C006B1E4D /* ContentView.swift */,
+				8ECE10F026408041006B1E4D /* Movie API */,
 				8ECE109326403E2E006B1E4D /* Assets.xcassets */,
 				8ECE109826403E2E006B1E4D /* Info.plist */,
 				8ECE109526403E2E006B1E4D /* Preview Content */,
@@ -173,6 +176,14 @@
 				8ECE10D626404693006B1E4D /* Info.plist */,
 			);
 			path = SwiftUIMoviesMacTests;
+			sourceTree = "<group>";
+		};
+		8ECE10F026408041006B1E4D /* Movie API */ = {
+			isa = PBXGroup;
+			children = (
+				8ECE10F126408056006B1E4D /* RemoteMovieLoader.swift */,
+			);
+			path = "Movie API";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ECE10F226408057006B1E4D /* RemoteMovieLoader.swift in Sources */,
 				8ECE109226403E2C006B1E4D /* ContentView.swift in Sources */,
 				8ECE109026403E2C006B1E4D /* SwiftUIMoviesApp.swift in Sources */,
 			);
