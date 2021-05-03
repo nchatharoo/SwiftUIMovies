@@ -9,25 +9,24 @@ import XCTest
 
 class RemoteMovieLoader {
     private let url: URL
-    private let client: HTTPClientSpy
+    private let client: HTTPClient
     
-    init(url: URL, client: HTTPClientSpy) {
+    init(url: URL, client: HTTPClient) {
         self.url = url
         self.client = client
     }
     
-    func load(from url: URL) {
-        HTTPClient.shared.get(from: URL(string: "https://a-url.com")!)
+    func load() {
+        client.get(from: URL(string: "https://a-url.com")!)
     }
 }
 
-class HTTPClient {
-    static var shared = HTTPClient()
-    func get(from url: URL) {}
+protocol HTTPClient {
+    func get(from url: URL)
 }
 
 class HTTPClientSpy: HTTPClient {
-    override func get(from url: URL) {
+    func get(from url: URL) {
         requestedURL = url
     }
     var requestedURL: URL?
@@ -42,11 +41,10 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
     }
     
     func test_load_requestDataFRomURL() {
-        let url = URL(string: "http://any-url.com")!
         let (sut, client) = makeSUT()
         
-        sut.load(from: url)
-        XCTAssertNil(client.requestedURL)
+        sut.load()
+        XCTAssertNotNil(client.requestedURL)
     }
     
     // MARK: - Helpers
