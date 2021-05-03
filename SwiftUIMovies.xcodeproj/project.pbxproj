@@ -16,17 +16,11 @@
 		8ECE10C626404693006B1E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE10C526404693006B1E4D /* Assets.xcassets */; };
 		8ECE10C926404693006B1E4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE10C826404693006B1E4D /* Preview Assets.xcassets */; };
 		8ECE10D526404693006B1E4D /* SwiftUIMoviesMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10D426404693006B1E4D /* SwiftUIMoviesMacTests.swift */; };
+		8ECE10EF2640753B006B1E4D /* LoadMovieFromRemoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10EE2640753B006B1E4D /* LoadMovieFromRemoteUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		8ECE109E26403E2E006B1E4D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8ECE108426403E2C006B1E4D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8ECE108B26403E2C006B1E4D;
-			remoteInfo = SwiftUIMovies;
-		};
-		8ECE10A926403E2E006B1E4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8ECE108426403E2C006B1E4D /* Project object */;
 			proxyType = 1;
@@ -51,7 +45,6 @@
 		8ECE109826403E2E006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECE109D26403E2E006B1E4D /* SwiftUIMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECE10A326403E2E006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8ECE10A826403E2E006B1E4D /* SwiftUIMoviesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIMoviesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECE10BA264044A0006B1E4D /* SwiftUIMovies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftUIMovies.entitlements; sourceTree = "<group>"; };
 		8ECE10BF26404692006B1E4D /* SwiftUIMoviesMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIMoviesMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECE10C126404692006B1E4D /* SwiftUIMoviesMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesMacApp.swift; sourceTree = "<group>"; };
@@ -63,6 +56,8 @@
 		8ECE10D026404693006B1E4D /* SwiftUIMoviesMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIMoviesMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECE10D426404693006B1E4D /* SwiftUIMoviesMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesMacTests.swift; sourceTree = "<group>"; };
 		8ECE10D626404693006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8ECE10ED2640753A006B1E4D /* SwiftUIMoviesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftUIMoviesTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		8ECE10EE2640753B006B1E4D /* LoadMovieFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMovieFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,13 +69,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8ECE109A26403E2E006B1E4D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8ECE10A526403E2E006B1E4D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -120,7 +108,6 @@
 			children = (
 				8ECE108C26403E2C006B1E4D /* SwiftUIMovies.app */,
 				8ECE109D26403E2E006B1E4D /* SwiftUIMoviesTests.xctest */,
-				8ECE10A826403E2E006B1E4D /* SwiftUIMoviesUITests.xctest */,
 				8ECE10BF26404692006B1E4D /* SwiftUIMoviesMac.app */,
 				8ECE10D026404693006B1E4D /* SwiftUIMoviesMacTests.xctest */,
 			);
@@ -152,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				8ECE10A326403E2E006B1E4D /* Info.plist */,
+				8ECE10EE2640753B006B1E4D /* LoadMovieFromRemoteUseCaseTests.swift */,
+				8ECE10ED2640753A006B1E4D /* SwiftUIMoviesTests-Bridging-Header.h */,
 			);
 			path = SwiftUIMoviesTests;
 			sourceTree = "<group>";
@@ -224,24 +213,6 @@
 			productReference = 8ECE109D26403E2E006B1E4D /* SwiftUIMoviesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8ECE10A726403E2E006B1E4D /* SwiftUIMoviesUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8ECE10B726403E2E006B1E4D /* Build configuration list for PBXNativeTarget "SwiftUIMoviesUITests" */;
-			buildPhases = (
-				8ECE10A426403E2E006B1E4D /* Sources */,
-				8ECE10A526403E2E006B1E4D /* Frameworks */,
-				8ECE10A626403E2E006B1E4D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8ECE10AA26403E2E006B1E4D /* PBXTargetDependency */,
-			);
-			name = SwiftUIMoviesUITests;
-			productName = SwiftUIMoviesUITests;
-			productReference = 8ECE10A826403E2E006B1E4D /* SwiftUIMoviesUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		8ECE10BE26404692006B1E4D /* SwiftUIMoviesMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8ECE10E226404693006B1E4D /* Build configuration list for PBXNativeTarget "SwiftUIMoviesMac" */;
@@ -291,10 +262,7 @@
 					};
 					8ECE109C26403E2E006B1E4D = {
 						CreatedOnToolsVersion = 12.5;
-						TestTargetID = 8ECE108B26403E2C006B1E4D;
-					};
-					8ECE10A726403E2E006B1E4D = {
-						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 						TestTargetID = 8ECE108B26403E2C006B1E4D;
 					};
 					8ECE10BE26404692006B1E4D = {
@@ -321,7 +289,6 @@
 			targets = (
 				8ECE108B26403E2C006B1E4D /* SwiftUIMovies */,
 				8ECE109C26403E2E006B1E4D /* SwiftUIMoviesTests */,
-				8ECE10A726403E2E006B1E4D /* SwiftUIMoviesUITests */,
 				8ECE10BE26404692006B1E4D /* SwiftUIMoviesMac */,
 				8ECE10CF26404693006B1E4D /* SwiftUIMoviesMacTests */,
 			);
@@ -339,13 +306,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8ECE109B26403E2E006B1E4D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8ECE10A626403E2E006B1E4D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -384,13 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8ECE10A426403E2E006B1E4D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				8ECE10EF2640753B006B1E4D /* LoadMovieFromRemoteUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,11 +372,6 @@
 			isa = PBXTargetDependency;
 			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMovies */;
 			targetProxy = 8ECE109E26403E2E006B1E4D /* PBXContainerItemProxy */;
-		};
-		8ECE10AA26403E2E006B1E4D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMovies */;
-			targetProxy = 8ECE10A926403E2E006B1E4D /* PBXContainerItemProxy */;
 		};
 		8ECE10D226404693006B1E4D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -601,6 +550,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				INFOPLIST_FILE = SwiftUIMoviesTests/Info.plist;
@@ -612,6 +562,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.SwiftUIMoviesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftUIMoviesTests/SwiftUIMoviesTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIMovies.app/SwiftUIMovies";
@@ -623,6 +575,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				INFOPLIST_FILE = SwiftUIMoviesTests/Info.plist;
@@ -634,49 +587,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.SwiftUIMoviesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftUIMoviesTests/SwiftUIMoviesTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIMovies.app/SwiftUIMovies";
-			};
-			name = Release;
-		};
-		8ECE10B826403E2E006B1E4D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P9CD4D4F5T;
-				INFOPLIST_FILE = SwiftUIMoviesUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.SwiftUIMoviesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SwiftUIMovies;
-			};
-			name = Debug;
-		};
-		8ECE10B926403E2E006B1E4D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P9CD4D4F5T;
-				INFOPLIST_FILE = SwiftUIMoviesUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.SwiftUIMoviesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SwiftUIMovies;
 			};
 			name = Release;
 		};
@@ -802,15 +716,6 @@
 			buildConfigurations = (
 				8ECE10B526403E2E006B1E4D /* Debug */,
 				8ECE10B626403E2E006B1E4D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8ECE10B726403E2E006B1E4D /* Build configuration list for PBXNativeTarget "SwiftUIMoviesUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8ECE10B826403E2E006B1E4D /* Debug */,
-				8ECE10B926403E2E006B1E4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
