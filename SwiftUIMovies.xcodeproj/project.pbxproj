@@ -11,7 +11,6 @@
 		8ECE109226403E2C006B1E4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE109126403E2C006B1E4D /* ContentView.swift */; };
 		8ECE109426403E2E006B1E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE109326403E2E006B1E4D /* Assets.xcassets */; };
 		8ECE109726403E2E006B1E4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE109626403E2E006B1E4D /* Preview Assets.xcassets */; };
-		8ECE10A226403E2E006B1E4D /* SwiftUIMoviesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10A126403E2E006B1E4D /* SwiftUIMoviesTests.swift */; };
 		8ECE10C226404692006B1E4D /* SwiftUIMoviesMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10C126404692006B1E4D /* SwiftUIMoviesMacApp.swift */; };
 		8ECE10C426404692006B1E4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10C326404692006B1E4D /* ContentView.swift */; };
 		8ECE10C626404693006B1E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE10C526404693006B1E4D /* Assets.xcassets */; };
@@ -51,7 +50,6 @@
 		8ECE109626403E2E006B1E4D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8ECE109826403E2E006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECE109D26403E2E006B1E4D /* SwiftUIMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8ECE10A126403E2E006B1E4D /* SwiftUIMoviesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesTests.swift; sourceTree = "<group>"; };
 		8ECE10A326403E2E006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECE10A826403E2E006B1E4D /* SwiftUIMoviesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIMoviesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECE10BA264044A0006B1E4D /* SwiftUIMovies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftUIMovies.entitlements; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 		8ECE10A026403E2E006B1E4D /* SwiftUIMoviesTests */ = {
 			isa = PBXGroup;
 			children = (
-				8ECE10A126403E2E006B1E4D /* SwiftUIMoviesTests.swift */,
 				8ECE10A326403E2E006B1E4D /* Info.plist */,
 			);
 			path = SwiftUIMoviesTests;
@@ -387,7 +384,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8ECE10A226403E2E006B1E4D /* SwiftUIMoviesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
