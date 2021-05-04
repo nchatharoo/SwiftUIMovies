@@ -96,7 +96,7 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
         let (sut, client) = makeSUT()
 
         expect(sut, toCompleteWith: .success([]), when: {
-                let emptyListJSON = Data("{\"items\": []}".utf8)
+                let emptyListJSON = Data("{\"results\": []}".utf8)
                 client.complete(withStatusCode: 200, data: emptyListJSON)
         })
     }
@@ -104,29 +104,15 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
     func test_load_deliversErrorOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
         
-        let item1 = Movie(id: 338762, title: "Bloodshot", backdropPath: "\\/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg", posterPath: "\\/8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg", overview: "After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine—'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought.", voteAverage: 7.1, voteCount: 418, runtime: nil, releaseDate: "2020-03-05", genres: nil, credits: nil, videos: nil)
+        let item1 = makeItem(id: 338762, title: "Bloodshot", backdropPath: "\\/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg", posterPath: "\\/8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg", overview: "After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine—'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought.", voteAverage: 7.1, voteCount: 418, runtime: nil, releaseDate: "2020-03-05", genres: nil, credits: nil, videos: nil)
         
-        let item1JSON = [
-            "id": item1.id,
-            "posterPath": item1.posterPath!
-        ] as [String : Any]
+        let item2 = makeItem(id: 618344, title: "Justice League Dark: Apokolips War", backdropPath: "\\/sQkRiQo3nLrQYMXZodDjNUJKHZV.jpg", posterPath: "\\/c01Y4suApJ1Wic2xLmaq1QYcfoZ.jpg", overview: "Earth is decimated after intergalactic tyrant Darkseid has devastated the Justice League in a poorly executed war by the DC Super Heroes. Now the remaining bastions of good – the Justice League, Teen Titans, Suicide Squad and assorted others – must regroup, strategize and take the war to Darkseid in order to save the planet and its surviving inhabitants.", voteAverage: 8.5, voteCount: 418, runtime: nil, releaseDate: "2020-05-05", genres: nil, credits: nil, videos: nil)
         
-        let item2 = Movie(id: 618344, title: "Justice League Dark: Apokolips War", backdropPath: "\\/sQkRiQo3nLrQYMXZodDjNUJKHZV.jpg", posterPath: "\\/c01Y4suApJ1Wic2xLmaq1QYcfoZ.jpg", overview: "Earth is decimated after intergalactic tyrant Darkseid has devastated the Justice League in a poorly executed war by the DC Super Heroes. Now the remaining bastions of good – the Justice League, Teen Titans, Suicide Squad and assorted others – must regroup, strategize and take the war to Darkseid in order to save the planet and its surviving inhabitants.", voteAverage: 8.5, voteCount: 418, runtime: nil, releaseDate: "2020-05-05", genres: nil, credits: nil, videos: nil)
         
-        let item2JSON = [
-            "id": item2.id,
-            "overview": item2.overview,
-            "voteAverage": item2.voteAverage,
-            "posterPath": item2.posterPath!
-        ] as [String : Any]
+        let items = [item1.model, item2.model]
         
-        let itemsJSON = [
-            "items": [item1JSON, item2JSON]
-        ]
-        
-        print(itemsJSON)
-        expect(sut, toCompleteWith: .success([item1, item2]), when: {
-            let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
+        expect(sut, toCompleteWith: .success(items), when: {
+            let json = try! JSONSerialization.data(withJSONObject: [item1.json, item2.json])
             client.complete(withStatusCode: 200, data: json)
         })
     }
@@ -147,5 +133,31 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
         action()
         
         XCTAssertEqual(capturedResults, [result], file: file, line: line)
+    }
+    
+    private func makeItem(id: Int, title: String, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [MovieGenre]?, credits: MovieCredit?, videos: MovieVideoResponse?) -> (model: Movie, json: [String: Any]) {
+        let item = Movie(id: id, title: title, backdropPath: backdropPath, posterPath: posterPath, overview: overview, voteAverage: voteAverage, voteCount: voteCount, runtime: runtime, releaseDate: releaseDate, genres: genres, credits: credits, videos: videos)
+        
+        let json = [
+            "id": item.id,
+            "title": item.title,
+            "backdropPath": item.backdropPath ?? "",
+            "posterPath": item.posterPath ?? "",
+            "overview": item.overview,
+            "voteAverage": item.voteAverage,
+            "voteCount": item.voteCount,
+            "runtime": item.runtime ?? 0,
+            "releaseDate": item.releaseDate ?? "",
+            "genres": item.genres ?? "",
+            "credits": item.credits ?? "",
+            "videos": item.videos ?? ""
+        ].compactMapValues { $0 }
+        
+        return (item, json)
+    }
+    
+    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
+        let json = ["items": items]
+        return try! JSONSerialization.data(withJSONObject: json)
     }
 }
