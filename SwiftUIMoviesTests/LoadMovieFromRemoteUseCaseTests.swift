@@ -65,13 +65,10 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
     func test_load_deliversErrorOnClientError() {
         let (sut, client) = makeSUT()
         
-        var capturedErrors = [RemoteMovieLoader.Error]()
-        sut.load { capturedErrors.append($0) }
-        
-        let clientError = NSError(domain: "Test", code: 0)
-        client.complete(with: clientError)
-        
-        XCTAssertEqual(capturedErrors, [.connectivity])
+        expect(sut, completeWithError: .connectivity, when: {
+            let clientError = NSError(domain: "Test", code: 0)
+            client.complete(with: clientError)
+        })
     }
     
     func test_load_deliversErrorOnNon200HTTPResponse() {
@@ -79,26 +76,20 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
         
         let samples = [199, 201, 300, 400, 500]
         
-        samples.enumerated().forEach { index, code in
-            var capturedErrors = [RemoteMovieLoader.Error]()
-            sut.load { capturedErrors.append($0) }
-            
-            client.complete(withStatusCode: code, at: index)
-            
-            XCTAssertEqual(capturedErrors, [.invalidData])
+        samples.enumerated().forEach{ index, code in
+            expect(sut, completeWithError: .invalidData, when: {
+                client.complete(withStatusCode: code, at: index)
+            })
         }
     }
     
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
         
-        var capturedErrors = [RemoteMovieLoader.Error]()
-        sut.load { capturedErrors.append($0) }
-        
-        let invalidJSON = Data("invalid json".utf8)
-        client.complete(withStatusCode: 200, data: invalidJSON)
-        
-        XCTAssertEqual(capturedErrors, [.invalidData])
+        expect(sut, completeWithError: .invalidData, when: {
+            let invalidJSON = Data("invalid json".utf8)
+            client.complete(withStatusCode: 200, data: invalidJSON)
+        })
     }
 
     // MARK: - Helpers
@@ -108,5 +99,13 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
         let sut = RemoteMovieLoader(url: url, client: client)
         return (sut, client)
     }
-
+    
+    private func expect(_ sut: RemoteMovieLoader, completeWithError error: RemoteMovieLoader.Error, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        var capturedErrors = [RemoteMovieLoader.Error]()
+        sut.load { capturedErrors.append($0) }
+        
+        action()
+        
+        XCTAssertEqual(capturedErrors, [error], file: file, line: line)
+    }
 }
