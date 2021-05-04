@@ -78,7 +78,8 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
         
         samples.enumerated().forEach{ index, code in
             expect(sut, toCompleteWith: .failure(.invalidData), when: {
-                client.complete(withStatusCode: code, at: index)
+                let json = makeItemsJSON([])
+                client.complete(withStatusCode: code, data: json, at: index)
             })
         }
     }
@@ -157,7 +158,7 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
     }
     
     private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
-        let json = ["items": items]
+        let json = ["results": items]
         return try! JSONSerialization.data(withJSONObject: json)
     }
 }
