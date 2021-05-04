@@ -101,11 +101,11 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
     }
     
     private func expect(_ sut: RemoteMovieLoader, completeWithError error: RemoteMovieLoader.Error, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        var capturedErrors = [RemoteMovieLoader.Error]()
-        sut.load { capturedErrors.append($0) }
-        
+        var capturedResults = [RemoteMovieLoader.Result]()
+        sut.load { capturedResults.append($0) }
+
         action()
         
-        XCTAssertEqual(capturedErrors, [error], file: file, line: line)
+        XCTAssertEqual(capturedResults, [.failure(error)], file: file, line: line)
     }
 }
