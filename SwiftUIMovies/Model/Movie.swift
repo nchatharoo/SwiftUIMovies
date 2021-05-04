@@ -8,23 +8,38 @@
 import Foundation
 
 public struct Movie: Decodable, Equatable {
+    public init(id: Int, title: String, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [MovieGenre]?, credits: MovieCredit?, videos: MovieVideoResponse?) {
+        self.id = id
+        self.title = title
+        self.backdropPath = backdropPath
+        self.posterPath = posterPath
+        self.overview = overview
+        self.voteAverage = voteAverage
+        self.voteCount = voteCount
+        self.runtime = runtime
+        self.releaseDate = releaseDate
+        self.genres = genres
+        self.credits = credits
+        self.videos = videos
+    }
+    
     public static func == (lhs: Movie, rhs: Movie) -> Bool {
         lhs.id == rhs.id
     }
     
-    let id: Int
-    let title: String
-    let backdropPath: String?
-    let posterPath: String?
-    let overview: String
-    let voteAverage: Double
-    let voteCount: Int
-    let runtime: Int?
-    let releaseDate: String?
+    public let id: Int
+    public let title: String
+    public let backdropPath: String?
+    public let posterPath: String?
+    public let overview: String
+    public let voteAverage: Double
+    public let voteCount: Int
+    public let runtime: Int?
+    public let releaseDate: String?
     
-    let genres: [MovieGenre]?
-    let credits: MovieCredit?
-    let videos: MovieVideoResponse?
+    public let genres: [MovieGenre]?
+    public let credits: MovieCredit?
+    public let videos: MovieVideoResponse?
     
     static private let yearFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -109,40 +124,69 @@ public struct Movie: Decodable, Equatable {
     
 }
 
-struct MovieGenre: Decodable {
+public struct MovieGenre: Decodable {
+    public init(name: String) {
+        self.name = name
+    }
+    public let name: String
+}
+
+public struct MovieCredit: Decodable {
+    public init(cast: [MovieCast], crew: [MovieCrew]) {
+        self.cast = cast
+        self.crew = crew
+    }
     
-    let name: String
-}
-
-struct MovieCredit: Decodable {
     
-    let cast: [MovieCast]
-    let crew: [MovieCrew]
+    public let cast: [MovieCast]
+    public let crew: [MovieCrew]
 }
 
-struct MovieCast: Decodable {
-    let id: Int
-    let character: String
-    let name: String
-}
-
-struct MovieCrew: Decodable {
-    let id: Int
-    let job: String
-    let name: String
-}
-
-struct MovieVideoResponse: Decodable {
+public struct MovieCast: Decodable {
+    public init(id: Int, character: String, name: String) {
+        self.id = id
+        self.character = character
+        self.name = name
+    }
     
-    let results: [MovieVideo]
+    public let id: Int
+    public let character: String
+    public let name: String
 }
 
-struct MovieVideo: Decodable {
+public struct MovieCrew: Decodable {
+    public init(id: Int, job: String, name: String) {
+        self.id = id
+        self.job = job
+        self.name = name
+    }
     
-    let id: String
-    let key: String
-    let name: String
-    let site: String
+    public let id: Int
+    public let job: String
+    public let name: String
+}
+
+public struct MovieVideoResponse: Decodable {
+    public init(results: [MovieVideo]) {
+        self.results = results
+    }
+    
+    
+    public let results: [MovieVideo]
+}
+
+public struct MovieVideo: Decodable {
+    public init(id: String, key: String, name: String, site: String) {
+        self.id = id
+        self.key = key
+        self.name = name
+        self.site = site
+    }
+    
+    public let id: String
+    public let key: String
+    public let name: String
+    public let site: String
     
     var youtubeURL: URL? {
         guard site == "YouTube" else {

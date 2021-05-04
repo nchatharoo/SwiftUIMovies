@@ -38,17 +38,19 @@ public final class RemoteMovieLoader {
     public func load(completion: @escaping (Result) -> Void) {
         client.get(from: url) { result in
             switch result {
-            
             case let .success(data, _):
-                if let _ = try? JSONSerialization.jsonObject(with: data) {
-                    completion(.success([]))
+                if let root = try? JSONDecoder().decode(Root.self, from: data) {
+                    completion(.success(root.results))
                 } else {
                     completion(.failure(.invalidData))
                 }
-
             case .failure:
                 completion(.failure(.connectivity))
             }
         }
     }
+}
+
+private struct Root: Decodable {
+    let results: [Movie]
 }

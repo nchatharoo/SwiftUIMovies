@@ -100,6 +100,37 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
                 client.complete(withStatusCode: 200, data: emptyListJSON)
         })
     }
+    
+    func test_load_deliversErrorOn200HTTPResponseWithJSONItems() {
+        let (sut, client) = makeSUT()
+        
+        let item1 = Movie(id: 338762, title: "Bloodshot", backdropPath: "\\/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg", posterPath: "\\/8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg", overview: "After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine—'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought.", voteAverage: 7.1, voteCount: 418, runtime: nil, releaseDate: "2020-03-05", genres: nil, credits: nil, videos: nil)
+        
+        let item1JSON = [
+            "id": item1.id,
+            "posterPath": item1.posterPath!
+        ] as [String : Any]
+        
+        let item2 = Movie(id: 618344, title: "Justice League Dark: Apokolips War", backdropPath: "\\/sQkRiQo3nLrQYMXZodDjNUJKHZV.jpg", posterPath: "\\/c01Y4suApJ1Wic2xLmaq1QYcfoZ.jpg", overview: "Earth is decimated after intergalactic tyrant Darkseid has devastated the Justice League in a poorly executed war by the DC Super Heroes. Now the remaining bastions of good – the Justice League, Teen Titans, Suicide Squad and assorted others – must regroup, strategize and take the war to Darkseid in order to save the planet and its surviving inhabitants.", voteAverage: 8.5, voteCount: 418, runtime: nil, releaseDate: "2020-05-05", genres: nil, credits: nil, videos: nil)
+        
+        let item2JSON = [
+            "id": item2.id,
+            "overview": item2.overview,
+            "voteAverage": item2.voteAverage,
+            "posterPath": item2.posterPath!
+        ] as [String : Any]
+        
+        let itemsJSON = [
+            "items": [item1JSON, item2JSON]
+        ]
+        
+        print(itemsJSON)
+        expect(sut, toCompleteWith: .success([item1, item2]), when: {
+            let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
+            client.complete(withStatusCode: 200, data: json)
+        })
+    }
+
 
     // MARK: - Helpers
     
