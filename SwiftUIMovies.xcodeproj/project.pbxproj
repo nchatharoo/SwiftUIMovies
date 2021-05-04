@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8EB6E71D26416BD200AE8D72 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6E71C26416BD200AE8D72 /* Movie.swift */; };
 		8ECE109026403E2C006B1E4D /* SwiftUIMoviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE108F26403E2C006B1E4D /* SwiftUIMoviesApp.swift */; };
 		8ECE109226403E2C006B1E4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE109126403E2C006B1E4D /* ContentView.swift */; };
 		8ECE109426403E2E006B1E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE109326403E2E006B1E4D /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8EB6E71C26416BD200AE8D72 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		8ECE108C26403E2C006B1E4D /* SwiftUIMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECE108F26403E2C006B1E4D /* SwiftUIMoviesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesApp.swift; sourceTree = "<group>"; };
 		8ECE109126403E2C006B1E4D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8EB6E71B26416BCB00AE8D72 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8EB6E71C26416BD200AE8D72 /* Movie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8ECE108326403E2C006B1E4D = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +132,7 @@
 				8ECE10BA264044A0006B1E4D /* SwiftUIMovies.entitlements */,
 				8ECE108F26403E2C006B1E4D /* SwiftUIMoviesApp.swift */,
 				8ECE109126403E2C006B1E4D /* ContentView.swift */,
+				8EB6E71B26416BCB00AE8D72 /* Model */,
 				8ECE10F026408041006B1E4D /* Movie API */,
 				8ECE109326403E2E006B1E4D /* Assets.xcassets */,
 				8ECE109826403E2E006B1E4D /* Info.plist */,
@@ -348,6 +359,7 @@
 			files = (
 				8ECE10F226408057006B1E4D /* RemoteMovieLoader.swift in Sources */,
 				8ECE109226403E2C006B1E4D /* ContentView.swift in Sources */,
+				8EB6E71D26416BD200AE8D72 /* Movie.swift in Sources */,
 				8ECE109026403E2C006B1E4D /* SwiftUIMoviesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
