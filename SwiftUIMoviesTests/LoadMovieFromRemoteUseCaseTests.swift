@@ -10,10 +10,8 @@ import SwiftUIMovies
 
 class HTTPClientSpy: HTTPClient {
     func get(from url: URL) {
-        requestedURL = url
         requestedURLs.append(url)
     }
-    var requestedURL: URL?
     var requestedURLs = [URL]()
 }
 
@@ -22,14 +20,14 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
         
-        XCTAssertNil(client.requestedURL)
+        XCTAssertTrue(client.requestedURLs.isEmpty)
     }
     
     func test_load_requestDataFRomURL() {
         let (sut, client) = makeSUT()
         
         sut.load()
-        XCTAssertNotNil(client.requestedURL)
+        XCTAssertNotNil(client.requestedURLs)
     }
     
     func test_loadTwice_requestsDataFRomURLTwice() {
