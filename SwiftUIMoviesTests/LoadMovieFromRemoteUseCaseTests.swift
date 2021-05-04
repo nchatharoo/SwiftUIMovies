@@ -112,7 +112,7 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
         let items = [item1.model, item2.model]
         
         expect(sut, toCompleteWith: .success(items), when: {
-            let json = try! JSONSerialization.data(withJSONObject: [item1.json, item2.json])
+            let json = makeItemsJSON([item1.json, item2.json])
             client.complete(withStatusCode: 200, data: json)
         })
     }
