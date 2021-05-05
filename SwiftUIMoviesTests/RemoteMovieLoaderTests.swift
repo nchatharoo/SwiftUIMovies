@@ -35,7 +35,7 @@ class HTTPClientSpy: HTTPClient {
     
 }
 
-class RemoteMovieLoader: XCTestCase {
+class RemoteMovieLoaderTests: XCTestCase {
 
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
