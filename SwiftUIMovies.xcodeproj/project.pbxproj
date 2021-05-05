@@ -61,7 +61,6 @@
 		8ECE10D026404693006B1E4D /* SwiftUIMoviesMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIMoviesMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECE10D426404693006B1E4D /* SwiftUIMoviesMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesMacTests.swift; sourceTree = "<group>"; };
 		8ECE10D626404693006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8ECE10ED2640753A006B1E4D /* SwiftUIMoviesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftUIMoviesTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8ECE10EE2640753B006B1E4D /* RemoteMovieLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieLoaderTests.swift; sourceTree = "<group>"; };
 		8ECE10F126408056006B1E4D /* RemoteMovieLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,7 +155,6 @@
 			children = (
 				8ECE10A326403E2E006B1E4D /* Info.plist */,
 				8ECE10EE2640753B006B1E4D /* RemoteMovieLoaderTests.swift */,
-				8ECE10ED2640753A006B1E4D /* SwiftUIMoviesTests-Bridging-Header.h */,
 				8E6146FC2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = SwiftUIMoviesTests;
@@ -590,7 +588,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.SwiftUIMoviesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SwiftUIMoviesTests/SwiftUIMoviesTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -615,7 +612,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.SwiftUIMoviesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SwiftUIMoviesTests/SwiftUIMoviesTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIMovies.app/SwiftUIMovies";
