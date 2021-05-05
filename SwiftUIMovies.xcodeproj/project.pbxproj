@@ -97,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E6146FE2642DBAF00AC06B1 /* Movie API */ = {
+			isa = PBXGroup;
+			children = (
+				8ECE10EE2640753B006B1E4D /* RemoteMovieLoaderTests.swift */,
+				8E6146FC2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift */,
+			);
+			path = "Movie API";
+			sourceTree = "<group>";
+		};
 		8EB6E71B26416BCB00AE8D72 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,8 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				8ECE10A326403E2E006B1E4D /* Info.plist */,
-				8ECE10EE2640753B006B1E4D /* RemoteMovieLoaderTests.swift */,
-				8E6146FC2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift */,
+				8E6146FE2642DBAF00AC06B1 /* Movie API */,
 			);
 			path = SwiftUIMoviesTests;
 			sourceTree = "<group>";
