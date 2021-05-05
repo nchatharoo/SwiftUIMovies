@@ -149,9 +149,9 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
             "voteCount": item.voteCount,
             "runtime": item.runtime ?? 0,
             "releaseDate": item.releaseDate ?? "",
-            "genres": item.genres ?? "",
-            "credits": item.credits ?? "",
-            "videos": item.videos ?? ""
+            "genres": item.genres ?? [],
+            "credits": item.credits ?? nil,
+            "videos": item.videos ?? nil
         ].compactMapValues { $0 }
         
         return (item, json)
