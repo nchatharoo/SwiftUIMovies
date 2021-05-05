@@ -117,13 +117,28 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
             client.complete(withStatusCode: 200, data: json)
         })
     }
+    
+    func testDoesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+        let url = URL(string: "http://a-url.com")!
+        let client = HTTPClientSpy()
+        var sut: RemoteMovieLoader? = RemoteMovieLoader(url: url, client: client)
+        
+        var capturedResults = [RemoteMovieLoader.Result]()
+        sut?.load { capturedResults.append($0) }
 
+        sut = nil
+        client.complete(withStatusCode: 200, data: makeItemsJSON([]))
+        
+        XCTAssertTrue(capturedResults.isEmpty)
+    }
 
     // MARK: - Helpers
     
     private func makeSUT(url: URL = URL(string: "https://a-url.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: RemoteMovieLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemoteMovieLoader(url: url, client: client)
+        trackForMemoryLeaks(sut)
+        trackForMemoryLeaks(client)
         return (sut, client)
     }
     
@@ -160,5 +175,11 @@ class LoadMovieFromRemoteUseCaseTests: XCTestCase {
     private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
         let json = ["results": items]
         return try! JSONSerialization.data(withJSONObject: json)
+    }
+    
+    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.")
+        }
     }
 }
