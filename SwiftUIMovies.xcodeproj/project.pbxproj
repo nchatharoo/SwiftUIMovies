@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E6146FD2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6146FC2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift */; };
 		8EB6E71D26416BD200AE8D72 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6E71C26416BD200AE8D72 /* Movie.swift */; };
 		8ECE109026403E2C006B1E4D /* SwiftUIMoviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE108F26403E2C006B1E4D /* SwiftUIMoviesApp.swift */; };
 		8ECE109226403E2C006B1E4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE109126403E2C006B1E4D /* ContentView.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E6146FC2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		8EB6E71C26416BD200AE8D72 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		8ECE108C26403E2C006B1E4D /* SwiftUIMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECE108F26403E2C006B1E4D /* SwiftUIMoviesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesApp.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				8ECE10A326403E2E006B1E4D /* Info.plist */,
 				8ECE10EE2640753B006B1E4D /* RemoteMovieLoaderTests.swift */,
 				8ECE10ED2640753A006B1E4D /* SwiftUIMoviesTests-Bridging-Header.h */,
+				8E6146FC2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = SwiftUIMoviesTests;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ECE10EF2640753B006B1E4D /* RemoteMovieLoaderTests.swift in Sources */,
+				8E6146FD2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
