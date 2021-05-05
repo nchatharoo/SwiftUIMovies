@@ -33,7 +33,7 @@ class URLSessionHTTPClientTests: XCTestCase {
     
     // MARK: Helpers
     private class URLSessionSpy: URLSession {
-        var receivedURLs = [URL]()
+
         private var stubs = [URL : URLSessionDataTask]()
         func stub(url: URL, task: URLSessionDataTask) {
             stubs[url] = task
