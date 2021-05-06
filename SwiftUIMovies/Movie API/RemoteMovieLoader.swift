@@ -52,8 +52,19 @@ public final class RemoteMovieLoader {
         }
     }
     
-    public func loadMovie(id: Int) {
-        client.getMovie(with: id) { _ in }
+    public func loadMovie(id: Int, completion: @escaping (Result) -> Void) {
+        client.getMovie(with: id) { result in
+            switch result {
+            case let .success(data, response):
+                if response.statusCode == 200, let root = try? JSONDecoder().decode(Root.self, from: data) {
+                    completion(.success(root.results))
+                } else {
+                    completion(.failure(.invalidData))
+                }
+            case .failure:
+                completion(.failure(.connectivity))
+            }
+        }
     }
 }
 
