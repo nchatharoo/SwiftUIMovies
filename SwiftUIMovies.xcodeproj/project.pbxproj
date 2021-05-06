@@ -22,6 +22,7 @@
 		8ECE10D526404693006B1E4D /* SwiftUIMoviesMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10D426404693006B1E4D /* SwiftUIMoviesMacTests.swift */; };
 		8ECE10EF2640753B006B1E4D /* RemoteMovieLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10EE2640753B006B1E4D /* RemoteMovieLoaderTests.swift */; };
 		8ECE10F226408057006B1E4D /* RemoteMovieLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10F126408056006B1E4D /* RemoteMovieLoader.swift */; };
+		8ECFCF3F26443B2F00C217ED /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECFCF3E26443B2F00C217ED /* HTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		8ECE10D626404693006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECE10EE2640753B006B1E4D /* RemoteMovieLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieLoaderTests.swift; sourceTree = "<group>"; };
 		8ECE10F126408056006B1E4D /* RemoteMovieLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieLoader.swift; sourceTree = "<group>"; };
+		8ECFCF3E26443B2F00C217ED /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 		8ECE10F026408041006B1E4D /* Movie API */ = {
 			isa = PBXGroup;
 			children = (
+				8ECFCF3E26443B2F00C217ED /* HTTPClient.swift */,
 				8ECE10F126408056006B1E4D /* RemoteMovieLoader.swift */,
 				8E6147022643295900AC06B1 /* URLSessionHTTPClient.swift */,
 			);
@@ -382,6 +385,7 @@
 			files = (
 				8ECE10F226408057006B1E4D /* RemoteMovieLoader.swift in Sources */,
 				8E6147032643295A00AC06B1 /* URLSessionHTTPClient.swift in Sources */,
+				8ECFCF3F26443B2F00C217ED /* HTTPClient.swift in Sources */,
 				8ECE109226403E2C006B1E4D /* ContentView.swift in Sources */,
 				8EB6E71D26416BD200AE8D72 /* Movie.swift in Sources */,
 				8ECE109026403E2C006B1E4D /* SwiftUIMoviesApp.swift in Sources */,

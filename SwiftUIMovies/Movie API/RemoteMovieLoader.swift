@@ -7,16 +7,6 @@
 
 import Foundation
 
-public enum HTTPClientResult {
-    case success(Data, HTTPURLResponse)
-    case failure(Error)
-}
-
-public protocol HTTPClient {
-    func getMovies(from url: URL, completion: @escaping (HTTPClientResult) -> Void)
-    func getMovie(with id: Int, completion: @escaping (HTTPClientResult) -> Void)
-}
-    
 public final class RemoteMovieLoader {
     public let url: URL
     public let client: HTTPClient
