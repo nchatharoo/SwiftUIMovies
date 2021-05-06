@@ -51,6 +51,10 @@ public final class RemoteMovieLoader {
             }
         }
     }
+    
+    public func loadMovie(id: Int) {
+        client.getMovie(with: id) { _ in }
+    }
 }
 
 private struct Root: Decodable {
