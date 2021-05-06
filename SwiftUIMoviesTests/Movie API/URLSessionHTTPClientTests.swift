@@ -101,7 +101,6 @@ class URLSessionHTTPClientTests: XCTestCase {
     
     func test_getFromID_performsGETRequestWithID() {
         let id = 287947
-        let url = URL(string: "\(baseAPIURL)/movie/\(id)")!
         let url = anyURL(and: id)
         let exp = expectation(description: "Wait for request")
         
