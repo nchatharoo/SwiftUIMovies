@@ -27,4 +27,8 @@ public class URLSessionHTTPClient: HTTPClient {
             }
         }.resume()
     }
+    
+    public func getMovie(with id: Int, completion: @escaping (HTTPClientResult) -> Void) {
+        
+    }
 }

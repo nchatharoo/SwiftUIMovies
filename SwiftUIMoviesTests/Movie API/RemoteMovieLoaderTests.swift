@@ -19,6 +19,10 @@ class HTTPClientSpy: HTTPClient {
         messages.append((url, completion))
     }
     
+    func getMovie(with id: Int, completion: @escaping (HTTPClientResult) -> Void) {
+        
+    }
+    
     func complete(with error: Error, at index: Int = 0) {
         messages[index].completion(.failure(error))
     }

@@ -14,6 +14,7 @@ public enum HTTPClientResult {
 
 public protocol HTTPClient {
     func getMovies(from url: URL, completion: @escaping (HTTPClientResult) -> Void)
+    func getMovie(with id: Int, completion: @escaping (HTTPClientResult) -> Void)
 }
     
 public final class RemoteMovieLoader {
