@@ -134,12 +134,13 @@ class RemoteMovieLoaderTests: XCTestCase {
     
     func testDoesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
         let url = URL(string: "http://a-url.com")!
+        let id = 338762
         let client = HTTPClientSpy()
         var sut: RemoteMovieLoader? = RemoteMovieLoader(url: url, client: client)
         
         var capturedResults = [RemoteMovieLoader.Result]()
         sut?.load { capturedResults.append($0) }
-
+        sut?.loadMovie(id: id) { capturedResults.append($0) }
         sut = nil
         client.complete(withStatusCode: 200, data: makeItemsJSON([]))
         
