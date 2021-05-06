@@ -29,7 +29,8 @@ enum MovieListEndpoint: String, CaseIterable, Identifiable {
 
 class URLSessionHTTPClientTests: XCTestCase {
     private let baseAPIURL = "https://api.themoviedb.org/3"
-
+    private let apiKey = "FAKEAPIKEY"
+    
     override func setUp() {
         super.setUp()
         
@@ -169,7 +170,25 @@ class URLSessionHTTPClientTests: XCTestCase {
         } else {
             url = URL(string: "\(baseAPIURL)/movie/\(endpoint.rawValue)")!
         }
+        
+        loadURL(url: url)
         return url
+    }
+    
+    @discardableResult
+    private func loadURL(url: URL) -> URL? {
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            return nil
+        }
+        
+        let queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
+        
+        urlComponents.queryItems = queryItems
+        
+        guard let finalURL = urlComponents.url else {
+            return nil
+        }
+        return finalURL
     }
     
     private func anyData() -> Data {
