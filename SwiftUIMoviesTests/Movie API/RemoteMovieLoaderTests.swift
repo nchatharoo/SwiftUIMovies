@@ -10,6 +10,7 @@ import SwiftUIMovies
 
 class HTTPClientSpy: HTTPClient {
     private var messages = [(url: URL, completion: (HTTPClientResult) -> Void)]()
+    private var messagesID = [(id: Int, completion: (HTTPClientResult) -> Void)]()
     
     var requestedURLs: [URL] {
         return messages.map { $0.url }
@@ -20,7 +21,7 @@ class HTTPClientSpy: HTTPClient {
     }
     
     func getMovie(with id: Int, completion: @escaping (HTTPClientResult) -> Void) {
-        
+        messagesID.append((id, completion))
     }
     
     func complete(with error: Error, at index: Int = 0) {

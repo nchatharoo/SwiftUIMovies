@@ -9,7 +9,8 @@ import XCTest
 import SwiftUIMovies
 
 class URLSessionHTTPClientTests: XCTestCase {
-    
+    private let baseAPIURL = "https://api.themoviedb.org/3"
+
     override func setUp() {
         super.setUp()
         
@@ -77,6 +78,22 @@ class URLSessionHTTPClientTests: XCTestCase {
         XCTAssertEqual(receivedValues?.data, emptyData)
         XCTAssertEqual(receivedValues?.response.url, response.url)
         XCTAssertEqual(receivedValues?.response.statusCode, response.statusCode)
+    }
+    
+    func test_getFromID_performsGETRequestWithID() {
+        let id = 287947
+        let url = URL(string: "\(baseAPIURL)/movie/\(id)")!
+        let exp = expectation(description: "Wait for request")
+        
+        URLProtocolStub.observeRequests { request in
+            XCTAssertEqual(request.url, url)
+            XCTAssertEqual(request.httpMethod, "GET")
+            exp.fulfill()
+        }
+        
+        makeSUT().getMovie(with: id) { _ in }
+        
+        wait(for: [exp], timeout: 1.0)
     }
     
     // MARK: Helpers
