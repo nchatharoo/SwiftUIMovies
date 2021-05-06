@@ -13,9 +13,9 @@ public enum HTTPClientResult {
 }
 
 public protocol HTTPClient {
-    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void)
+    func getMovies(from url: URL, completion: @escaping (HTTPClientResult) -> Void)
 }
-
+    
 public final class RemoteMovieLoader {
     public let url: URL
     public let client: HTTPClient
@@ -36,7 +36,7 @@ public final class RemoteMovieLoader {
     }
     
     public func load(completion: @escaping (Result) -> Void) {
-        client.get(from: url) { [weak self] result in
+        client.getMovies(from: url) { [weak self] result in
             guard self != nil else { return }
             switch result {
             case let .success(data, response):

@@ -32,7 +32,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        makeSUT().get(from: url) { _ in }
+        makeSUT().getMovies(from: url) { _ in }
         
         wait(for: [exp], timeout: 1.0)
     }
@@ -117,7 +117,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         let exp = expectation(description: "Wait for completion")
         
         var receivedResult: HTTPClientResult!
-        sut.get(from: anyURL()) { result in
+        sut.getMovies(from: anyURL()) { result in
             receivedResult = result
             exp.fulfill()
         }

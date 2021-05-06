@@ -15,7 +15,7 @@ class HTTPClientSpy: HTTPClient {
         return messages.map { $0.url }
     }
     
-    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+    func getMovies(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
         messages.append((url, completion))
     }
     
