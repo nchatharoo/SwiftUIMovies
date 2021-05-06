@@ -102,6 +102,7 @@ class URLSessionHTTPClientTests: XCTestCase {
     func test_getFromID_performsGETRequestWithID() {
         let id = 287947
         let url = URL(string: "\(baseAPIURL)/movie/\(id)")!
+        let url = anyURL(and: id)
         let exp = expectation(description: "Wait for request")
         
         URLProtocolStub.observeRequests { request in
@@ -162,8 +163,14 @@ class URLSessionHTTPClientTests: XCTestCase {
         return receivedResult
     }
     
-    private func anyURL() -> URL {
-        return URL(string: "http://any-url.com")!
+    private func anyURL(endpoint: MovieListEndpoint = .popular , and id: Int? = nil) -> URL {
+        var url: URL
+        if let id = id {
+            url = URL(string: "\(baseAPIURL)/movie/\(id)")!
+        } else {
+            url = URL(string: "\(baseAPIURL)/movie/\(endpoint.rawValue)")!
+        }
+        return url
     }
     
     private func anyData() -> Data {
