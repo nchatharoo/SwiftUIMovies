@@ -171,8 +171,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             url = URL(string: "\(baseAPIURL)/movie/\(endpoint.rawValue)")!
         }
         
-        loadURL(url: url)
-        return url
+        return loadURL(url: url)!
     }
     
     @discardableResult
