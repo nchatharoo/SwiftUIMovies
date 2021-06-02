@@ -18,7 +18,10 @@ public class URLSessionHTTPClient: HTTPClient {
     
     struct UnexpectedValuesRepresentation: Error {}
     
-    public func getMovies(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+    public func getMovies(from endpoint: MovieListEndpoint, completion: @escaping (HTTPClientResult) -> Void) {
+        guard let url = URL(string: "\(baseAPIURL)/movie/\(endpoint.rawValue)") else {
+            return
+        }
         loadURL(url: url, completion: completion)
     }
     

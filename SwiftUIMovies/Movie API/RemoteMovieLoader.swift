@@ -27,7 +27,7 @@ public final class RemoteMovieLoader {
     }
     
     public func load(completion: @escaping (Result) -> Void) {
-        client.getMovies(from: url) { [weak self] result in
+        client.getMovies(from: .nowPlaying) { [weak self] result in
             guard self != nil else { return }
             switch result {
             case let .success(data, response):

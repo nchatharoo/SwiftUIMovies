@@ -34,7 +34,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        makeSUT().getMovies(from: url) { _ in }
+        makeSUT().getMovies(from: .nowPlaying) { _ in }
         
         wait(for: [exp], timeout: 1.0)
     }
@@ -135,7 +135,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         let exp = expectation(description: "Wait for completion")
         
         var receivedResult: HTTPClientResult!
-        sut.getMovies(from: anyURL()) { result in
+        sut.getMovies(from: .nowPlaying) { result in
             receivedResult = result
             exp.fulfill()
         }
@@ -144,7 +144,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         return receivedResult
     }
     
-    private func anyURL(endpoint: MovieListEndpoint = .popular , and id: Int? = nil) -> URL {
+    private func anyURL(endpoint: MovieListEndpoint = .nowPlaying , and id: Int? = nil) -> URL {
         var url: URL
         if let id = id {
             url = URL(string: "\(baseAPIURL)/movie/\(id)")!

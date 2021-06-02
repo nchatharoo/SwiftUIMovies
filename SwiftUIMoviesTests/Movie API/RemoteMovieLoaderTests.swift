@@ -16,7 +16,10 @@ class HTTPClientSpy: HTTPClient {
         return messages.map { $0.url }
     }
     
-    func getMovies(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+    func getMovies(from endpoint: MovieListEndpoint, completion: @escaping (HTTPClientResult) -> Void) {
+        guard let url = URL(string: "\("https://api.themoviedb.org/3")/movie/\(endpoint.rawValue)") else {
+            return
+        }
         messages.append((url, completion))
     }
     
