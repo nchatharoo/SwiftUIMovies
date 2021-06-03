@@ -122,7 +122,7 @@ class RemoteMovieLoaderTests: XCTestCase {
         let client = HTTPClientSpy()
         var sut: RemoteMovieLoader? = RemoteMovieLoader(url: url, client: client)
         
-        var capturedResults = [RemoteMovieLoader.Result]()
+        var capturedResults = [RemoteMovieLoader.LoadMovieResult]()
         sut?.load { capturedResults.append($0) }
         sut?.loadMovie(id: id) { capturedResults.append($0) }
         sut = nil
@@ -133,7 +133,7 @@ class RemoteMovieLoaderTests: XCTestCase {
     
     func test_load_deliversItemsOn200HTTPResponseWithJSONItemsForMovieID() {
         let (sut, client) = makeSUT()
-        var capturedResults = [RemoteMovieLoader.Result]()
+        var capturedResults = [RemoteMovieLoader.LoadMovieResult]()
 
         let item1 = makeItem(id: 338762, title: "Bloodshot", backdropPath: "\\/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg", posterPath: "\\/8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg", overview: "", voteAverage: 7.1, voteCount: 418, runtime: nil, releaseDate: "2020-03-05", genres: nil, credits: nil, videos: nil)
         
@@ -156,8 +156,8 @@ class RemoteMovieLoaderTests: XCTestCase {
         return (sut, client)
     }
     
-    private func expect(_ sut: RemoteMovieLoader, toCompleteWith result: RemoteMovieLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        var capturedResults = [RemoteMovieLoader.Result]()
+    private func expect(_ sut: RemoteMovieLoader, toCompleteWith result: RemoteMovieLoader.LoadMovieResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        var capturedResults = [RemoteMovieLoader.LoadMovieResult]()
         sut.load { capturedResults.append($0) }
         action()
         

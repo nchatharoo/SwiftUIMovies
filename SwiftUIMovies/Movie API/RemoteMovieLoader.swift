@@ -16,7 +16,7 @@ public final class RemoteMovieLoader {
         case connectivity
     }
     
-    public enum Result: Equatable {
+    public enum LoadMovieResult: Equatable {
         case success([Movie])
         case failure(Error)
     }
@@ -26,7 +26,7 @@ public final class RemoteMovieLoader {
         self.client = client
     }
     
-    public func load(completion: @escaping (Result) -> Void) {
+    public func load(completion: @escaping (LoadMovieResult) -> Void) {
         client.getMovies(from: .nowPlaying) { [weak self] result in
             guard self != nil else { return }
             switch result {
@@ -42,7 +42,7 @@ public final class RemoteMovieLoader {
         }
     }
     
-    public func loadMovie(id: Int, completion: @escaping (Result) -> Void) {
+    public func loadMovie(id: Int, completion: @escaping (LoadMovieResult) -> Void) {
         client.getMovie(with: id) { result in
             switch result {
             case let .success(data, response):
