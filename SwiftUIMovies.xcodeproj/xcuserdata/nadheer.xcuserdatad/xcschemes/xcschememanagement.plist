@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>SwiftUIMoviesAPIEndToEndTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>SwiftUIMoviesMac.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>8E08E690267245C4003B9EBA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8ECE108B26403E2C006B1E4D</key>
 		<dict>
 			<key>primary</key>

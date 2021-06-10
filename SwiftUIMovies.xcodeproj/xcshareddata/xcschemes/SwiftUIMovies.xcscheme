@@ -50,6 +50,16 @@
                ReferencedContainer = "container:SwiftUIMovies.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8E08E690267245C4003B9EBA"
+               BuildableName = "SwiftUIMoviesAPIEndToEndTests.xctest"
+               BlueprintName = "SwiftUIMoviesAPIEndToEndTests"
+               ReferencedContainer = "container:SwiftUIMovies.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
