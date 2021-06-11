@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E08E694267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E08E693267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift */; };
+		8E08E69B2672498F003B9EBA /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6147002643183400AC06B1 /* XCTestCase+MemoryLeakTracking.swift */; };
 		8E5F402F26680A3C001F01CA /* MovieListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F402E26680A3C001F01CA /* MovieListEndpoint.swift */; };
 		8E6146FD2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6146FC2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift */; };
 		8E6147012643183400AC06B1 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6147002643183400AC06B1 /* XCTestCase+MemoryLeakTracking.swift */; };
@@ -357,6 +358,7 @@
 				TargetAttributes = {
 					8E08E690267245C4003B9EBA = {
 						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 8ECE108B26403E2C006B1E4D;
 					};
 					8ECE108B26403E2C006B1E4D = {
 						CreatedOnToolsVersion = 12.5;
@@ -445,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E08E694267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift in Sources */,
+				8E08E69B2672498F003B9EBA /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +516,7 @@
 		8E08E698267245C4003B9EBA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				INFOPLIST_FILE = SwiftUIMoviesAPIEndToEndTests/Info.plist;
@@ -525,12 +529,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIMovies.app/SwiftUIMovies";
 			};
 			name = Debug;
 		};
 		8E08E699267245C4003B9EBA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				INFOPLIST_FILE = SwiftUIMoviesAPIEndToEndTests/Info.plist;
@@ -543,6 +549,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIMovies.app/SwiftUIMovies";
 			};
 			name = Release;
 		};
