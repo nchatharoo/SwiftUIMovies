@@ -17,9 +17,9 @@ class SwiftUIMoviesAPIEndToEndTests: XCTestCase {
                 XCTAssertEqual(item, expectedMovie(at: index), "Unexpected values at index \(index)")
             }
         case let .failure(error):
-            XCTFail("Expected successful feed result, got \(error) instead")
+            XCTFail("Expected successful movie result, got \(error) instead")
         default:
-            XCTFail("Expected successful feed result, got no result instead")
+            XCTFail("Expected successful movie result, got no result instead")
         }
     }
     
