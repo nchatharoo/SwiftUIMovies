@@ -31,12 +31,7 @@ public final class RemoteMovieLoader {
             guard self != nil else { return }
             switch result {
             case let .success(data, response):
-                if response.statusCode == 200, let root = try? JSONDecoder().decode(Root.self, from: data) {
-                    print(root)
-                    completion(.success(root.results))
-                } else {
-                    completion(.failure(.invalidData))
-                }
+                completion(RemoteMovieLoader.map(data, from: response))
             case .failure:
                 completion(.failure(.connectivity))
             }
@@ -47,18 +42,38 @@ public final class RemoteMovieLoader {
         client.getMovie(with: id) { result in
             switch result {
             case let .success(data, response):
-                if response.statusCode == 200, let root = try? JSONDecoder().decode(Root.self, from: data) {
-                    completion(.success(root.results))
-                } else {
-                    completion(.failure(.invalidData))
-                }
+                completion(RemoteMovieLoader.map(data, from: response))
             case .failure:
                 completion(.failure(.connectivity))
             }
         }
     }
+    
+    private static func map(_ data: Data, from response: HTTPURLResponse) -> LoadMovieResult {
+        do {
+            let items = try MovieItemsMapper.map(data, from: response)
+            return .success(items.toModels())
+        } catch {
+            return .failure(error as! RemoteMovieLoader.Error)
+        }
+    }
 }
 
-private struct Root: Decodable {
-    let results: [Movie]
+final class MovieItemsMapper {
+    private struct Root: Decodable {
+        let results: [Movie]
+    }
+       
+    static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Movie] {
+       guard response.statusCode == 200, let root = try? JSONDecoder().decode(Root.self, from: data) else {
+        throw RemoteMovieLoader.Error.invalidData
+       }
+       return root.results
+   }
+}
+
+private extension Array where Element == Movie {
+    func toModels() -> [Movie] {
+        return map { Movie(id: $0.id, title: $0.title, backdropPath: $0.backdropPath, posterPath: $0.posterPath, overview: $0.overview, voteAverage: $0.voteAverage, voteCount: $0.voteCount, runtime: $0.runtime, releaseDate: $0.releaseDate, genres: $0.genres, credits: $0.credits, videos: $0.videos)}
+    }
 }
