@@ -117,13 +117,13 @@ class RemoteMovieLoaderTests: XCTestCase {
     }
     
     func testDoesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
-        let url = URL(string: "http://a-url.com")!
+        let endpoint = MovieListEndpoint.nowPlaying
         let id = 338762
         let client = HTTPClientSpy()
-        var sut: RemoteMovieLoader? = RemoteMovieLoader(url: url, client: client)
+        var sut: RemoteMovieLoader? = RemoteMovieLoader(endpoint: endpoint, client: client)
         
         var capturedResults = [RemoteMovieLoader.LoadMovieResult]()
-        sut?.load { capturedResults.append($0) }
+        sut?.loadMovies { capturedResults.append($0) }
         sut?.loadMovie(id: id) { capturedResults.append($0) }
         sut = nil
         client.complete(withStatusCode: 200, data: makeItemsJSON([]))
@@ -148,9 +148,9 @@ class RemoteMovieLoaderTests: XCTestCase {
 
     // MARK: - Helpers
     
-    private func makeSUT(url: URL = URL(string: "https://a-url.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: RemoteMovieLoader, client: HTTPClientSpy) {
+    private func makeSUT(endpoint: MovieListEndpoint = .nowPlaying, file: StaticString = #file, line: UInt = #line) -> (sut: RemoteMovieLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
-        let sut = RemoteMovieLoader(url: url, client: client)
+        let sut = RemoteMovieLoader(endpoint: endpoint, client: client)
         trackForMemoryLeaks(sut)
         trackForMemoryLeaks(client)
         return (sut, client)
@@ -158,7 +158,7 @@ class RemoteMovieLoaderTests: XCTestCase {
     
     private func expect(_ sut: RemoteMovieLoader, toCompleteWith result: RemoteMovieLoader.LoadMovieResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         var capturedResults = [RemoteMovieLoader.LoadMovieResult]()
-        sut.load { capturedResults.append($0) }
+        sut.loadMovies { capturedResults.append($0) }
         action()
         
         XCTAssertEqual(capturedResults, [result], file: file, line: line)

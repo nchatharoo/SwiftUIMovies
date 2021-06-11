@@ -8,7 +8,7 @@
 import Foundation
 
 public final class RemoteMovieLoader {
-    public let url: URL
+    public let endpoint: MovieListEndpoint
     public let client: HTTPClient
     
     public enum Error: Swift.Error {
@@ -21,17 +21,18 @@ public final class RemoteMovieLoader {
         case failure(Error)
     }
     
-    public init(url: URL, client: HTTPClient) {
-        self.url = url
+    public init(endpoint: MovieListEndpoint, client: HTTPClient) {
+        self.endpoint = endpoint
         self.client = client
     }
     
-    public func load(completion: @escaping (LoadMovieResult) -> Void) {
-        client.getMovies(from: .nowPlaying) { [weak self] result in
+    public func loadMovies(completion: @escaping (LoadMovieResult) -> Void) {
+        client.getMovies(from: endpoint) { [weak self] result in
             guard self != nil else { return }
             switch result {
             case let .success(data, response):
                 if response.statusCode == 200, let root = try? JSONDecoder().decode(Root.self, from: data) {
+                    print(root)
                     completion(.success(root.results))
                 } else {
                     completion(.failure(.invalidData))
