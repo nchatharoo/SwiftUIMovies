@@ -63,9 +63,15 @@ final class MovieItemsMapper {
     private struct Root: Decodable {
         let results: [Movie]
     }
+    
+    static let jsonDecoder: JSONDecoder = {
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        return jsonDecoder
+    }()
        
     static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Movie] {
-       guard response.statusCode == 200, let root = try? JSONDecoder().decode(Root.self, from: data) else {
+       guard response.statusCode == 200, let root = try? jsonDecoder.decode(Root.self, from: data) else {
         throw RemoteMovieLoader.Error.invalidData
        }
        return root.results
