@@ -10,7 +10,7 @@ import Foundation
 public class URLSessionHTTPClient: HTTPClient {
     private let session: URLSession
     private let baseAPIURL = "https://api.themoviedb.org/3"
-    private let apiKey = "FAKEAPIKEY"
+    private let apiKey = "427837424ba8a780babbc727c4b55918"
     
     public init(session: URLSession = .shared) {
         self.session = session
