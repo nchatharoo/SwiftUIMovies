@@ -13,9 +13,7 @@ class SwiftUIMoviesAPIEndToEndTests: XCTestCase {
     func test_endToEndTestServerGETMoviesResult_matchesFixedTestAccountData() {
         switch getMoviesResult() {
         case let .success(movie):
-            movie.enumerated().forEach { (index, item) in
-                XCTAssertEqual(item, expectedMovie(at: index), "Unexpected values at index \(index)")
-            }
+            XCTAssertEqual(movie.first!, expectedMovie(at: 0), "Unexpected values at index 0")
         case let .failure(error):
             XCTFail("Expected successful movie result, got \(error) instead")
         default:
