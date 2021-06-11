@@ -44,7 +44,7 @@ jobs:
 
     - name: Select Xcode
 
-      run: sudo xcode-select -switch /Applications/Xcode_12.5.app
+      run: sudo xcode-select -switch /Applications/Xcode_12.4.app
 
       
 
