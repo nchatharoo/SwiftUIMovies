@@ -33,7 +33,7 @@ class SwiftUIMoviesAPIEndToEndTests: XCTestCase {
     private func makeItem(id: Int, title: String, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [MovieGenre]?, credits: MovieCredit?, videos: MovieVideoResponse?) -> (model: Movie, json: [String: Any]) {
         let item = Movie(id: id, title: title, backdropPath: backdropPath, posterPath: posterPath, overview: overview, voteAverage: voteAverage, voteCount: voteCount, runtime: runtime, releaseDate: releaseDate, genres: genres, credits: credits, videos: videos)
         
-        let json = [
+        let json: [String: Any] = [
             "id": item.id,
             "title": item.title,
             "backdropPath": item.backdropPath ?? "",
@@ -46,7 +46,7 @@ class SwiftUIMoviesAPIEndToEndTests: XCTestCase {
             "genres": item.genres ?? [],
             "credits": item.credits ?? nil,
             "videos": item.videos ?? nil
-        ].compactMapValues { $0 }
+        ].mapValues { $0 }
         
         return (item, json)
     }
