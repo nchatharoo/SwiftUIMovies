@@ -16,20 +16,37 @@ class LocalMovieLoader {
     }
     
     func save(_ items: [Movie]) {
-        store.deleteCacheMovie()
+        store.deleteCacheMovie { [unowned self] error in
+            if error == nil {
+                store.insert(items)
+            }
+        }
     }
 }
 
 class MovieStore {
+    typealias DeletionCompletion = (Error?) -> Void
+    
     var deleteCacheMovieCount = 0
     var insertCallCount = 0
     
-    func deleteCacheMovie() {
+    private var deletionCompletions = [DeletionCompletion]()
+    
+    func deleteCacheMovie(completion: @escaping DeletionCompletion) {
         deleteCacheMovieCount += 1
+        deletionCompletions.append(completion)
     }
     
     func completeDeletion(with error: Error, at index: Int = 0) {
-        
+        deletionCompletions[index](error)
+    }
+    
+    func completeDeletionSuccessfully(at index: Int = 0) {
+        deletionCompletions[index](nil)
+    }
+    
+    func insert(_ items: [Movie]) {
+        insertCallCount += 1
     }
 }
 
@@ -58,6 +75,16 @@ class CacheMovieUseCaseTests: XCTestCase {
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.insertCallCount, 0)
+    }
+    
+    func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
+        let (sut, store) = makeSUT()
+        let items = [uniqueItem(), uniqueItem()]
+        
+        sut.save(items)
+        store.completeDeletionSuccessfully()
+        
+        XCTAssertEqual(store.insertCallCount, 1)
     }
 
     
