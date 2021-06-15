@@ -31,14 +31,12 @@ class MovieStore {
 class CacheMovieUseCaseTests: XCTestCase {
     
     func test_init_doesNotDeleteCacheUponCreation() {
-        let store = MovieStore()
-        _ = LocalMovieLoader(store: store)
+        let (_, store) = makeSUT()
         XCTAssertEqual(store.deleteCacheMovieCount, 0)
     }
     
     func test_save_requestsCacheDeletion() {
-        let store = MovieStore()
-        let sut = LocalMovieLoader(store: store)
+        let (sut, store) = makeSUT()
         let items = [uniqueItem(), uniqueItem()]
         
         sut.save(items)
@@ -47,6 +45,12 @@ class CacheMovieUseCaseTests: XCTestCase {
     }
     
     //MARK: - Helpers
+    
+    private func makeSUT() -> (sut: LocalMovieLoader, store: MovieStore) {
+        let store = MovieStore()
+        let sut = LocalMovieLoader(store: store)
+        return (sut, store)
+    }
     
     private func uniqueItem() -> Movie {
         
