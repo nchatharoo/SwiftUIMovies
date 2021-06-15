@@ -35,12 +35,3 @@ public final class LocalMovieLoader {
         }
     }
 }
-
-public protocol MovieStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-
-    func deleteCacheMovie(completion: @escaping DeletionCompletion)
-    
-    func insert(_ items: [Movie], timestamp: Date, completion: @escaping InsertionCompletion)
-}
