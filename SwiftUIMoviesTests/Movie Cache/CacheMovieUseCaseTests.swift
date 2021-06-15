@@ -75,7 +75,7 @@ class CacheMovieUseCaseTests: XCTestCase {
         let store = MovieStoreSpy()
         var sut: LocalMovieLoader? = LocalMovieLoader(store: store, currentDate: Date.init)
         
-        var receivedResults = [Error?]()
+        var receivedResults = [LocalMovieLoader.SaveResult]()
         sut?.save([uniqueItem()], completion: { receivedResults.append($0) })
         
         sut = nil
@@ -88,7 +88,7 @@ class CacheMovieUseCaseTests: XCTestCase {
         let store = MovieStoreSpy()
         var sut: LocalMovieLoader? = LocalMovieLoader(store: store, currentDate: Date.init)
         
-        var receivedResults = [Error?]()
+        var receivedResults = [LocalMovieLoader.SaveResult]()
         sut?.save([uniqueItem()], completion: { receivedResults.append($0) })
         
         store.completeDeletionSuccessfully()
