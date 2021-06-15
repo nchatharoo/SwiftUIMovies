@@ -30,7 +30,6 @@ class MovieStore {
     typealias DeletionCompletion = (Error?) -> Void
     
     var deleteCacheMovieCount = 0
-    var insertCallCount = 0
     var insertions = [(items: [Movie], timestamp: Date)]()
     
     private var deletionCompletions = [DeletionCompletion]()
@@ -49,7 +48,6 @@ class MovieStore {
     }
     
     func insert(_ items: [Movie], timestamp: Date) {
-        insertCallCount += 1
         insertions.append((items, timestamp))
     }
 }
@@ -78,17 +76,7 @@ class CacheMovieUseCaseTests: XCTestCase {
         sut.save(items)
         store.completeDeletion(with: deletionError)
         
-        XCTAssertEqual(store.insertCallCount, 0)
-    }
-    
-    func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
-        let (sut, store) = makeSUT()
-        let items = [uniqueItem(), uniqueItem()]
-        
-        sut.save(items)
-        store.completeDeletionSuccessfully()
-        
-        XCTAssertEqual(store.insertCallCount, 1)
+        XCTAssertEqual(store.insertions.count, 0)
     }
     
     func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
