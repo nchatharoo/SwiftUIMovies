@@ -26,6 +26,7 @@ Using URLSession
 ## Thanks for stopping by!
 
 # Contact Info:
-
+If you want to discuss about the code/architecture :
 - Email: nchatharoo@icloud.com
 - LinkedIn: [Nadheer Chatharoo](https://www.linkedin.com/in/nadheer-chatharoo-98508585/)
+- Twitter: [NadheerC](https://twitter.com/NadheerC)
