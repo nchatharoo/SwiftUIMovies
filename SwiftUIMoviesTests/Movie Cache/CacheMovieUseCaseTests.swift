@@ -40,10 +40,11 @@ class CacheMovieUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT(currentDate: { timestamp })
         let items = [uniqueItem(), uniqueItem()]
         
+        let localItems = items.map { LocalMovieItem(id: $0.id, title: $0.title, backdropPath: $0.backdropPath, posterPath: $0.posterPath, overview: $0.overview, voteAverage: $0.voteAverage, voteCount: $0.voteCount, runtime: $0.runtime, releaseDate: $0.releaseDate, genres: $0.genres, credits: $0.credits, videos: $0.videos) }
         sut.save(items) { _ in }
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCacheMovie, .insert(items, timestamp)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCacheMovie, .insert(localItems, timestamp)])
     }
     
     func test_save_failsOnDeletionError() {
@@ -101,7 +102,7 @@ class CacheMovieUseCaseTests: XCTestCase {
     private class MovieStoreSpy: MovieStore {
         enum ReceivedMessage: Equatable {
             case deleteCacheMovie
-            case insert([Movie],Date)
+            case insert([LocalMovieItem],Date)
         }
         
         private(set) var receivedMessages = [ReceivedMessage]()
@@ -122,7 +123,7 @@ class CacheMovieUseCaseTests: XCTestCase {
             deletionCompletions[index](nil)
         }
         
-        func insert(_ items: [Movie], timestamp: Date, completion: @escaping InsertionCompletion) {
+        func insert(_ items: [LocalMovieItem], timestamp: Date, completion: @escaping InsertionCompletion) {
             insertionCompletions.append(completion)
             receivedMessages.append(.insert(items, timestamp))
         }
