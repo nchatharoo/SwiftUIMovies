@@ -26,10 +26,9 @@ class CacheMovieUseCaseTests: XCTestCase {
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
-        let items = [uniqueItem(), uniqueItem()]
         let deletionError = anyNSError()
         
-        sut.save(items) { _ in }
+        sut.save(uniqueItems().models) { _ in }
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCacheMovie])
@@ -38,13 +37,12 @@ class CacheMovieUseCaseTests: XCTestCase {
     func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
         let timestamp = Date()
         let (sut, store) = makeSUT(currentDate: { timestamp })
-        let items = [uniqueItem(), uniqueItem()]
+        let items = uniqueItems()
         
-        let localItems = items.map { LocalMovieItem(id: $0.id, title: $0.title, backdropPath: $0.backdropPath, posterPath: $0.posterPath, overview: $0.overview, voteAverage: $0.voteAverage, voteCount: $0.voteCount, runtime: $0.runtime, releaseDate: $0.releaseDate, genres: $0.genres, credits: $0.credits, videos: $0.videos) }
-        sut.save(items) { _ in }
+        sut.save(items.models) { _ in }
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCacheMovie, .insert(localItems, timestamp)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCacheMovie, .insert(items.local, timestamp)])
     }
     
     func test_save_failsOnDeletionError() {
@@ -90,8 +88,8 @@ class CacheMovieUseCaseTests: XCTestCase {
         var sut: LocalMovieLoader? = LocalMovieLoader(store: store, currentDate: Date.init)
         
         var receivedResults = [LocalMovieLoader.SaveResult]()
-        sut?.save([uniqueItem()], completion: { receivedResults.append($0) })
-        
+        sut?.save(uniqueItems().models) { receivedResults.append($0) }
+
         store.completeDeletionSuccessfully()
         sut = nil
         store.completeInsertion(with: anyNSError())
@@ -152,7 +150,7 @@ class CacheMovieUseCaseTests: XCTestCase {
         let exp = expectation(description: "Wait for save completion")
         
         var receivedError: Error?
-        sut.save([uniqueItem()]) { error in
+        sut.save(uniqueItems().models) { error in
             receivedError = error
             exp.fulfill()
         }
@@ -173,5 +171,11 @@ class CacheMovieUseCaseTests: XCTestCase {
     
     private func anyNSError() -> NSError {
         return NSError(domain: "any error", code: 0, userInfo: nil)
+    }
+    
+    private func uniqueItems() -> (models: [Movie], local: [LocalMovieItem]) {
+        let models = [uniqueItem(), uniqueItem()]
+        let local = models.map { LocalMovieItem(id: $0.id, title: $0.title, backdropPath: $0.backdropPath, posterPath: $0.posterPath, overview: $0.overview, voteAverage: $0.voteAverage, voteCount: $0.voteCount, runtime: $0.runtime, releaseDate: $0.releaseDate, genres: $0.genres, credits: $0.credits, videos: $0.videos) }
+        return (models, local)
     }
 }
