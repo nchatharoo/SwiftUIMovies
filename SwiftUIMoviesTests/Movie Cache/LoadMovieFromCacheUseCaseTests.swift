@@ -45,7 +45,27 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         
         XCTAssertEqual(receivedError as NSError?, retrievalError)
     }
+    
+    func test_load_deliversNoMoviesOnEmptyCache() {
+        let (sut, store) = makeSUT()
+        let exp = expectation(description: "Wait for load completion")
 
+        var receivedMovies: [Movie]?
+        sut.load { result in
+            switch result {
+            case let .success(movies):
+                receivedMovies = movies
+            default:
+                XCTFail("Expected success got \(result) instead")
+            }
+            exp.fulfill()
+        }
+
+        store.completeRetrievalWithEmptyCache()
+        wait(for: [exp], timeout: 1.0)
+
+        XCTAssertEqual(receivedMovies, [])
+    }
     
     //MARK: - Helpers
     
