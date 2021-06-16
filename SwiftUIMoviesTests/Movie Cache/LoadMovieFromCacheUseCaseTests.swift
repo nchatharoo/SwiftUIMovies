@@ -12,91 +12,18 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
 
     func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
+        
         XCTAssertEqual(store.receivedMessages, [])
     }
     
-    func test_save_requestsCacheDeletion() {
+    func test_load_requestsCacheRetrieval() {
         let (sut, store) = makeSUT()
-        let items = [uniqueItem(), uniqueItem()]
         
-        sut.save(items) { _ in }
+        sut.load()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCacheMovie])
+        XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
     
-    func test_save_doesNotRequestCacheInsertionOnDeletionError() {
-        let (sut, store) = makeSUT()
-        let deletionError = anyNSError()
-        
-        sut.save(uniqueItems().models) { _ in }
-        store.completeDeletion(with: deletionError)
-        
-        XCTAssertEqual(store.receivedMessages, [.deleteCacheMovie])
-    }
-    
-    func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
-        let timestamp = Date()
-        let (sut, store) = makeSUT(currentDate: { timestamp })
-        let items = uniqueItems()
-        
-        sut.save(items.models) { _ in }
-        store.completeDeletionSuccessfully()
-        
-        XCTAssertEqual(store.receivedMessages, [.deleteCacheMovie, .insert(items.local, timestamp)])
-    }
-    
-    func test_save_failsOnDeletionError() {
-        let (sut, store) = makeSUT()
-        let deletionError = anyNSError()
-        expect(sut, toCompleteWithError: deletionError, when: {
-            store.completeDeletion(with: deletionError)
-        })
-    }
-
-    func test_save_failsOnInsertionError() {
-        let (sut, store) = makeSUT()
-        let insertionError = anyNSError()
-        expect(sut, toCompleteWithError: insertionError, when: {
-            store.completeDeletionSuccessfully()
-            store.completeInsertion(with: insertionError)
-        })
-    }
-    
-    func test_save_succedsOnSuccessfulCacheInsertion() {
-        let (sut, store) = makeSUT()
-        expect(sut, toCompleteWithError: nil, when: {
-            store.completeDeletionSuccessfully()
-            store.completeInsertionSuccessfully()
-        })
-    }
-    
-    func test_save_doesNotDeliverDeletionErrorAfterSUTInstanceHasBeenDeallocated() {
-        let store = MovieStoreSpy()
-        var sut: LocalMovieLoader? = LocalMovieLoader(store: store, currentDate: Date.init)
-        
-        var receivedResults = [LocalMovieLoader.SaveResult]()
-        sut?.save([uniqueItem()], completion: { receivedResults.append($0) })
-        
-        sut = nil
-        store.completeDeletion(with: anyNSError())
-        
-        XCTAssertTrue(receivedResults.isEmpty)
-    }
-    
-    func test_save_doesNotDeliverInsertionErrorAfterSUTInstanceHasBeenDeallocated() {
-        let store = MovieStoreSpy()
-        var sut: LocalMovieLoader? = LocalMovieLoader(store: store, currentDate: Date.init)
-        
-        var receivedResults = [LocalMovieLoader.SaveResult]()
-        sut?.save(uniqueItems().models) { receivedResults.append($0) }
-
-        store.completeDeletionSuccessfully()
-        sut = nil
-        store.completeInsertion(with: anyNSError())
-        
-        XCTAssertTrue(receivedResults.isEmpty)
-    }
-
     //MARK: - Helpers
     
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #file, line: UInt = #line) -> (sut: LocalMovieLoader, store: MovieStoreSpy) {

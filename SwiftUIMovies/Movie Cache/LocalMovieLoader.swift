@@ -36,6 +36,10 @@ public final class LocalMovieLoader {
             completion(error)
         }
     }
+    
+    public func load() {
+        store.retrieve()
+    }
 }
 
 private extension Array where Element == Movie {

@@ -12,6 +12,6 @@ public protocol MovieStore {
     typealias InsertionCompletion = (Error?) -> Void
 
     func deleteCacheMovie(completion: @escaping DeletionCompletion)
-    
     func insert(_ items: [LocalMovieItem], timestamp: Date, completion: @escaping InsertionCompletion)
+    func retrieve()
 }

@@ -12,6 +12,7 @@ class MovieStoreSpy: MovieStore {
     enum ReceivedMessage: Equatable {
         case deleteCacheMovie
         case insert([LocalMovieItem],Date)
+        case retrieve
     }
     
     private(set) var receivedMessages = [ReceivedMessage]()
@@ -43,5 +44,9 @@ class MovieStoreSpy: MovieStore {
     
     func completeInsertionSuccessfully(at index: Int = 0) {
         insertionCompletions[index](nil)
+    }
+    
+    func retrieve() {
+        receivedMessages.append(.retrieve)
     }
 }
