@@ -39,7 +39,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         })
     }
     
-    func test_load_deliversCachedImagesOnLessThanSevenDaysOldCache() {
+    func test_load_deliversCachedMoviesOnLessThanSevenDaysOldCache() {
         let movie = uniqueItems()
         let fixedCurrentDate = Date()
         let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: 1)
@@ -49,7 +49,17 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
             store.completeRetrieval(with: movie.local, timestamp: lessThanSevenDaysOldTimestamp)
         })
     }
+    
+    func test_load_deliversNoMoviesOnSevenDaysOldCache() {
+        let movie = uniqueItems()
+        let fixedCurrentDate = Date()
+        let sevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
+        expect(sut, toCompleteWith: .success([]), when: {
+            store.completeRetrieval(with: movie.local, timestamp: sevenDaysOldTimestamp)
+        })
+    }
     
     //MARK: - Helpers
     
@@ -72,7 +82,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
             case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
                 XCTAssertEqual(receivedError, expectedError, file: file, line: line)
             default:
-                XCTFail("Expected result \(expectedResult), got \(receivedResult) instead")
+                XCTFail("Expected result \(expectedResult), got \(receivedResult) instead", file: file, line: line)
             }
             exp.fulfill()
         }
@@ -104,7 +114,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
 
 private extension Date {
     func adding(days: Int) -> Date {
-        return Calendar(identifier: .gregorian).date(byAdding: .day, value: 7, to: self)!
+        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
     }
     
     func adding(seconds: TimeInterval) -> Date {
