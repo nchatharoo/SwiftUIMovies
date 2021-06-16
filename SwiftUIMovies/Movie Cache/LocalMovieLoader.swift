@@ -47,15 +47,16 @@ public final class LocalMovieLoader {
     }
     
     public func load(completion: @escaping (LoadResult) -> Void) {
-        store.retrieve { [unowned self] result in
+        store.retrieve { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case let .failure(error):
-                store.deleteCacheMovie { _ in }
+                self.store.deleteCacheMovie { _ in }
                 completion(.failure(error))
             case let .found(movies, timestamp) where self.validate(timestamp):
                 completion(.success(movies.toModels()))
             case .found:
-                store.deleteCacheMovie { _ in }
+                self.store.deleteCacheMovie { _ in }
                 completion(.success([]))
             case .empty:
                 completion(.success([]))

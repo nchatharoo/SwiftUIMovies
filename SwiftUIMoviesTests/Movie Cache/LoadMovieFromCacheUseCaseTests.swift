@@ -125,7 +125,20 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         
         XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCacheMovie])
     }
+    
+    func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+        let store = MovieStoreSpy()
+        var sut: LocalMovieLoader? = LocalMovieLoader(store: store, currentDate: Date.init)
+        
+        var receivedResults = [LocalMovieLoader.LoadResult]()
+        
+        sut?.load { receivedResults.append($0) }
 
+        sut = nil
+        store.completeRetrievalWithEmptyCache()
+        
+        XCTAssertTrue(receivedResults.isEmpty)
+    }
 
     //MARK: - Helpers
     
