@@ -8,11 +8,18 @@
 import Foundation
 
 public final class LocalMovieLoader {
+    
+    public enum LoadMovieResult {
+        case success([Movie])
+        case failure(Error)
+    }
+    
     private let store: MovieStore
     private let currentDate: () -> Date
 
     public typealias SaveResult = Error?
-
+    public typealias LoadResult = LoadMovieResult
+    
     public init(store: MovieStore, currentDate: @escaping () -> Date) {
         self.store = store
         self.currentDate = currentDate
@@ -37,8 +44,12 @@ public final class LocalMovieLoader {
         }
     }
     
-    public func load(completion: @escaping (Error?) -> Void) {
-        store.retrieve(completion: completion)
+    public func load(completion: @escaping (LoadResult) -> Void) {
+        store.retrieve { error in
+            if let error = error {
+                completion(.failure(error))
+            }
+        }
     }
 }
 
