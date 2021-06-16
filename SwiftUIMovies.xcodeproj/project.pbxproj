@@ -10,6 +10,7 @@
 		8E08E694267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E08E693267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift */; };
 		8E08E69B2672498F003B9EBA /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6147002643183400AC06B1 /* XCTestCase+MemoryLeakTracking.swift */; };
 		8E559E85267A06C2002BC2EE /* RemoteMovieItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E559E84267A06C2002BC2EE /* RemoteMovieItem.swift */; };
+		8E559E87267A071D002BC2EE /* LocalMovieItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E559E86267A071D002BC2EE /* LocalMovieItem.swift */; };
 		8E5F402F26680A3C001F01CA /* MovieListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F402E26680A3C001F01CA /* MovieListEndpoint.swift */; };
 		8E6146FD2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6146FC2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift */; };
 		8E6147012643183400AC06B1 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6147002643183400AC06B1 /* XCTestCase+MemoryLeakTracking.swift */; };
@@ -61,6 +62,7 @@
 		8E08E693267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesAPIEndToEndTests.swift; sourceTree = "<group>"; };
 		8E08E695267245C4003B9EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E559E84267A06C2002BC2EE /* RemoteMovieItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieItem.swift; sourceTree = "<group>"; };
+		8E559E86267A071D002BC2EE /* LocalMovieItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMovieItem.swift; sourceTree = "<group>"; };
 		8E5F402E26680A3C001F01CA /* MovieListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListEndpoint.swift; sourceTree = "<group>"; };
 		8E6146FC2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		8E6147002643183400AC06B1 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				8E6AA4502678F08F00FE4859 /* LocalMovieLoader.swift */,
 				8E6AA4522678F13000FE4859 /* MovieStore.swift */,
+				8E559E86267A071D002BC2EE /* LocalMovieItem.swift */,
 			);
 			path = "Movie Cache";
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				8E6AA4512678F08F00FE4859 /* LocalMovieLoader.swift in Sources */,
 				8ECFCF3F26443B2F00C217ED /* HTTPClient.swift in Sources */,
 				8ECE109226403E2C006B1E4D /* ContentView.swift in Sources */,
+				8E559E87267A071D002BC2EE /* LocalMovieItem.swift in Sources */,
 				8E559E85267A06C2002BC2EE /* RemoteMovieItem.swift in Sources */,
 				8EB6E71D26416BD200AE8D72 /* Movie.swift in Sources */,
 				8ECE109026403E2C006B1E4D /* SwiftUIMoviesApp.swift in Sources */,
