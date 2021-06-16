@@ -59,9 +59,16 @@ public final class RemoteMovieLoader {
     }
 }
 
+private extension Array where Element == RemoteMovieItem {
+    func toModels() -> [Movie] {
+        return map { Movie(id: $0.id, title: $0.title, backdropPath: $0.backdropPath, posterPath: $0.posterPath, overview: $0.overview, voteAverage: $0.voteAverage, voteCount: $0.voteCount, runtime: $0.runtime, releaseDate: $0.releaseDate, genres: $0.genres, credits: $0.credits, videos: $0.videos)
+        }
+    }
+}
+
 final class MovieItemsMapper {
     private struct Root: Decodable {
-        let results: [Movie]
+        let results: [RemoteMovieItem]
     }
     
     static let jsonDecoder: JSONDecoder = {
@@ -70,7 +77,7 @@ final class MovieItemsMapper {
         return jsonDecoder
     }()
        
-    static func map(_ data: Data, from response: HTTPURLResponse) throws -> [Movie] {
+    static func map(_ data: Data, from response: HTTPURLResponse) throws -> [RemoteMovieItem] {
        guard response.statusCode == 200, let root = try? jsonDecoder.decode(Root.self, from: data) else {
         throw RemoteMovieLoader.Error.invalidData
        }
@@ -80,6 +87,7 @@ final class MovieItemsMapper {
 
 private extension Array where Element == Movie {
     func toModels() -> [Movie] {
-        return map { Movie(id: $0.id, title: $0.title, backdropPath: $0.backdropPath, posterPath: $0.posterPath, overview: $0.overview, voteAverage: $0.voteAverage, voteCount: $0.voteCount, runtime: $0.runtime, releaseDate: $0.releaseDate, genres: $0.genres, credits: $0.credits, videos: $0.videos)}
+        return map { Movie(id: $0.id, title: $0.title, backdropPath: $0.backdropPath, posterPath: $0.posterPath, overview: $0.overview, voteAverage: $0.voteAverage, voteCount: $0.voteCount, runtime: $0.runtime, releaseDate: $0.releaseDate, genres: $0.genres, credits: $0.credits, videos: $0.videos)
+        }
     }
 }
