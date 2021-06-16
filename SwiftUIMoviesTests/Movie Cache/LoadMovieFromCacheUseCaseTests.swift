@@ -39,6 +39,18 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         })
     }
     
+    func test_load_deliversCachedImagesOnLessThanSevenDaysOldCache() {
+        let movie = uniqueItems()
+        let fixedCurrentDate = Date()
+        let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: 1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+
+        expect(sut, toCompleteWith: .success(movie.models), when: {
+            store.completeRetrieval(with: movie.local, timestamp: lessThanSevenDaysOldTimestamp)
+        })
+    }
+
+    
     //MARK: - Helpers
     
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #file, line: UInt = #line) -> (sut: LocalMovieLoader, store: MovieStoreSpy) {
@@ -88,4 +100,14 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         return (models, local)
     }
 
+}
+
+private extension Date {
+    func adding(days: Int) -> Date {
+        return Calendar(identifier: .gregorian).date(byAdding: .day, value: 7, to: self)!
+    }
+    
+    func adding(seconds: TimeInterval) -> Date {
+        return self + seconds
+    }
 }

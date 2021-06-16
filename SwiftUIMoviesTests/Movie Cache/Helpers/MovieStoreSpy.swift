@@ -11,7 +11,7 @@ import SwiftUIMovies
 class MovieStoreSpy: MovieStore {
     enum ReceivedMessage: Equatable {
         case deleteCacheMovie
-        case insert([LocalMovieItem],Date)
+        case insert([LocalMovieItem], Date)
         case retrieve
     }
     
@@ -53,10 +53,14 @@ class MovieStoreSpy: MovieStore {
     }
     
     func completeRetrieval(with error: Error, at index: Int = 0) {
-        retrievalCompletions[index](error)
+        retrievalCompletions[index](.failure(error))
     }
     
     func completeRetrievalWithEmptyCache(at index: Int = 0) {
-        retrievalCompletions[index](nil)
+        retrievalCompletions[index](.empty)
+    }
+    
+    func completeRetrieval(with movies: [LocalMovieItem], timestamp: Date, at index: Int = 0) {
+        retrievalCompletions[index](.found(movies: movies, timestamp: timestamp))
     }
 }
