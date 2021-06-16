@@ -27,44 +27,16 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     func test_load_failsOnRetrievalError() {
         let (sut, store) = makeSUT()
         let retrievalError = anyNSError()
-        let exp = expectation(description: "Wait for load completion")
-        
-        var receivedError: Error?
-        sut.load { result in
-            switch result {
-            case let .failure(error):
-                receivedError = error
-            default:
-                XCTFail("Expected failure, got \(result) instead")
-            }
-            exp.fulfill()
-        }
-        
-        store.completeRetrieval(with: retrievalError)
-        wait(for: [exp], timeout: 1.0)
-        
-        XCTAssertEqual(receivedError as NSError?, retrievalError)
+        expect(sut, toCompleteWith: .failure(retrievalError), when: {
+            store.completeRetrieval(with: retrievalError)
+        })
     }
     
     func test_load_deliversNoMoviesOnEmptyCache() {
         let (sut, store) = makeSUT()
-        let exp = expectation(description: "Wait for load completion")
-
-        var receivedMovies: [Movie]?
-        sut.load { result in
-            switch result {
-            case let .success(movies):
-                receivedMovies = movies
-            default:
-                XCTFail("Expected success got \(result) instead")
-            }
-            exp.fulfill()
-        }
-
-        store.completeRetrievalWithEmptyCache()
-        wait(for: [exp], timeout: 1.0)
-
-        XCTAssertEqual(receivedMovies, [])
+        expect(sut, toCompleteWith: .success([]), when: {
+            store.completeRetrievalWithEmptyCache()
+        })
     }
     
     //MARK: - Helpers
@@ -78,20 +50,25 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         return (sut, store)
     }
     
-    private func expect(_ sut: LocalMovieLoader, toCompleteWithError expectedError: NSError?, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        let exp = expectation(description: "Wait for save completion")
-        
-        var receivedError: Error?
-        sut.save(uniqueItems().models) { error in
-            receivedError = error
+    private func expect(_ sut: LocalMovieLoader, toCompleteWith expectedResult: LocalMovieLoader.LoadResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        let exp = expectation(description: "Wait for load completion")
+
+        sut.load { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedMovies), .success(expectedMovies)):
+                XCTAssertEqual(receivedMovies, expectedMovies, file: file, line: line)
+            case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
+                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+            default:
+                XCTFail("Expected result \(expectedResult), got \(receivedResult) instead")
+            }
             exp.fulfill()
         }
+
         action()
         wait(for: [exp], timeout: 1.0)
-        
-        XCTAssertEqual(receivedError as NSError?, expectedError, file: file, line: line)
     }
-    
+
     private func uniqueItem() -> Movie {
         
         return Movie(id: anyInt(), title: "Bloodshot", backdropPath: "\\/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg", posterPath: "\\/8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg", overview: "", voteAverage: 7.1, voteCount: 418, runtime: nil, releaseDate: "2020-03-05", genres: nil, credits: nil, videos: nil)
