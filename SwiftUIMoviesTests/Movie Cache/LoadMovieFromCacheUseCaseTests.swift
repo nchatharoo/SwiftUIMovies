@@ -61,6 +61,17 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         })
     }
     
+    func test_load_deliversNoMoviesOnMoreThanSevenDaysOldCache() {
+        let movie = uniqueItems()
+        let fixedCurrentDate = Date()
+        let moreThansevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: -1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+
+        expect(sut, toCompleteWith: .success([]), when: {
+            store.completeRetrieval(with: movie.local, timestamp: moreThansevenDaysOldTimestamp)
+        })
+    }
+    
     //MARK: - Helpers
     
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #file, line: UInt = #line) -> (sut: LocalMovieLoader, store: MovieStoreSpy) {
