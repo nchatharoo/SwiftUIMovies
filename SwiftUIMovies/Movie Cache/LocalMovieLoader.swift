@@ -51,7 +51,6 @@ public final class LocalMovieLoader {
             guard let self = self else { return }
             switch result {
             case let .failure(error):
-                self.store.deleteCacheMovie { _ in }
                 completion(.failure(error))
             case let .found(movies, timestamp) where self.validate(timestamp):
                 completion(.success(movies.toModels()))
@@ -62,6 +61,11 @@ public final class LocalMovieLoader {
                 completion(.success([]))
             }
         }
+    }
+    
+    public func validateCache() {
+        store.retrieve { _ in }
+        store.deleteCacheMovie { _ in }
     }
     
     private var maxCacheAgeInDays: Int {
