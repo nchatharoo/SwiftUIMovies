@@ -35,16 +35,41 @@ class ValidateFeedCacheUseCaseTests: XCTestCase {
     }
     
     func test_validateCache_doesNotDeleteCacheOnLessThanSevenDaysOldCache() {
-        let feed = uniqueItems()
+        let movie = uniqueItems()
         let fixedCurrentDate = Date()
         let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: 1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
         sut.validateCache()
-        store.completeRetrieval(with: feed.local, timestamp: lessThanSevenDaysOldTimestamp)
+        store.completeRetrieval(with: movie.local, timestamp: lessThanSevenDaysOldTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
+    
+    func test_validateCache_deletesOnSevenDaysOldCache() {
+        let movie = uniqueItems()
+        let fixedCurrentDate = Date()
+        let sevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+
+        sut.validateCache()
+        store.completeRetrieval(with: movie.local, timestamp: sevenDaysOldTimestamp)
+        
+        XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCacheMovie])
+    }
+    
+    func test_validateCache_deletesOnMoreThanSevenDaysOldCache() {
+        let movie = uniqueItems()
+        let fixedCurrentDate = Date()
+        let sevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: -1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+
+        sut.validateCache()
+        store.completeRetrieval(with: movie.local, timestamp: sevenDaysOldTimestamp)
+        
+        XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCacheMovie])
+    }
+
     
     //MARK: - Helpers
     
