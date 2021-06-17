@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class RemoteMovieLoader {
+public final class RemoteMovieLoader: MovieLoader {
     public let endpoint: MovieListEndpoint
     public let client: HTTPClient
     
@@ -16,40 +16,37 @@ public final class RemoteMovieLoader {
         case connectivity
     }
     
-    public enum LoadMovieResult: Equatable {
-        case success([Movie])
-        case failure(Error)
-    }
-    
+    public typealias Result = MovieLoader.Result
+        
     public init(endpoint: MovieListEndpoint, client: HTTPClient) {
         self.endpoint = endpoint
         self.client = client
     }
     
-    public func loadMovies(completion: @escaping (LoadMovieResult) -> Void) {
+    public func loadMovies(completion: @escaping (Result) -> Void) {
         client.getMovies(from: endpoint) { [weak self] result in
             guard self != nil else { return }
             switch result {
             case let .success(data, response):
                 completion(RemoteMovieLoader.map(data, from: response))
             case .failure:
-                completion(.failure(.connectivity))
+                completion(.failure(Error.connectivity))
             }
         }
     }
     
-    public func loadMovie(id: Int, completion: @escaping (LoadMovieResult) -> Void) {
+    public func loadMovie(id: Int, completion: @escaping (Result) -> Void) {
         client.getMovie(with: id) { result in
             switch result {
             case let .success(data, response):
                 completion(RemoteMovieLoader.map(data, from: response))
             case .failure:
-                completion(.failure(.connectivity))
+                completion(.failure(Error.connectivity))
             }
         }
     }
     
-    private static func map(_ data: Data, from response: HTTPURLResponse) -> LoadMovieResult {
+    private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {
         do {
             let items = try MovieItemsMapper.map(data, from: response)
             return .success(items.toModels())
