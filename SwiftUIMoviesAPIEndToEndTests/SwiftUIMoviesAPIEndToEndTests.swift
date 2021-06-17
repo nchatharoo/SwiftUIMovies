@@ -51,13 +51,13 @@ class SwiftUIMoviesAPIEndToEndTests: XCTestCase {
         return (item, json)
     }
     
-    private func getMoviesResult(file: StaticString = #file, line: UInt = #line) -> RemoteMovieLoader.LoadMovieResult? {
+    private func getMoviesResult(file: StaticString = #file, line: UInt = #line) -> RemoteMovieLoader.Result? {
         let loader = RemoteMovieLoader(endpoint: .nowPlaying, client: ephemeralClient())
         trackForMemoryLeaks(loader, file: file, line: line)
         
         let exp = expectation(description: "Wait for load completion")
         
-        var receivedResult: RemoteMovieLoader.LoadMovieResult?
+        var receivedResult: RemoteMovieLoader.Result?
         
         loader.loadMovies { result in
             receivedResult = result
