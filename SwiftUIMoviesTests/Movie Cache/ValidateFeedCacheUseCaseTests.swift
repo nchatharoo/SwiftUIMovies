@@ -69,6 +69,20 @@ class ValidateFeedCacheUseCaseTests: XCTestCase {
         
         XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCacheMovie])
     }
+    
+    func test_validateCache_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+        let store = MovieStoreSpy()
+        var sut: LocalMovieLoader? = LocalMovieLoader(store: store, currentDate: Date.init)
+        
+        let receivedResults = [LocalMovieLoader.LoadResult]()
+        
+        sut?.validateCache()
+
+        sut = nil
+        store.completeRetrieval(with: anyNSError())
+        
+        XCTAssertTrue(receivedResults.isEmpty)
+    }
 
     
     //MARK: - Helpers

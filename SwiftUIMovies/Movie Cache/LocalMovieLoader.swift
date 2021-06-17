@@ -63,7 +63,8 @@ public final class LocalMovieLoader {
     }
     
     public func validateCache() {
-        self.store.retrieve { [unowned self] result in
+        self.store.retrieve { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .failure:
                 self.store.deleteCacheMovie { _ in }
