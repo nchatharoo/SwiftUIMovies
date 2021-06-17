@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E08E694267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E08E693267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift */; };
 		8E08E69B2672498F003B9EBA /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6147002643183400AC06B1 /* XCTestCase+MemoryLeakTracking.swift */; };
+		8E547770267B2FFF00B102FA /* ValidateFeedCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54776F267B2FFF00B102FA /* ValidateFeedCacheUseCaseTests.swift */; };
 		8E559E85267A06C2002BC2EE /* RemoteMovieItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E559E84267A06C2002BC2EE /* RemoteMovieItem.swift */; };
 		8E559E87267A071D002BC2EE /* LocalMovieItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E559E86267A071D002BC2EE /* LocalMovieItem.swift */; };
 		8E559E89267A10CB002BC2EE /* LoadMovieFromCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E559E88267A10CB002BC2EE /* LoadMovieFromCacheUseCaseTests.swift */; };
@@ -63,6 +64,7 @@
 		8E08E691267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIMoviesAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E08E693267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesAPIEndToEndTests.swift; sourceTree = "<group>"; };
 		8E08E695267245C4003B9EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E54776F267B2FFF00B102FA /* ValidateFeedCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateFeedCacheUseCaseTests.swift; sourceTree = "<group>"; };
 		8E559E84267A06C2002BC2EE /* RemoteMovieItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieItem.swift; sourceTree = "<group>"; };
 		8E559E86267A071D002BC2EE /* LocalMovieItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMovieItem.swift; sourceTree = "<group>"; };
 		8E559E88267A10CB002BC2EE /* LoadMovieFromCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMovieFromCacheUseCaseTests.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				8E559E8A267A1296002BC2EE /* Helpers */,
 				8E778BEA2677A12C001425AD /* CacheMovieUseCaseTests.swift */,
 				8E559E88267A10CB002BC2EE /* LoadMovieFromCacheUseCaseTests.swift */,
+				8E54776F267B2FFF00B102FA /* ValidateFeedCacheUseCaseTests.swift */,
 			);
 			path = "Movie Cache";
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E547770267B2FFF00B102FA /* ValidateFeedCacheUseCaseTests.swift in Sources */,
 				8ECE10EF2640753B006B1E4D /* RemoteMovieLoaderTests.swift in Sources */,
 				8E6146FD2642DB4000AC06B1 /* URLSessionHTTPClientTests.swift in Sources */,
 				8E778BEB2677A12C001425AD /* CacheMovieUseCaseTests.swift in Sources */,
