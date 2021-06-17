@@ -14,23 +14,34 @@ public final class LocalMovieLoader {
         case failure(Error)
     }
     
-    private let store: MovieStore
-    private let currentDate: () -> Date
-    
-    private let calendar = Calendar(identifier: .gregorian)
-
-    public typealias SaveResult = Error?
-    public typealias LoadResult = LoadMovieResult
-    
     public init(store: MovieStore, currentDate: @escaping () -> Date) {
         self.store = store
         self.currentDate = currentDate
     }
     
+    private let store: MovieStore
+    private let currentDate: () -> Date
+    
+    private let calendar = Calendar(identifier: .gregorian)
+    private var maxCacheAgeInDays: Int {
+        return 7
+    }
+    
+    private func validate(_ timestamp: Date) -> Bool {
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
+            return false
+        }
+        return currentDate() < maxCacheAge
+    }
+}
+
+extension LocalMovieLoader {
+    public typealias SaveResult = Error?
+
     public func save(_ items: [Movie], completion: @escaping (SaveResult) -> Void) {
         store.deleteCacheMovie { [weak self] error in
             guard let self = self else { return }
-
+            
             if let cacheDeletionError = error {
                 completion(cacheDeletionError)
             } else {
@@ -45,36 +56,45 @@ public final class LocalMovieLoader {
             completion(error)
         }
     }
-    
+}
+
+extension LocalMovieLoader {
+    public typealias LoadResult = LoadMovieResult
+
     public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .failure(error):
-                self.store.deleteCacheMovie { _ in }
                 completion(.failure(error))
+                
             case let .found(movies, timestamp) where self.validate(timestamp):
                 completion(.success(movies.toModels()))
-            case .found:
-                self.store.deleteCacheMovie { _ in }
-                completion(.success([]))
-            case .empty:
+                
+            case .found, .empty:
                 completion(.success([]))
             }
         }
     }
-    
-    private var maxCacheAgeInDays: Int {
-        return 7
-    }
-    
-    private func validate(_ timestamp: Date) -> Bool {
-        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
-            return false
+}
+
+extension LocalMovieLoader {
+    public func validateCache() {
+        self.store.retrieve { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure:
+                self.store.deleteCacheMovie { _ in }
+                
+            case let .found(_, timestamp) where !self.validate(timestamp):
+                self.store.deleteCacheMovie { _ in }
+                
+            case .empty, .found: break
+            }
         }
-        return currentDate() < maxCacheAge
     }
 }
+
 
 private extension Array where Element == Movie {
     func toLocal() -> [LocalMovieItem] {
@@ -89,4 +109,3 @@ private extension Array where Element == LocalMovieItem {
         }
     }
 }
-
