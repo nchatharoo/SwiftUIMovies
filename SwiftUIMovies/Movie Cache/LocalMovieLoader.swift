@@ -18,7 +18,7 @@ public final class LocalMovieLoader {
     private let currentDate: () -> Date
     
     private let calendar = Calendar(identifier: .gregorian)
-
+    
     public typealias SaveResult = Error?
     public typealias LoadResult = LoadMovieResult
     
@@ -30,7 +30,7 @@ public final class LocalMovieLoader {
     public func save(_ items: [Movie], completion: @escaping (SaveResult) -> Void) {
         store.deleteCacheMovie { [weak self] error in
             guard let self = self else { return }
-
+            
             if let cacheDeletionError = error {
                 completion(cacheDeletionError)
             } else {
@@ -64,8 +64,13 @@ public final class LocalMovieLoader {
     }
     
     public func validateCache() {
-        store.retrieve { _ in }
-        store.deleteCacheMovie { _ in }
+        self.store.retrieve { [unowned self] result in
+            switch result {
+            case .failure:
+                self.store.deleteCacheMovie { _ in }
+            default: break
+            }
+        }
     }
     
     private var maxCacheAgeInDays: Int {
