@@ -25,8 +25,12 @@ func uniqueItems() -> (models: [Movie], local: [LocalMovieItem]) {
 
 extension Date {
     
-    func minusMovieCacheMaxAge() -> Date {
-        return adding(days: -7)
+    func minusMoviesCacheMaxAge() -> Date {
+        return adding(days: -moviesCacheMaxAgeInDays)
+    }
+    
+    private var moviesCacheMaxAgeInDays: Int {
+        return 7
     }
 
     func adding(days: Int) -> Date {

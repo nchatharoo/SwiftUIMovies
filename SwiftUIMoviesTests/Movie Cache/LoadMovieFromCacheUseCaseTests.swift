@@ -42,7 +42,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     func test_load_deliversCachedMoviesOnNonExpiredCache() {
         let movie = uniqueItems()
         let fixedCurrentDate = Date()
-        let nonExpiredOldTimestamp = fixedCurrentDate.minusMovieCacheMaxAge().adding(seconds: 1)
+        let nonExpiredOldTimestamp = fixedCurrentDate.minusMoviesCacheMaxAge().adding(seconds: 1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
         expect(sut, toCompleteWith: .success(movie.models), when: {
@@ -53,7 +53,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     func test_load_deliversNoMoviesOnCacheExpiration() {
         let movie = uniqueItems()
         let fixedCurrentDate = Date()
-        let expirationTimestamp = fixedCurrentDate.minusMovieCacheMaxAge()
+        let expirationTimestamp = fixedCurrentDate.minusMoviesCacheMaxAge()
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
         expect(sut, toCompleteWith: .success([]), when: {
@@ -64,7 +64,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     func test_load_deliversNoMoviesOnExpiredCache() {
         let movie = uniqueItems()
         let fixedCurrentDate = Date()
-        let expiredTimestamp = fixedCurrentDate.minusMovieCacheMaxAge().adding(seconds: -1)
+        let expiredTimestamp = fixedCurrentDate.minusMoviesCacheMaxAge().adding(seconds: -1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
         expect(sut, toCompleteWith: .success([]), when: {
@@ -93,7 +93,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectsOnNonExpiredCache() {
         let movie = uniqueItems()
         let fixedCurrentDate = Date()
-        let nonExpiredTimestamp = fixedCurrentDate.minusMovieCacheMaxAge().adding(seconds: 1)
+        let nonExpiredTimestamp = fixedCurrentDate.minusMoviesCacheMaxAge().adding(seconds: 1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
         sut.load { _ in }
@@ -105,7 +105,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectsOnCacheExpiration() {
         let movie = uniqueItems()
         let fixedCurrentDate = Date()
-        let expirationTimestamp = fixedCurrentDate.minusMovieCacheMaxAge()
+        let expirationTimestamp = fixedCurrentDate.minusMoviesCacheMaxAge()
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
         sut.load { _ in }
@@ -117,7 +117,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectsOnExpiredCache() {
         let movie = uniqueItems()
         let fixedCurrentDate = Date()
-        let expiredTimestamp = fixedCurrentDate.minusMovieCacheMaxAge().adding(days: -1)
+        let expiredTimestamp = fixedCurrentDate.minusMoviesCacheMaxAge().adding(days: -1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
         sut.load { _ in }
