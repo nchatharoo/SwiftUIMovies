@@ -14,24 +14,12 @@ public final class LocalMovieLoader {
         case failure(Error)
     }
     
-    public init(store: MovieStore, currentDate: @escaping () -> Date) {
-        self.store = store
-        self.currentDate = currentDate
-    }
-    
     private let store: MovieStore
     private let currentDate: () -> Date
     
-    private let calendar = Calendar(identifier: .gregorian)
-    private var maxCacheAgeInDays: Int {
-        return 7
-    }
-    
-    private func validate(_ timestamp: Date) -> Bool {
-        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
-            return false
-        }
-        return currentDate() < maxCacheAge
+    public init(store: MovieStore, currentDate: @escaping () -> Date) {
+        self.store = store
+        self.currentDate = currentDate
     }
 }
 
@@ -68,7 +56,7 @@ extension LocalMovieLoader {
             case let .failure(error):
                 completion(.failure(error))
                 
-            case let .found(movies, timestamp) where self.validate(timestamp):
+            case let .found(movies, timestamp) where MovieCachePolicy.validate(timestamp, against: self.currentDate()):
                 completion(.success(movies.toModels()))
                 
             case .found, .empty:
@@ -86,7 +74,7 @@ extension LocalMovieLoader {
             case .failure:
                 self.store.deleteCacheMovie { _ in }
                 
-            case let .found(_, timestamp) where !self.validate(timestamp):
+            case let .found(_, timestamp) where !MovieCachePolicy.validate(timestamp, against: self.currentDate()):
                 self.store.deleteCacheMovie { _ in }
                 
             case .empty, .found: break
