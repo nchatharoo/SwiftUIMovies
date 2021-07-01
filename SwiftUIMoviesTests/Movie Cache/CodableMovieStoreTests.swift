@@ -57,7 +57,11 @@ class CodableMovieStore {
         }
     }
     
-    private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("movie.store")
+    private let storeURL: URL
+    
+    init(storeURL: URL) {
+        self.storeURL = storeURL
+    }
 
     func retrieve(completion: @escaping MovieStore.RetrievalCompletion) {
         guard let data = try? Data(contentsOf: storeURL) else {
@@ -163,7 +167,8 @@ class CodableMovieStoreTests: XCTestCase {
     //MARK - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableMovieStore {
-        let sut = CodableMovieStore()
+        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("movie.store")
+        let sut = CodableMovieStore(storeURL: storeURL)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
