@@ -95,7 +95,7 @@ class CodableMovieStoreTests: XCTestCase {
 
     
     func test_retrieve_deliversEmptyOnEmptyCache() {
-        let sut = CodableMovieStore()
+        let sut = makeSUT()
         let exp = expectation(description: "Wait for cache retrieval")
         sut.retrieve { result in
             switch result {
@@ -112,7 +112,7 @@ class CodableMovieStoreTests: XCTestCase {
     }
     
     func test_retrieve_HasNoSideEffectOnEmptyCache() {
-        let sut = CodableMovieStore()
+        let sut = makeSUT()
         let exp = expectation(description: "Wait for cache retrieval")
         
         sut.retrieve { firstResult in
@@ -135,7 +135,7 @@ class CodableMovieStoreTests: XCTestCase {
     }
     
     func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues() {
-        let sut = CodableMovieStore()
+        let sut = makeSUT()
         let movie = uniqueItems().local
         let timestamp = Date()
         let exp = expectation(description: "Wait for cache retrieval")
@@ -158,5 +158,13 @@ class CodableMovieStoreTests: XCTestCase {
         }
         
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    //MARK - Helpers
+    
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableMovieStore {
+        let sut = CodableMovieStore()
+        trackForMemoryLeaks(sut, file: file, line: line)
+        return sut
     }
 }
