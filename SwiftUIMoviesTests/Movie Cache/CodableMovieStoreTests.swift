@@ -85,16 +85,13 @@ class CodableMovieStore {
 class CodableMovieStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
-        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("movie.store")
-        try? FileManager.default.removeItem(at: storeURL)
+        try? FileManager.default.removeItem(at: storeURL())
     }
     
     override func tearDown() {
         super.tearDown()
         
-        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("movie.store")
-        try? FileManager.default.removeItem(at: storeURL)
-
+        try? FileManager.default.removeItem(at: storeURL())
     }
 
     
@@ -167,9 +164,13 @@ class CodableMovieStoreTests: XCTestCase {
     //MARK - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableMovieStore {
-        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("movie.store")
-        let sut = CodableMovieStore(storeURL: storeURL)
+        let sut = CodableMovieStore(storeURL: storeURL())
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
+    }
+    
+    private func storeURL() -> URL {
+        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("movie.store")
+        return storeURL
     }
 }
