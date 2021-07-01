@@ -110,13 +110,7 @@ class CodableMovieStoreTests: XCTestCase {
         let movie = uniqueItems().local
         let timestamp = Date()
 
-        let exp = expectation(description: "Wait for cache insertion")
-        sut.insert(movie, timestamp: timestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected movie to be inserted successfully")
-                exp.fulfill()
-            
-        }
-        wait(for: [exp], timeout: 1.0)
+        insert((movie, timestamp), to: sut)
         expect(sut, toRetrieve: .found(movies: movie, timestamp: timestamp))
     }
     
@@ -124,14 +118,8 @@ class CodableMovieStoreTests: XCTestCase {
         let sut = makeSUT()
         let movies = uniqueItems().local
         let timestamp = Date()
-        let exp = expectation(description: "Wait for cache retrieval")
         
-        sut.insert(movies, timestamp: timestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected movies to be inserted successfully")
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1.0)
+        insert((movies, timestamp), to: sut)
         expect(sut, toRetrieve: .found(movies: movies, timestamp: timestamp))
     }
     
@@ -170,6 +158,16 @@ class CodableMovieStoreTests: XCTestCase {
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
+    
+    private func insert(_ cache: (movies: [LocalMovieItem], timestamp: Date), to sut: CodableMovieStore) {
+        let exp = expectation(description: "Wait for cache insertion")
+        sut.insert(cache.movies, timestamp: cache.timestamp) { insertionError in
+            XCTAssertNil(insertionError, "Expected movies to be inserted successfully")
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
+
     
     private func testSpecificStoreURL() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
