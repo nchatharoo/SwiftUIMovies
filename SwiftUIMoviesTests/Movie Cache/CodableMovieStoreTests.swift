@@ -10,8 +10,51 @@ import SwiftUIMovies
 
 class CodableMovieStore {
     private struct Cache: Codable {
-        let movies: [LocalMovieItem]
+        let movies: [CodableMovieItem]
         let timestamp: Date
+        
+        var localMovies: [LocalMovieItem] {
+            return movies.map { $0.local }
+        }
+    }
+    
+    private struct CodableMovieItem: Equatable, Codable {
+        public let id: Int
+        public let title: String
+        public let backdropPath: String?
+        public let posterPath: String?
+        public let overview: String
+        public let voteAverage: Double
+        public let voteCount: Int
+        public let runtime: Int?
+        public let releaseDate: String?
+        
+        public let genres: [MovieGenre]?
+        public let credits: MovieCredit?
+        public let videos: MovieVideoResponse?
+        
+        init(_ movie: LocalMovieItem) {
+            self.id = movie.id
+            self.title = movie.title
+            self.backdropPath = movie.backdropPath
+            self.posterPath = movie.posterPath
+            self.overview = movie.overview
+            self.voteAverage = movie.voteAverage
+            self.voteCount = movie.voteCount
+            self.runtime = movie.runtime
+            self.releaseDate = movie.releaseDate
+            self.genres = movie.genres
+            self.credits = movie.credits
+            self.videos = movie.videos
+        }
+        
+        static func == (lhs: CodableMovieItem, rhs: CodableMovieItem) -> Bool {
+            lhs.id == rhs.id
+        }
+        
+        var local: LocalMovieItem {
+            return LocalMovieItem(id: id, title: title, backdropPath: backdropPath, posterPath: posterPath, overview: overview, voteAverage: voteAverage, voteCount: voteCount, runtime: runtime, releaseDate: releaseDate, genres: genres, credits: credits, videos: videos)
+        }
     }
     
     private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("movie.store")
@@ -22,12 +65,13 @@ class CodableMovieStore {
         }
         let decoder = JSONDecoder()
         let cache = try! decoder.decode(Cache.self, from: data)
-        completion(.found(movies: cache.movies, timestamp: cache.timestamp))
+        completion(.found(movies: cache.localMovies, timestamp: cache.timestamp))
     }
     
     func insert(_ movies: [LocalMovieItem], timestamp: Date, completion: @escaping MovieStore.InsertionCompletion) {
         let encoder = JSONEncoder()
-        let encoded = try! encoder.encode(Cache(movies: movies, timestamp: timestamp))
+        let cache = Cache(movies: movies.map(CodableMovieItem.init), timestamp: timestamp)
+        let encoded = try! encoder.encode(cache)
         try! encoded.write(to: storeURL)
         completion(nil)
     }
