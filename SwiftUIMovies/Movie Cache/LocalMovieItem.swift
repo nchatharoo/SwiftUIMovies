@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct LocalMovieItem: Equatable {
+public struct LocalMovieItem: Equatable, Codable {
     
     public init(id: Int, title: String, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [MovieGenre]?, credits: MovieCredit?, videos: MovieVideoResponse?) {
         self.id = id
