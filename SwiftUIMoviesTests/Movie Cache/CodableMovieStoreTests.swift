@@ -100,51 +100,24 @@ class CodableMovieStoreTests: XCTestCase {
     
     func test_retrieve_HasNoSideEffectOnEmptyCache() {
         let sut = makeSUT()
-        let exp = expectation(description: "Wait for cache retrieval")
         
-        sut.retrieve { firstResult in
-            sut.retrieve { secondResult in
-                
-                switch (firstResult, secondResult) {
-                
-                case (.empty, .empty):
-                    break
-                    
-                default:
-                    XCTFail("Expected retrieving twice from empty cache to deliver same empty result, got \(firstResult) and \(secondResult) instead")
-                }
-                
-                exp.fulfill()
-            }
-            
-        }
-        wait(for: [exp], timeout: 1.0)
+        expect(sut, toRetrieveTwice: .empty)
+        expect(sut, toRetrieve: .empty)
     }
-    
+
     func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues() {
         let sut = makeSUT()
         let movie = uniqueItems().local
         let timestamp = Date()
-        let exp = expectation(description: "Wait for cache retrieval")
-        
+
+        let exp = expectation(description: "Wait for cache insertion")
         sut.insert(movie, timestamp: timestamp) { insertionError in
             XCTAssertNil(insertionError, "Expected movie to be inserted successfully")
-            
-            sut.retrieve { retrieveResult in
-                switch retrieveResult {
-                case let .found(retrievedMovie, retrievedTimestamp):
-                    XCTAssertEqual(retrievedMovie, movie)
-                    XCTAssertEqual(retrievedTimestamp, timestamp)
-                    
-                default:
-                    XCTFail("Expected found result with \(movie) and timestamp \(timestamp), got \(retrieveResult) instead")
-                }
-                
                 exp.fulfill()
-            }
+            
         }
-        
         wait(for: [exp], timeout: 1.0)
+        expect(sut, toRetrieve: .found(movies: movie, timestamp: timestamp))
     }
     
     func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
@@ -192,7 +165,11 @@ class CodableMovieStoreTests: XCTestCase {
         
         wait(for: [exp], timeout: 1.0)
     }
-
+    
+    private func expect(_ sut: CodableMovieStore, toRetrieveTwice expectedResult: RetrieveCachedMovieResult, file: StaticString = #file, line: UInt = #line) {
+        expect(sut, toRetrieve: expectedResult, file: file, line: line)
+        expect(sut, toRetrieve: expectedResult, file: file, line: line)
+    }
     
     private func testSpecificStoreURL() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
