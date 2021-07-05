@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Movie: Decodable, Equatable {
+public struct Movie: Codable, Equatable {
     public init(id: Int, title: String, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [MovieGenre]?, credits: MovieCredit?, videos: MovieVideoResponse?) {
         self.id = id
         self.title = title
@@ -124,14 +124,14 @@ public struct Movie: Decodable, Equatable {
     
 }
 
-public struct MovieGenre: Decodable {
+public struct MovieGenre: Codable {
     public init(name: String) {
         self.name = name
     }
     public let name: String
 }
 
-public struct MovieCredit: Decodable {
+public struct MovieCredit: Codable {
     public init(cast: [MovieCast], crew: [MovieCrew]) {
         self.cast = cast
         self.crew = crew
@@ -142,7 +142,7 @@ public struct MovieCredit: Decodable {
     public let crew: [MovieCrew]
 }
 
-public struct MovieCast: Decodable {
+public struct MovieCast: Codable {
     public init(id: Int, character: String, name: String) {
         self.id = id
         self.character = character
@@ -154,7 +154,7 @@ public struct MovieCast: Decodable {
     public let name: String
 }
 
-public struct MovieCrew: Decodable {
+public struct MovieCrew: Codable {
     public init(id: Int, job: String, name: String) {
         self.id = id
         self.job = job
@@ -166,7 +166,7 @@ public struct MovieCrew: Decodable {
     public let name: String
 }
 
-public struct MovieVideoResponse: Decodable {
+public struct MovieVideoResponse: Codable {
     public init(results: [MovieVideo]) {
         self.results = results
     }
@@ -175,7 +175,7 @@ public struct MovieVideoResponse: Decodable {
     public let results: [MovieVideo]
 }
 
-public struct MovieVideo: Decodable {
+public struct MovieVideo: Codable {
     public init(id: String, key: String, name: String, site: String) {
         self.id = id
         self.key = key
