@@ -21,7 +21,7 @@ class MovieStoreSpy: MovieStore {
     private var insertionCompletions = [InsertionCompletion]()
     private var retrievalCompletions = [RetrievalCompletion]()
     
-    func deleteCacheMovie(completion: @escaping DeletionCompletion) {
+    func deleteCachedMovies(completion: @escaping DeletionCompletion) {
         deletionCompletions.append(completion)
         receivedMessages.append(.deleteCacheMovie)
     }

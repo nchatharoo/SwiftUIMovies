@@ -27,7 +27,7 @@ extension LocalMovieLoader {
     public typealias SaveResult = Error?
 
     public func save(_ items: [Movie], completion: @escaping (SaveResult) -> Void) {
-        store.deleteCacheMovie { [weak self] error in
+        store.deleteCachedMovies { [weak self] error in
             guard let self = self else { return }
             
             if let cacheDeletionError = error {
@@ -72,10 +72,10 @@ extension LocalMovieLoader {
             guard let self = self else { return }
             switch result {
             case .failure:
-                self.store.deleteCacheMovie { _ in }
+                self.store.deleteCachedMovies { _ in }
                 
             case let .found(_, timestamp) where !MovieCachePolicy.validate(timestamp, against: self.currentDate()):
-                self.store.deleteCacheMovie { _ in }
+                self.store.deleteCachedMovies { _ in }
                 
             case .empty, .found: break
             }
