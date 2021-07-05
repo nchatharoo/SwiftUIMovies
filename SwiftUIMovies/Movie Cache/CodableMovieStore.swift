@@ -65,7 +65,7 @@ public class CodableMovieStore: MovieStore {
 
     public func retrieve(completion: @escaping RetrievalCompletion) {
         let storeURL = self.storeURL
-        queue.async {
+        queue.async(flags: .barrier) {
             guard let data = try? Data(contentsOf: storeURL) else {
                 return completion(.empty)
             }
@@ -81,7 +81,7 @@ public class CodableMovieStore: MovieStore {
     
     public func insert(_ movies: [LocalMovieItem], timestamp: Date, completion: @escaping InsertionCompletion) {
         let storeURL = self.storeURL
-        queue.async {
+        queue.async(flags: .barrier) {
             do {
                 let encoder = JSONEncoder()
                 let cache = Cache(movies: movies.map(CodableMovieItem.init), timestamp: timestamp)
@@ -96,7 +96,7 @@ public class CodableMovieStore: MovieStore {
     
     public func deleteCacheMovie(completion: @escaping DeletionCompletion) {
         let storeURL = self.storeURL
-        queue.async {
+        queue.async(flags: .barrier) {
             guard FileManager.default.fileExists(atPath: storeURL.path) else {
                 return completion(nil)
             }
