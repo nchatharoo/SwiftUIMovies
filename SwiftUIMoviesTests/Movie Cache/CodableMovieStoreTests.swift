@@ -87,6 +87,18 @@ class CodableMovieStore {
             completion(error)
         }
     }
+    
+    func deleteCacheMovies(completion: @escaping MovieStore.DeletionCompletion) {
+        guard FileManager.default.fileExists(atPath: storeURL.path) else {
+            return completion(nil)
+        }
+        do {
+            try FileManager.default.removeItem(at: storeURL)
+            completion(nil)
+        } catch {
+            completion(error)
+        }
+    }
 }
 
 class CodableMovieStoreTests: XCTestCase {
@@ -171,6 +183,36 @@ class CodableMovieStoreTests: XCTestCase {
         XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
     }
     
+    func test_delete_hasNoSideEffectsOnEmptyCache() {
+        let sut = makeSUT()
+        
+        let deletionError = deleteCache(from: sut)
+        
+        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
+        expect(sut, toRetrieve: .empty)
+    }
+    
+    func test_delete_emptiesPreviouslyInsertedCache() {
+        let sut = makeSUT()
+        
+        insert((uniqueItems().local, Date()), to: sut)
+        
+        let deletionError = deleteCache(from: sut)
+        
+        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
+        expect(sut, toRetrieve: .empty)
+    }
+    
+    func test_delete_deliversErrorOnDeletionError() {
+        let notDeletePermissionURL = cachesDirectory()
+        let sut = makeSUT(storeURL: notDeletePermissionURL)
+        
+        let deletionError = deleteCache(from: sut)
+        XCTAssertNotNil(deletionError, "Expected empty cache deletion to fail")
+        expect(sut, toRetrieve: .empty)
+    }
+
+    
     //MARK - Helpers
     
     private func makeSUT(storeURL: URL? = nil, file: StaticString = #file, line: UInt = #line) -> CodableMovieStore {
@@ -219,6 +261,16 @@ class CodableMovieStoreTests: XCTestCase {
         return insertionError
     }
 
+    private func deleteCache(from sut: CodableMovieStore, file: StaticString = #file, line: UInt = #line) -> Error? {
+        let exp = expectation(description: "Wait for cache deletion")
+        var deletionError: Error?
+        sut.deleteCacheMovies { receivedDeletionError in
+            deletionError = receivedDeletionError
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+        return deletionError
+    }
     
     private func testSpecificStoreURL() -> URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
@@ -234,5 +286,11 @@ class CodableMovieStoreTests: XCTestCase {
     
     private func deleteStoreArtifacts() {
         try? FileManager.default.removeItem(at: testSpecificStoreURL())
+    }
+    
+    private func cachesDirectory() -> URL {
+        let arrayPaths = FileManager.default.urls(for: .cachesDirectory, in: .systemDomainMask)
+        let cacheDirectoryPath = arrayPaths[0]
+        return cacheDirectoryPath
     }
 }
