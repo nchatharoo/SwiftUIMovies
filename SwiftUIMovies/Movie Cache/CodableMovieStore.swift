@@ -94,7 +94,7 @@ public class CodableMovieStore: MovieStore {
         }
     }
     
-    public func deleteCacheMovie(completion: @escaping DeletionCompletion) {
+    public func deleteCachedMovies(completion: @escaping DeletionCompletion) {
         let storeURL = self.storeURL
         queue.async(flags: .barrier) {
             guard FileManager.default.fileExists(atPath: storeURL.path) else {

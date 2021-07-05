@@ -130,7 +130,7 @@ class CodableMovieStoreTests: XCTestCase {
         }
         
         let op2 = expectation(description: "Operation 2")
-        sut.deleteCacheMovie { _ in
+        sut.deleteCachedMovies { _ in
             completedOperationInOrder.append(op2)
             op2.fulfill()
         }
@@ -199,7 +199,7 @@ class CodableMovieStoreTests: XCTestCase {
     private func deleteCache(from sut: MovieStore, file: StaticString = #file, line: UInt = #line) -> Error? {
         let exp = expectation(description: "Wait for cache deletion")
         var deletionError: Error?
-        sut.deleteCacheMovie { receivedDeletionError in
+        sut.deleteCachedMovies { receivedDeletionError in
             deletionError = receivedDeletionError
             exp.fulfill()
         }
