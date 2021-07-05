@@ -128,17 +128,17 @@ class CodableMovieStoreTests: XCTestCase {
     }
     
     func test_retrieve_deliversFailureOnRetrievalError() {
-        let sut = makeSUT()
-        
-        try! "invalid data".write(to: testSpecificStoreURL(), atomically: false, encoding: .utf8)
-        
+        let storeURL = testSpecificStoreURL()
+        let sut = makeSUT(storeURL: storeURL)
+
+        try! "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
         expect(sut, toRetrieve: .failure(anyNSError()))
     }
     
     //MARK - Helpers
     
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableMovieStore {
-        let sut = CodableMovieStore(storeURL: testSpecificStoreURL())
+    private func makeSUT(storeURL: URL? = nil, file: StaticString = #file, line: UInt = #line) -> CodableMovieStore {
+        let sut = CodableMovieStore(storeURL: storeURL ?? testSpecificStoreURL())
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
