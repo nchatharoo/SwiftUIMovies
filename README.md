@@ -15,7 +15,7 @@ A SwiftUI app using TMDB API to display :
 Using URLSession
 
 ### Persistence
-- [ ] UnitTest
+- [x] UnitTest
 - [ ] EndToEndTest
 
 ### Presentation
