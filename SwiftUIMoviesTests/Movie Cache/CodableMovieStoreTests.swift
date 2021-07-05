@@ -8,7 +8,7 @@
 import XCTest
 import SwiftUIMovies
 
-class CodableMovieStore {
+class CodableMovieStore: MovieStore {
     private struct Cache: Codable {
         let movies: [CodableMovieItem]
         let timestamp: Date
@@ -63,7 +63,7 @@ class CodableMovieStore {
         self.storeURL = storeURL
     }
 
-    func retrieve(completion: @escaping MovieStore.RetrievalCompletion) {
+    func retrieve(completion: @escaping RetrievalCompletion) {
         guard let data = try? Data(contentsOf: storeURL) else {
             return completion(.empty)
         }
@@ -76,7 +76,7 @@ class CodableMovieStore {
         }
     }
     
-    func insert(_ movies: [LocalMovieItem], timestamp: Date, completion: @escaping MovieStore.InsertionCompletion) {
+    func insert(_ movies: [LocalMovieItem], timestamp: Date, completion: @escaping InsertionCompletion) {
         do {
             let encoder = JSONEncoder()
             let cache = Cache(movies: movies.map(CodableMovieItem.init), timestamp: timestamp)
@@ -88,7 +88,7 @@ class CodableMovieStore {
         }
     }
     
-    func deleteCacheMovies(completion: @escaping MovieStore.DeletionCompletion) {
+    func deleteCacheMovie(completion: @escaping DeletionCompletion) {
         guard FileManager.default.fileExists(atPath: storeURL.path) else {
             return completion(nil)
         }
@@ -264,7 +264,7 @@ class CodableMovieStoreTests: XCTestCase {
     private func deleteCache(from sut: CodableMovieStore, file: StaticString = #file, line: UInt = #line) -> Error? {
         let exp = expectation(description: "Wait for cache deletion")
         var deletionError: Error?
-        sut.deleteCacheMovies { receivedDeletionError in
+        sut.deleteCacheMovie { receivedDeletionError in
             deletionError = receivedDeletionError
             exp.fulfill()
         }
