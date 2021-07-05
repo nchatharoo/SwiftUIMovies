@@ -196,8 +196,6 @@ class CodableMovieStoreTests: XCTestCase {
     }
     
     private func cachesDirectory() -> URL {
-        let arrayPaths = FileManager.default.urls(for: .cachesDirectory, in: .systemDomainMask)
-        let cacheDirectoryPath = arrayPaths[0]
-        return cacheDirectoryPath
+        return FileManager.default.urls(for: .cachesDirectory, in: .systemDomainMask).first!
     }
 }
