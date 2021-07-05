@@ -144,6 +144,20 @@ class CodableMovieStoreTests: XCTestCase {
         expect(sut, toRetrieveTwice: .failure(anyNSError()))
     }
     
+    func test_insert_overridesPreviouslyInsertedCacheValues() {
+        let sut = makeSUT()
+        
+        let firstInsertionError = insert((uniqueItems().local, Date()), to: sut)
+        XCTAssertNil(firstInsertionError, "Expected to insert cache successfully")
+        
+        let latestFeed = uniqueItems().local
+        let latestTimestamp = Date()
+        let latestInsertionError = insert((latestFeed,latestTimestamp), to: sut)
+        
+        XCTAssertNil(latestInsertionError, "Expected to override cache successfully")
+        expect(sut, toRetrieve: .found(movies: latestFeed, timestamp: latestTimestamp))
+    }
+    
     //MARK - Helpers
     
     private func makeSUT(storeURL: URL? = nil, file: StaticString = #file, line: UInt = #line) -> CodableMovieStore {
@@ -180,13 +194,16 @@ class CodableMovieStoreTests: XCTestCase {
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
     
-    private func insert(_ cache: (movies: [LocalMovieItem], timestamp: Date), to sut: CodableMovieStore) {
+    @discardableResult
+    private func insert(_ cache: (movies: [LocalMovieItem], timestamp: Date), to sut: CodableMovieStore) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")
-        sut.insert(cache.movies, timestamp: cache.timestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected movies to be inserted successfully")
+        var insertionError: Error?
+        sut.insert(cache.movies, timestamp: cache.timestamp) { receivedInsertionError in
+            insertionError = receivedInsertionError
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
+        return insertionError
     }
 
     
