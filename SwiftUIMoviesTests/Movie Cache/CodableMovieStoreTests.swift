@@ -215,13 +215,13 @@ class CodableMovieStoreTests: XCTestCase {
     
     //MARK - Helpers
     
-    private func makeSUT(storeURL: URL? = nil, file: StaticString = #file, line: UInt = #line) -> CodableMovieStore {
+    private func makeSUT(storeURL: URL? = nil, file: StaticString = #file, line: UInt = #line) -> MovieStore {
         let sut = CodableMovieStore(storeURL: storeURL ?? testSpecificStoreURL())
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
     
-    private func expect(_ sut: CodableMovieStore, toRetrieve expectedResult: RetrieveCachedMovieResult, file: StaticString = #file, line: UInt = #line) {
+    private func expect(_ sut: MovieStore, toRetrieve expectedResult: RetrieveCachedMovieResult, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for cache retrieval")
 
         sut.retrieve { retrievedResult in
@@ -244,13 +244,13 @@ class CodableMovieStoreTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
-    private func expect(_ sut: CodableMovieStore, toRetrieveTwice expectedResult: RetrieveCachedMovieResult, file: StaticString = #file, line: UInt = #line) {
+    private func expect(_ sut: MovieStore, toRetrieveTwice expectedResult: RetrieveCachedMovieResult, file: StaticString = #file, line: UInt = #line) {
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
     
     @discardableResult
-    private func insert(_ cache: (movies: [LocalMovieItem], timestamp: Date), to sut: CodableMovieStore) -> Error? {
+    private func insert(_ cache: (movies: [LocalMovieItem], timestamp: Date), to sut: MovieStore) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")
         var insertionError: Error?
         sut.insert(cache.movies, timestamp: cache.timestamp) { receivedInsertionError in
@@ -261,7 +261,7 @@ class CodableMovieStoreTests: XCTestCase {
         return insertionError
     }
 
-    private func deleteCache(from sut: CodableMovieStore, file: StaticString = #file, line: UInt = #line) -> Error? {
+    private func deleteCache(from sut: MovieStore, file: StaticString = #file, line: UInt = #line) -> Error? {
         let exp = expectation(description: "Wait for cache deletion")
         var deletionError: Error?
         sut.deleteCacheMovie { receivedDeletionError in
