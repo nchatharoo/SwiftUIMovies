@@ -16,7 +16,7 @@ Using URLSession
 
 ### Persistence
 - [x] UnitTest
-- [ ] EndToEndTest
+- [x] EndToEndTest
 
 ### Presentation
 - [ ] UnitTest
