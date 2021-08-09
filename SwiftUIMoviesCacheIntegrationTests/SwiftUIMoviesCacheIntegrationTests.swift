@@ -43,6 +43,33 @@ class SwiftUIMoviesCacheIntegrationTests: XCTestCase {
         expect(sutToPerformLoad, toLoad: movies)
     }
     
+    func test_save_overridesItemsSavedOnASeparateInstance() {
+        let sutToPerfomFirstSave = makeSUT()
+        let sutToPerfomLastSave = makeSUT()
+        let sutToPerformLoad = makeSUT()
+        let firstMovies = uniqueItems().models
+        let latestMovies = uniqueItems().models
+        
+        let saveExp1 = expectation(description: "Wait for save completion")
+        sutToPerfomFirstSave.save(firstMovies) { saveError in
+            XCTAssertNil(saveError, "Expected to save successfully")
+            saveExp1.fulfill()
+        }
+        
+        wait(for: [saveExp1], timeout: 1.0)
+        
+        let saveExp2 = expectation(description: "Wait for save completion")
+        sutToPerfomLastSave.save(latestMovies) { saveError in
+            XCTAssertNil(saveError, "Expected to save successfully")
+            saveExp2.fulfill()
+        }
+        
+        wait(for: [saveExp2], timeout: 1.0)
+        
+        expect(sutToPerformLoad, toLoad: latestMovies)
+    }
+
+    
     // - MARK: Helpers
     
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #file, line: UInt = #line) -> LocalMovieLoader {
