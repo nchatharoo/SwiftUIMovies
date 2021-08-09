@@ -33,13 +33,7 @@ class SwiftUIMoviesCacheIntegrationTests: XCTestCase {
         let sutToPerformLoad = makeSUT()
         let movies = uniqueItems().models
         
-        let saveExp = expectation(description: "Wait for save completion")
-        sutToPerfomSave.save(movies) { saveError in
-            XCTAssertNil(saveError, "Expected to save successfully")
-            saveExp.fulfill()
-        }
-        wait(for: [saveExp], timeout: 1.0)
-
+        save(movies, with: sutToPerfomSave)
         expect(sutToPerformLoad, toLoad: movies)
     }
     
@@ -49,23 +43,9 @@ class SwiftUIMoviesCacheIntegrationTests: XCTestCase {
         let sutToPerformLoad = makeSUT()
         let firstMovies = uniqueItems().models
         let latestMovies = uniqueItems().models
-        
-        let saveExp1 = expectation(description: "Wait for save completion")
-        sutToPerfomFirstSave.save(firstMovies) { saveError in
-            XCTAssertNil(saveError, "Expected to save successfully")
-            saveExp1.fulfill()
-        }
-        
-        wait(for: [saveExp1], timeout: 1.0)
-        
-        let saveExp2 = expectation(description: "Wait for save completion")
-        sutToPerfomLastSave.save(latestMovies) { saveError in
-            XCTAssertNil(saveError, "Expected to save successfully")
-            saveExp2.fulfill()
-        }
-        
-        wait(for: [saveExp2], timeout: 1.0)
-        
+                
+        save(firstMovies, with: sutToPerfomFirstSave)
+        save(latestMovies, with: sutToPerfomLastSave)
         expect(sutToPerformLoad, toLoad: latestMovies)
     }
 
@@ -79,6 +59,15 @@ class SwiftUIMoviesCacheIntegrationTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
 
         return sut
+    }
+    
+    private func save(_ movies: [Movie], with loader: LocalMovieLoader, file: StaticString = #file, line: UInt = #line) {
+        let saveExp = expectation(description: "Wait for save completion")
+        loader.save(movies) { saveError in
+            XCTAssertNil(saveError, "Expected to save successfully")
+            saveExp.fulfill()
+        }
+        wait(for: [saveExp], timeout: 1.0)
     }
     
     private func expect(_ sut: LocalMovieLoader, toLoad expectedMovies: [Movie], file: StaticString = #file, line: UInt = #line) {
