@@ -40,7 +40,6 @@
 		8ECE10C426404692006B1E4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10C326404692006B1E4D /* ContentView.swift */; };
 		8ECE10C626404693006B1E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE10C526404693006B1E4D /* Assets.xcassets */; };
 		8ECE10C926404693006B1E4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE10C826404693006B1E4D /* Preview Assets.xcassets */; };
-		8ECE10D526404693006B1E4D /* SwiftUIMoviesMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10D426404693006B1E4D /* SwiftUIMoviesMacTests.swift */; };
 		8ECE10EF2640753B006B1E4D /* RemoteMovieLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10EE2640753B006B1E4D /* RemoteMovieLoaderTests.swift */; };
 		8ECE10F226408057006B1E4D /* RemoteMovieLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10F126408056006B1E4D /* RemoteMovieLoader.swift */; };
 		8ECFCF3F26443B2F00C217ED /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECFCF3E26443B2F00C217ED /* HTTPClient.swift */; };
@@ -120,8 +119,6 @@
 		8ECE10CA26404693006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECE10CB26404693006B1E4D /* SwiftUIMoviesMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftUIMoviesMac.entitlements; sourceTree = "<group>"; };
 		8ECE10D026404693006B1E4D /* SwiftUIMoviesMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIMoviesMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8ECE10D426404693006B1E4D /* SwiftUIMoviesMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesMacTests.swift; sourceTree = "<group>"; };
-		8ECE10D626404693006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ECE10EE2640753B006B1E4D /* RemoteMovieLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieLoaderTests.swift; sourceTree = "<group>"; };
 		8ECE10F126408056006B1E4D /* RemoteMovieLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMovieLoader.swift; sourceTree = "<group>"; };
 		8ECFCF3E26443B2F00C217ED /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
@@ -264,7 +261,6 @@
 				8ECE108E26403E2C006B1E4D /* SwiftUIMovies */,
 				8ECE10A026403E2E006B1E4D /* SwiftUIMoviesTests */,
 				8ECE10C026404692006B1E4D /* SwiftUIMoviesMac */,
-				8ECE10D326404693006B1E4D /* SwiftUIMoviesMacTests */,
 				8E08E692267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests */,
 				8E287EA126C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests */,
 				8ECE108D26403E2C006B1E4D /* Products */,
@@ -339,15 +335,6 @@
 				8ECE10C826404693006B1E4D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		8ECE10D326404693006B1E4D /* SwiftUIMoviesMacTests */ = {
-			isa = PBXGroup;
-			children = (
-				8ECE10D426404693006B1E4D /* SwiftUIMoviesMacTests.swift */,
-				8ECE10D626404693006B1E4D /* Info.plist */,
-			);
-			path = SwiftUIMoviesMacTests;
 			sourceTree = "<group>";
 		};
 		8ECE10F026408041006B1E4D /* Movie API */ = {
@@ -649,7 +636,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8ECE10D526404693006B1E4D /* SwiftUIMoviesMacTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
