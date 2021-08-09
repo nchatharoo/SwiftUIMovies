@@ -90,6 +90,17 @@
                ReferencedContainer = "container:SwiftUIMovies.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8E287E9F26C175AD00003ADF"
+               BuildableName = "SwiftUIMoviesCacheIntegrationTests.xctest"
+               BlueprintName = "SwiftUIMoviesCacheIntegrationTests"
+               ReferencedContainer = "container:SwiftUIMovies.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

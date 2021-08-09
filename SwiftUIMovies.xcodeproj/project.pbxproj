@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8E08E694267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E08E693267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift */; };
 		8E08E69B2672498F003B9EBA /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6147002643183400AC06B1 /* XCTestCase+MemoryLeakTracking.swift */; };
+		8E287EA326C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E287EA226C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests.swift */; };
+		8E287EAA26C1769000003ADF /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6147002643183400AC06B1 /* XCTestCase+MemoryLeakTracking.swift */; };
+		8E287EAB26C1796400003ADF /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E547773267B54C900B102FA /* SharedTestHelpers.swift */; };
+		8E287EAC26C1797000003ADF /* MovieCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E547771267B544B00B102FA /* MovieCacheTestHelpers.swift */; };
 		8E547770267B2FFF00B102FA /* ValidateFeedCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E54776F267B2FFF00B102FA /* ValidateFeedCacheUseCaseTests.swift */; };
 		8E547772267B544B00B102FA /* MovieCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E547771267B544B00B102FA /* MovieCacheTestHelpers.swift */; };
 		8E547774267B54C900B102FA /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E547773267B54C900B102FA /* SharedTestHelpers.swift */; };
@@ -50,6 +54,13 @@
 			remoteGlobalIDString = 8ECE108B26403E2C006B1E4D;
 			remoteInfo = SwiftUIMovies;
 		};
+		8E287EA526C175AD00003ADF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8ECE108426403E2C006B1E4D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8ECE108B26403E2C006B1E4D;
+			remoteInfo = SwiftUIMovies;
+		};
 		8ECE109E26403E2E006B1E4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8ECE108426403E2C006B1E4D /* Project object */;
@@ -70,6 +81,9 @@
 		8E08E691267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIMoviesAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E08E693267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesAPIEndToEndTests.swift; sourceTree = "<group>"; };
 		8E08E695267245C4003B9EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E287EA026C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIMoviesCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E287EA226C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesCacheIntegrationTests.swift; sourceTree = "<group>"; };
+		8E287EA426C175AD00003ADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E54776F267B2FFF00B102FA /* ValidateFeedCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateFeedCacheUseCaseTests.swift; sourceTree = "<group>"; };
 		8E547771267B544B00B102FA /* MovieCacheTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCacheTestHelpers.swift; sourceTree = "<group>"; };
 		8E547773267B54C900B102FA /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
@@ -121,6 +135,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8E287E9D26C175AD00003ADF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8ECE108926403E2C006B1E4D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -159,6 +180,15 @@
 				8E08E695267245C4003B9EBA /* Info.plist */,
 			);
 			path = SwiftUIMoviesAPIEndToEndTests;
+			sourceTree = "<group>";
+		};
+		8E287EA126C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				8E287EA226C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests.swift */,
+				8E287EA426C175AD00003ADF /* Info.plist */,
+			);
+			path = SwiftUIMoviesCacheIntegrationTests;
 			sourceTree = "<group>";
 		};
 		8E547775267B861B00B102FA /* Movie Feature */ = {
@@ -236,6 +266,7 @@
 				8ECE10C026404692006B1E4D /* SwiftUIMoviesMac */,
 				8ECE10D326404693006B1E4D /* SwiftUIMoviesMacTests */,
 				8E08E692267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests */,
+				8E287EA126C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests */,
 				8ECE108D26403E2C006B1E4D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -248,6 +279,7 @@
 				8ECE10BF26404692006B1E4D /* SwiftUIMoviesMac.app */,
 				8ECE10D026404693006B1E4D /* SwiftUIMoviesMacTests.xctest */,
 				8E08E691267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.xctest */,
+				8E287EA026C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -351,6 +383,24 @@
 			productReference = 8E08E691267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8E287E9F26C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E287EA926C175AD00003ADF /* Build configuration list for PBXNativeTarget "SwiftUIMoviesCacheIntegrationTests" */;
+			buildPhases = (
+				8E287E9C26C175AD00003ADF /* Sources */,
+				8E287E9D26C175AD00003ADF /* Frameworks */,
+				8E287E9E26C175AD00003ADF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E287EA626C175AD00003ADF /* PBXTargetDependency */,
+			);
+			name = SwiftUIMoviesCacheIntegrationTests;
+			productName = SwiftUIMoviesCacheIntegrationTests;
+			productReference = 8E287EA026C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8ECE108B26403E2C006B1E4D /* SwiftUIMovies */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8ECE10B126403E2E006B1E4D /* Build configuration list for PBXNativeTarget "SwiftUIMovies" */;
@@ -434,6 +484,10 @@
 						CreatedOnToolsVersion = 12.5;
 						TestTargetID = 8ECE108B26403E2C006B1E4D;
 					};
+					8E287E9F26C175AD00003ADF = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 8ECE108B26403E2C006B1E4D;
+					};
 					8ECE108B26403E2C006B1E4D = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -469,12 +523,20 @@
 				8ECE10BE26404692006B1E4D /* SwiftUIMoviesMac */,
 				8ECE10CF26404693006B1E4D /* SwiftUIMoviesMacTests */,
 				8E08E690267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests */,
+				8E287E9F26C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8E08E68F267245C4003B9EBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E287E9E26C175AD00003ADF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -522,6 +584,17 @@
 			files = (
 				8E08E694267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.swift in Sources */,
 				8E08E69B2672498F003B9EBA /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E287E9C26C175AD00003ADF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E287EA326C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests.swift in Sources */,
+				8E287EAC26C1797000003ADF /* MovieCacheTestHelpers.swift in Sources */,
+				8E287EAA26C1769000003ADF /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				8E287EAB26C1796400003ADF /* SharedTestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +661,11 @@
 			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMovies */;
 			targetProxy = 8E08E696267245C4003B9EBA /* PBXContainerItemProxy */;
 		};
+		8E287EA626C175AD00003ADF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMovies */;
+			targetProxy = 8E287EA526C175AD00003ADF /* PBXContainerItemProxy */;
+		};
 		8ECE109F26403E2E006B1E4D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMovies */;
@@ -636,6 +714,48 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.SwiftUIMoviesAPIEndToEndTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIMovies.app/SwiftUIMovies";
+			};
+			name = Release;
+		};
+		8E287EA726C175AD00003ADF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9CD4D4F5T;
+				INFOPLIST_FILE = SwiftUIMoviesCacheIntegrationTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.SwiftUIMoviesCacheIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIMovies.app/SwiftUIMovies";
+			};
+			name = Debug;
+		};
+		8E287EA826C175AD00003ADF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9CD4D4F5T;
+				INFOPLIST_FILE = SwiftUIMoviesCacheIntegrationTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.SwiftUIMoviesCacheIntegrationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -958,6 +1078,15 @@
 			buildConfigurations = (
 				8E08E698267245C4003B9EBA /* Debug */,
 				8E08E699267245C4003B9EBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E287EA926C175AD00003ADF /* Build configuration list for PBXNativeTarget "SwiftUIMoviesCacheIntegrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E287EA726C175AD00003ADF /* Debug */,
+				8E287EA826C175AD00003ADF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
