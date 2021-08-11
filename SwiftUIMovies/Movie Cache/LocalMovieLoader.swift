@@ -53,10 +53,10 @@ extension LocalMovieLoader {
             case let .failure(error):
                 completion(.failure(error))
                 
-            case let .found(movies, timestamp) where MovieCachePolicy.validate(timestamp, against: self.currentDate()):
+            case let .success(.found(movies, timestamp)) where MovieCachePolicy.validate(timestamp, against: self.currentDate()):
                 completion(.success(movies.toModels()))
                 
-            case .found, .empty:
+            case .success:
                 completion(.success([]))
             }
         }
@@ -71,10 +71,10 @@ extension LocalMovieLoader {
             case .failure:
                 self.store.deleteCachedMovies { _ in }
                 
-            case let .found(_, timestamp) where !MovieCachePolicy.validate(timestamp, against: self.currentDate()):
+            case let .success(.found(_, timestamp)) where !MovieCachePolicy.validate(timestamp, against: self.currentDate()):
                 self.store.deleteCachedMovies { _ in }
                 
-            case .empty, .found: break
+            case .success: break
             }
         }
     }

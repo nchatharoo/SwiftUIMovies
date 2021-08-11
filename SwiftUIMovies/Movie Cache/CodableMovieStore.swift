@@ -67,12 +67,12 @@ public class CodableMovieStore: MovieStore {
         let storeURL = self.storeURL
         queue.async(flags: .barrier) {
             guard let data = try? Data(contentsOf: storeURL) else {
-                return completion(.empty)
+                return completion(.success(.empty))
             }
             do {
                 let decoder = JSONDecoder()
                 let cache = try decoder.decode(Cache.self, from: data)
-                completion(.found(movies: cache.localMovies, timestamp: cache.timestamp))
+                completion(.success(.found(movies: cache.localMovies, timestamp: cache.timestamp)))
             } catch {
                 completion(.failure(error))
             }
