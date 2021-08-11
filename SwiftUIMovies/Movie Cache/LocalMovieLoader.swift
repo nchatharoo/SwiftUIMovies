@@ -9,7 +9,7 @@ import Foundation
 
 public final class LocalMovieLoader {
     
-    public typealias LoadMovieResult = Result<[Movie], Error>
+    public typealias LoadMovieResult = MovieLoader.Result
 
     private let store: MovieStore
     private let currentDate: () -> Date
