@@ -7,12 +7,8 @@
 
 import Foundation
 
-public enum HTTPClientResult {
-    case success(Data, HTTPURLResponse)
-    case failure(Error)
-}
-
 public protocol HTTPClient {
-    func getMovies(from endpoint: MovieListEndpoint, completion: @escaping (HTTPClientResult) -> Void)
-    func getMovie(with id: Int, completion: @escaping (HTTPClientResult) -> Void)
+    typealias Result = Swift.Result<(Data, HTTPURLResponse), Error>
+    func getMovies(from endpoint: MovieListEndpoint, completion: @escaping (Result) -> Void)
+    func getMovie(with id: Int, completion: @escaping (Result) -> Void)
 }
