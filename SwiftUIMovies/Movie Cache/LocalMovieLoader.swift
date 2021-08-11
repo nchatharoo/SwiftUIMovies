@@ -9,11 +9,8 @@ import Foundation
 
 public final class LocalMovieLoader {
     
-    public enum LoadMovieResult {
-        case success([Movie])
-        case failure(Error)
-    }
-    
+    public typealias LoadMovieResult = Result<[Movie], Error>
+
     private let store: MovieStore
     private let currentDate: () -> Date
     
