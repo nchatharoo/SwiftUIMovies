@@ -7,15 +7,7 @@
 
 import Foundation
 
-public struct CachedMovie {
-    public let movies: [LocalMovieItem]
-    public let timestamp:Date
-    
-    public init(movies: [LocalMovieItem], timestamp: Date) {
-        self.movies = movies
-        self.timestamp = timestamp
-    }
-}
+public typealias CachedMovie = (movies: [LocalMovieItem], timestamp: Date)
 
 public protocol MovieStore {
     typealias DeletionCompletion = (Error?) -> Void
