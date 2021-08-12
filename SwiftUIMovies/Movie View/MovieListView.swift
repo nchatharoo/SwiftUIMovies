@@ -10,14 +10,10 @@ import UIKit
 
 struct MovieListView: View {
     
-    @ObservedObject private var nowPlaying = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .nowPlaying, client: URLSessionHTTPClient()))
-    
-    @ObservedObject private var upcoming = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .upcoming, client: URLSessionHTTPClient()))
-    
-    @ObservedObject private var topRated = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .topRated, client: URLSessionHTTPClient()))
-    
-    @ObservedObject private var popular = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .popular, client: URLSessionHTTPClient()))
-
+    @ObservedObject var nowPlaying: MovieListObservable
+    @ObservedObject var upcoming: MovieListObservable
+    @ObservedObject var topRated: MovieListObservable
+    @ObservedObject var popular: MovieListObservable
 
     var body: some View {
         

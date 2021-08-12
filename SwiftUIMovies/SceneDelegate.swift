@@ -11,20 +11,22 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    @ObservedObject private var nowPlaying = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .nowPlaying, client: URLSessionHTTPClient()))
+    
+    @ObservedObject private var upcoming = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .upcoming, client: URLSessionHTTPClient()))
+    
+    @ObservedObject private var topRated = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .topRated, client: URLSessionHTTPClient()))
+    
+    @ObservedObject private var popular = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .popular, client: URLSessionHTTPClient()))
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        let movieListView = MovieListView(nowPlaying: nowPlaying, upcoming: upcoming, topRated: topRated, popular: popular)
 
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
-
-        // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            window.rootViewController = UIHostingController(rootView: movieListView)
             self.window = window
             window.makeKeyAndVisible()
         }

@@ -36,7 +36,6 @@
 		8EB6E71D26416BD200AE8D72 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6E71C26416BD200AE8D72 /* Movie.swift */; };
 		8EBE533E26C54597008CC005 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE533D26C54597008CC005 /* SceneDelegate.swift */; };
 		8EBE534026C545D5008CC005 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE533F26C545D5008CC005 /* AppDelegate.swift */; };
-		8ECE109226403E2C006B1E4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE109126403E2C006B1E4D /* ContentView.swift */; };
 		8ECE109426403E2E006B1E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE109326403E2E006B1E4D /* Assets.xcassets */; };
 		8ECE109726403E2E006B1E4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE109626403E2E006B1E4D /* Preview Assets.xcassets */; };
 		8ECE10C226404692006B1E4D /* SwiftUIMoviesMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10C126404692006B1E4D /* SwiftUIMoviesMacApp.swift */; };
@@ -103,7 +102,6 @@
 		8EBE533D26C54597008CC005 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8EBE533F26C545D5008CC005 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8ECE108C26403E2C006B1E4D /* SwiftUIMoviesiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIMoviesiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8ECE109126403E2C006B1E4D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8ECE109326403E2E006B1E4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8ECE109626403E2E006B1E4D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8ECE109826403E2E006B1E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -277,14 +275,9 @@
 				8ECE10BA264044A0006B1E4D /* SwiftUIMovies.entitlements */,
 				8EBE533F26C545D5008CC005 /* AppDelegate.swift */,
 				8EBE533D26C54597008CC005 /* SceneDelegate.swift */,
-				8ECE109126403E2C006B1E4D /* ContentView.swift */,
-<<<<<<< HEAD
 				8E689AAB26C4005400F71603 /* Movie View */,
 				8E287EAF26C1B5D400003ADF /* MovieListObservable.swift */,
-				8EB6E71B26416BCB00AE8D72 /* Model */,
-=======
 				8E547775267B861B00B102FA /* Movie Feature */,
->>>>>>> main
 				8ECE10F026408041006B1E4D /* Movie API */,
 				8E6AA44F2678F08300FE4859 /* Movie Cache */,
 				8ECE109326403E2E006B1E4D /* Assets.xcassets */,
@@ -567,7 +560,6 @@
 				8ECFCF3F26443B2F00C217ED /* HTTPClient.swift in Sources */,
 				8E674B84267BF3E2002073D2 /* MovieCachePolicy.swift in Sources */,
 				8EBE534026C545D5008CC005 /* AppDelegate.swift in Sources */,
-				8ECE109226403E2C006B1E4D /* ContentView.swift in Sources */,
 				8E559E87267A071D002BC2EE /* LocalMovieItem.swift in Sources */,
 				8E559E85267A06C2002BC2EE /* RemoteMovieItem.swift in Sources */,
 				8EB6E71D26416BD200AE8D72 /* Movie.swift in Sources */,
