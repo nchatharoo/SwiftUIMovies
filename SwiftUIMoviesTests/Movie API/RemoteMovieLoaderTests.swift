@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import SwiftUIMovies
+import SwiftUIMoviesiOS
 
 class HTTPClientSpy: HTTPClient {
     private var messages = [(url: URL, completion: (HTTPClient.Result) -> Void)]()

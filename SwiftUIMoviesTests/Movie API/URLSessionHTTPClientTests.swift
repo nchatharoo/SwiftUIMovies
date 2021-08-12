@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import SwiftUIMovies
+import SwiftUIMoviesiOS
 
 class URLSessionHTTPClientTests: XCTestCase {
     private let baseAPIURL = "https://api.themoviedb.org/3"
