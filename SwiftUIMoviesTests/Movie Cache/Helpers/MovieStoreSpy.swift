@@ -17,37 +17,37 @@ class MovieStoreSpy: MovieStore {
     
     private(set) var receivedMessages = [ReceivedMessage]()
     
-    private var deletionCompletions = [DeletionCompletion]()
-    private var insertionCompletions = [InsertionCompletion]()
-    private var retrievalCompletions = [RetrievalCompletion]()
-    
-    func deleteCachedMovies(completion: @escaping DeletionCompletion) {
+    private var deletionCompletions = [MovieStore.DeletionCompletion]()
+    private var insertionCompletions = [MovieStore.InsertionCompletion]()
+    private var retrievalCompletions = [MovieStore.RetrievalCompletion]()
+
+    func deleteCachedMovies(completion: @escaping MovieStore.DeletionCompletion) {
         deletionCompletions.append(completion)
         receivedMessages.append(.deleteCacheMovie)
     }
 
     func completeDeletion(with error: Error, at index: Int = 0) {
-        deletionCompletions[index](error)
+        deletionCompletions[index](.failure(error))
     }
     
     func completeDeletionSuccessfully(at index: Int = 0) {
-        deletionCompletions[index](nil)
+        deletionCompletions[index](.success(()))
     }
     
-    func insert(_ items: [LocalMovieItem], timestamp: Date, completion: @escaping InsertionCompletion) {
+    func insert(_ items: [LocalMovieItem], timestamp: Date, completion: @escaping MovieStore.InsertionCompletion) {
         insertionCompletions.append(completion)
         receivedMessages.append(.insert(items, timestamp))
     }
     
     func completeInsertion(with error: Error, at index: Int = 0) {
-        insertionCompletions[index](error)
+        insertionCompletions[index](.failure(error))
     }
     
     func completeInsertionSuccessfully(at index: Int = 0) {
-        insertionCompletions[index](nil)
+        insertionCompletions[index](.success(()))
     }
     
-    func retrieve(completion: @escaping RetrievalCompletion) {
+    func retrieve(completion: @escaping MovieStore.RetrievalCompletion) {
         retrievalCompletions.append(completion)
         receivedMessages.append(.retrieve)
     }

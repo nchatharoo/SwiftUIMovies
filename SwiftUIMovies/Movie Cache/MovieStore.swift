@@ -10,8 +10,12 @@ import Foundation
 public typealias CachedMovie = (movies: [LocalMovieItem], timestamp: Date)
 
 public protocol MovieStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
+    typealias DeletionResult = Result<Void,Error>
+    typealias DeletionCompletion = (DeletionResult) -> Void
+
+    typealias InsertionResult = Result<Void,Error>
+    typealias InsertionCompletion = (InsertionResult) -> Void
+
     typealias RetrievalResult = Result<CachedMovie?, Error>
     typealias RetrievalCompletion = (RetrievalResult) -> Void
 

@@ -188,8 +188,8 @@ class CodableMovieStoreTests: XCTestCase {
     private func insert(_ cache: (movies: [LocalMovieItem], timestamp: Date), to sut: MovieStore) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")
         var insertionError: Error?
-        sut.insert(cache.movies, timestamp: cache.timestamp) { receivedInsertionError in
-            insertionError = receivedInsertionError
+        sut.insert(cache.movies, timestamp: cache.timestamp) { result in
+            if case let Result.failure(error) = result { insertionError = error }
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
@@ -199,8 +199,8 @@ class CodableMovieStoreTests: XCTestCase {
     private func deleteCache(from sut: MovieStore, file: StaticString = #file, line: UInt = #line) -> Error? {
         let exp = expectation(description: "Wait for cache deletion")
         var deletionError: Error?
-        sut.deleteCachedMovies { receivedDeletionError in
-            deletionError = receivedDeletionError
+        sut.deleteCachedMovies { result in
+            if case let Result.failure(error) = result { deletionError = error }
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
