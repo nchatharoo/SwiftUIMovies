@@ -63,8 +63,10 @@ class SwiftUIMoviesCacheIntegrationTests: XCTestCase {
     
     private func save(_ movies: [Movie], with loader: LocalMovieLoader, file: StaticString = #file, line: UInt = #line) {
         let saveExp = expectation(description: "Wait for save completion")
-        loader.save(movies) { saveError in
-            XCTAssertNil(saveError, "Expected to save successfully")
+        loader.save(movies) { result in
+            if case let Result.failure(error) = result {
+                XCTAssertNil(error, "Expected to save successfully", file: file, line: line)
+            }
             saveExp.fulfill()
         }
         wait(for: [saveExp], timeout: 1.0)

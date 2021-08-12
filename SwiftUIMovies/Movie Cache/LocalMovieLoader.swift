@@ -9,11 +9,8 @@ import Foundation
 
 public final class LocalMovieLoader {
     
-    public enum LoadMovieResult {
-        case success([Movie])
-        case failure(Error)
-    }
-    
+    public typealias LoadMovieResult = MovieLoader.Result
+
     private let store: MovieStore
     private let currentDate: () -> Date
     
@@ -24,22 +21,24 @@ public final class LocalMovieLoader {
 }
 
 extension LocalMovieLoader {
-    public typealias SaveResult = Error?
+    public typealias SaveResult = Result<Void, Error>
 
-    public func save(_ items: [Movie], completion: @escaping (SaveResult) -> Void) {
-        store.deleteCachedMovies { [weak self] error in
+    public func save(_ movies: [Movie], completion: @escaping (SaveResult) -> Void) {
+        store.deleteCachedMovies { [weak self] deletionResult in
             guard let self = self else { return }
-            
-            if let cacheDeletionError = error {
-                completion(cacheDeletionError)
-            } else {
-                self.cache(items, with: completion)
+                        
+            switch deletionResult {
+            case .success():
+                self.cache(movies, with: completion)
+                
+            case let .failure(error):
+                completion(.failure(error))
             }
         }
     }
     
-    private func cache(_ items: [Movie], with completion: @escaping (SaveResult) -> Void) {
-        self.store.insert(items.toLocal(), timestamp: self.currentDate()) { [weak self] error in
+    private func cache(_ movies: [Movie], with completion: @escaping (SaveResult) -> Void) {
+        self.store.insert(movies.toLocal(), timestamp: self.currentDate()) { [weak self] error in
             guard self != nil else { return }
             completion(error)
         }
@@ -56,10 +55,10 @@ extension LocalMovieLoader {
             case let .failure(error):
                 completion(.failure(error))
                 
-            case let .found(movies, timestamp) where MovieCachePolicy.validate(timestamp, against: self.currentDate()):
-                completion(.success(movies.toModels()))
+            case let .success(.some(cache)) where MovieCachePolicy.validate(cache.timestamp, against: self.currentDate()):
+                completion(.success(cache.movies.toModels()))
                 
-            case .found, .empty:
+            case .success:
                 completion(.success([]))
             }
         }
@@ -74,10 +73,10 @@ extension LocalMovieLoader {
             case .failure:
                 self.store.deleteCachedMovies { _ in }
                 
-            case let .found(_, timestamp) where !MovieCachePolicy.validate(timestamp, against: self.currentDate()):
+            case let .success(.some(cache)) where !MovieCachePolicy.validate(cache.timestamp, against: self.currentDate()):
                 self.store.deleteCachedMovies { _ in }
                 
-            case .empty, .found: break
+            case .success: break
             }
         }
     }
