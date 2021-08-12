@@ -36,6 +36,8 @@
 		8EB6E71D26416BD200AE8D72 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB6E71C26416BD200AE8D72 /* Movie.swift */; };
 		8EBE533E26C54597008CC005 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE533D26C54597008CC005 /* SceneDelegate.swift */; };
 		8EBE534026C545D5008CC005 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE533F26C545D5008CC005 /* AppDelegate.swift */; };
+		8EBE534226C54F62008CC005 /* MovieCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE534126C54F62008CC005 /* MovieCache.swift */; };
+		8ECE109226403E2C006B1E4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE109126403E2C006B1E4D /* ContentView.swift */; };
 		8ECE109426403E2E006B1E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE109326403E2E006B1E4D /* Assets.xcassets */; };
 		8ECE109726403E2E006B1E4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ECE109626403E2E006B1E4D /* Preview Assets.xcassets */; };
 		8ECE10C226404692006B1E4D /* SwiftUIMoviesMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE10C126404692006B1E4D /* SwiftUIMoviesMacApp.swift */; };
@@ -101,6 +103,7 @@
 		8EB6E71C26416BD200AE8D72 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		8EBE533D26C54597008CC005 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8EBE533F26C545D5008CC005 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8EBE534126C54F62008CC005 /* MovieCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCache.swift; sourceTree = "<group>"; };
 		8ECE108C26403E2C006B1E4D /* SwiftUIMoviesiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIMoviesiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECE109326403E2E006B1E4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8ECE109626403E2E006B1E4D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -182,6 +185,7 @@
 			children = (
 				8EB6E71C26416BD200AE8D72 /* Movie.swift */,
 				8E547776267B862A00B102FA /* MovieLoader.swift */,
+				8EBE534126C54F62008CC005 /* MovieCache.swift */,
 			);
 			path = "Movie Feature";
 			sourceTree = "<group>";
@@ -565,6 +569,7 @@
 				8EB6E71D26416BD200AE8D72 /* Movie.swift in Sources */,
 				8E547777267B862A00B102FA /* MovieLoader.swift in Sources */,
 				8E809430269301DC006180FF /* CodableMovieStore.swift in Sources */,
+				8EBE534226C54F62008CC005 /* MovieCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

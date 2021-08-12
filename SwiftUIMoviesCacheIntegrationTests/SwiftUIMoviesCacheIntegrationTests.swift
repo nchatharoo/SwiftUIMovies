@@ -75,7 +75,7 @@ class SwiftUIMoviesCacheIntegrationTests: XCTestCase {
     private func expect(_ sut: LocalMovieLoader, toLoad expectedMovies: [Movie], file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
         
-        sut.load { result in
+        sut.loadMovies { result in
             switch result {
             case let .success(loadedMovies):
                 XCTAssertEqual(loadedMovies, expectedMovies, file: file, line: line)
