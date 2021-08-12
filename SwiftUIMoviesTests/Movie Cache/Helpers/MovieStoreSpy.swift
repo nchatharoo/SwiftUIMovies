@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftUIMovies
+import SwiftUIMoviesiOS
 
 class MovieStoreSpy: MovieStore {
     enum ReceivedMessage: Equatable {

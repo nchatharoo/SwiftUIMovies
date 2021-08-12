@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import SwiftUIMovies
+import SwiftUIMoviesiOS
 
 class LoadMovieFromCacheUseCaseTests: XCTestCase {
 

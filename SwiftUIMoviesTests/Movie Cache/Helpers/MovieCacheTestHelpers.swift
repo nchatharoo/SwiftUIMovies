@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftUIMovies
+import SwiftUIMoviesiOS
 
 func uniqueItem() -> Movie {
     
