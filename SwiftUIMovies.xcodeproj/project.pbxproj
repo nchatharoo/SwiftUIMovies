@@ -176,6 +176,7 @@
 		8E547775267B861B00B102FA /* Movie Feature */ = {
 			isa = PBXGroup;
 			children = (
+				8EB6E71C26416BD200AE8D72 /* Movie.swift */,
 				8E547776267B862A00B102FA /* MovieLoader.swift */,
 			);
 			path = "Movie Feature";
@@ -232,14 +233,6 @@
 			path = "Movie Cache";
 			sourceTree = "<group>";
 		};
-		8EB6E71B26416BCB00AE8D72 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8EB6E71C26416BD200AE8D72 /* Movie.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		8ECE108326403E2C006B1E4D = {
 			isa = PBXGroup;
 			children = (
@@ -267,11 +260,10 @@
 		8ECE108E26403E2C006B1E4D /* SwiftUIMovies */ = {
 			isa = PBXGroup;
 			children = (
-				8E547775267B861B00B102FA /* Movie Feature */,
 				8ECE10BA264044A0006B1E4D /* SwiftUIMovies.entitlements */,
 				8ECE108F26403E2C006B1E4D /* SwiftUIMoviesApp.swift */,
 				8ECE109126403E2C006B1E4D /* ContentView.swift */,
-				8EB6E71B26416BCB00AE8D72 /* Model */,
+				8E547775267B861B00B102FA /* Movie Feature */,
 				8ECE10F026408041006B1E4D /* Movie API */,
 				8E6AA44F2678F08300FE4859 /* Movie Cache */,
 				8ECE109326403E2E006B1E4D /* Assets.xcassets */,
