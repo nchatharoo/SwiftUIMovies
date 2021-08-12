@@ -20,7 +20,7 @@ public final class LocalMovieLoader {
     }
 }
 
-extension LocalMovieLoader {
+extension LocalMovieLoader: MovieCache {
     public typealias SaveResult = Result<Void, Error>
 
     public func save(_ movies: [Movie], completion: @escaping (SaveResult) -> Void) {
@@ -45,10 +45,26 @@ extension LocalMovieLoader {
     }
 }
 
-extension LocalMovieLoader {
-    public typealias LoadResult = LoadMovieResult
-
-    public func load(completion: @escaping (LoadResult) -> Void) {
+extension LocalMovieLoader: MovieLoader {
+    public typealias LoadResult = MovieLoader.Result
+    
+    public func loadMovies(completion: @escaping (LoadResult) -> Void) {
+        store.retrieve { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .failure(error):
+                completion(.failure(error))
+                
+            case let .success(.some(cache)) where MovieCachePolicy.validate(cache.timestamp, against: self.currentDate()):
+                completion(.success(cache.movies.toModels()))
+                
+            case .success:
+                completion(.success([]))
+            }
+        }
+    }
+    
+    public func loadMovie(id: Int, completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
             guard let self = self else { return }
             switch result {
