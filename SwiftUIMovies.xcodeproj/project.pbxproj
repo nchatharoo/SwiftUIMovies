@@ -95,7 +95,7 @@
 		8E778BEA2677A12C001425AD /* CacheMovieUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheMovieUseCaseTests.swift; sourceTree = "<group>"; };
 		8E80942F269301DC006180FF /* CodableMovieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMovieStore.swift; sourceTree = "<group>"; };
 		8EB6E71C26416BD200AE8D72 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		8ECE108C26403E2C006B1E4D /* SwiftUIMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8ECE108C26403E2C006B1E4D /* SwiftUIMoviesiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIMoviesiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ECE108F26403E2C006B1E4D /* SwiftUIMoviesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIMoviesApp.swift; sourceTree = "<group>"; };
 		8ECE109126403E2C006B1E4D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8ECE109326403E2E006B1E4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 		8ECE108D26403E2C006B1E4D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8ECE108C26403E2C006B1E4D /* SwiftUIMovies.app */,
+				8ECE108C26403E2C006B1E4D /* SwiftUIMoviesiOS.app */,
 				8ECE109D26403E2E006B1E4D /* SwiftUIMoviesTests.xctest */,
 				8ECE10BF26404692006B1E4D /* SwiftUIMoviesMac.app */,
 				8E08E691267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests.xctest */,
@@ -364,9 +364,9 @@
 			productReference = 8E287EA026C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8ECE108B26403E2C006B1E4D /* SwiftUIMovies */ = {
+		8ECE108B26403E2C006B1E4D /* SwiftUIMoviesiOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8ECE10B126403E2E006B1E4D /* Build configuration list for PBXNativeTarget "SwiftUIMovies" */;
+			buildConfigurationList = 8ECE10B126403E2E006B1E4D /* Build configuration list for PBXNativeTarget "SwiftUIMoviesiOS" */;
 			buildPhases = (
 				8ECE108826403E2C006B1E4D /* Sources */,
 				8ECE108926403E2C006B1E4D /* Frameworks */,
@@ -376,9 +376,9 @@
 			);
 			dependencies = (
 			);
-			name = SwiftUIMovies;
+			name = SwiftUIMoviesiOS;
 			productName = SwiftUIMovies;
-			productReference = 8ECE108C26403E2C006B1E4D /* SwiftUIMovies.app */;
+			productReference = 8ECE108C26403E2C006B1E4D /* SwiftUIMoviesiOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8ECE109C26403E2E006B1E4D /* SwiftUIMoviesTests */ = {
@@ -459,9 +459,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8ECE108B26403E2C006B1E4D /* SwiftUIMovies */,
-				8ECE109C26403E2E006B1E4D /* SwiftUIMoviesTests */,
+				8ECE108B26403E2C006B1E4D /* SwiftUIMoviesiOS */,
 				8ECE10BE26404692006B1E4D /* SwiftUIMoviesMac */,
+				8ECE109C26403E2E006B1E4D /* SwiftUIMoviesTests */,
 				8E08E690267245C4003B9EBA /* SwiftUIMoviesAPIEndToEndTests */,
 				8E287E9F26C175AD00003ADF /* SwiftUIMoviesCacheIntegrationTests */,
 			);
@@ -583,17 +583,17 @@
 /* Begin PBXTargetDependency section */
 		8E08E697267245C4003B9EBA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMovies */;
+			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMoviesiOS */;
 			targetProxy = 8E08E696267245C4003B9EBA /* PBXContainerItemProxy */;
 		};
 		8E287EA626C175AD00003ADF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMovies */;
+			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMoviesiOS */;
 			targetProxy = 8E287EA526C175AD00003ADF /* PBXContainerItemProxy */;
 		};
 		8ECE109F26403E2E006B1E4D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMovies */;
+			target = 8ECE108B26403E2C006B1E4D /* SwiftUIMoviesiOS */;
 			targetProxy = 8ECE109E26403E2E006B1E4D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -974,7 +974,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8ECE10B126403E2E006B1E4D /* Build configuration list for PBXNativeTarget "SwiftUIMovies" */ = {
+		8ECE10B126403E2E006B1E4D /* Build configuration list for PBXNativeTarget "SwiftUIMoviesiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8ECE10B226403E2E006B1E4D /* Debug */,

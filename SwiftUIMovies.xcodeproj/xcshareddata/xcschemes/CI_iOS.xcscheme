@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8ECE108B26403E2C006B1E4D"
-               BuildableName = "SwiftUIMovies.app"
-               BlueprintName = "SwiftUIMovies"
+               BuildableName = "SwiftUIMoviesiOS.app"
+               BlueprintName = "SwiftUIMoviesiOS"
                ReferencedContainer = "container:SwiftUIMovies.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8ECE108B26403E2C006B1E4D"
-            BuildableName = "SwiftUIMovies.app"
-            BlueprintName = "SwiftUIMovies"
+            BuildableName = "SwiftUIMoviesiOS.app"
+            BlueprintName = "SwiftUIMoviesiOS"
             ReferencedContainer = "container:SwiftUIMovies.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
@@ -125,8 +125,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8ECE108B26403E2C006B1E4D"
-            BuildableName = "SwiftUIMovies.app"
-            BlueprintName = "SwiftUIMovies"
+            BuildableName = "SwiftUIMoviesiOS.app"
+            BlueprintName = "SwiftUIMoviesiOS"
             ReferencedContainer = "container:SwiftUIMovies.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
