@@ -18,18 +18,18 @@ public class URLSessionHTTPClient: HTTPClient {
     
     struct UnexpectedValuesRepresentation: Error {}
     
-    public func getMovies(from endpoint: MovieListEndpoint, completion: @escaping (HTTPClientResult) -> Void) {
+    public func getMovies(from endpoint: MovieListEndpoint, completion: @escaping (HTTPClient.Result) -> Void) {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(endpoint.rawValue)") else {
             return
         }
         loadURL(url: url, completion: completion)
     }
     
-    public func getMovie(with id: Int, completion: @escaping (HTTPClientResult) -> Void) {
+    public func getMovie(with id: Int, completion: @escaping (HTTPClient.Result) -> Void) {
         loadURL(url: URL(string: "\(baseAPIURL)/movie/\(id)")!, completion: completion)
     }
     
-    private func loadURL(url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+    private func loadURL(url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             return
         }
@@ -42,13 +42,15 @@ public class URLSessionHTTPClient: HTTPClient {
             return
         }
         session.dataTask(with: finalURL) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-            } else if let data = data, let response = response as? HTTPURLResponse {
-                completion(.success(data, response))
-            } else {
-                completion(.failure(UnexpectedValuesRepresentation()))
-            }
+            completion(Result {
+                if let error = error {
+                throw error
+                } else if let data = data, let response = response as? HTTPURLResponse {
+                    return (data, response)
+                } else {
+                    throw UnexpectedValuesRepresentation()
+                }
+            })
         }.resume()
     }
 }

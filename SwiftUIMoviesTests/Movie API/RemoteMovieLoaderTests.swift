@@ -9,21 +9,21 @@ import XCTest
 import SwiftUIMovies
 
 class HTTPClientSpy: HTTPClient {
-    private var messages = [(url: URL, completion: (HTTPClientResult) -> Void)]()
-    private var messagesID = [(id: Int, completion: (HTTPClientResult) -> Void)]()
+    private var messages = [(url: URL, completion: (HTTPClient.Result) -> Void)]()
+    private var messagesID = [(id: Int, completion: (HTTPClient.Result) -> Void)]()
     
     var requestedURLs: [URL] {
         return messages.map { $0.url }
     }
     
-    func getMovies(from endpoint: MovieListEndpoint, completion: @escaping (HTTPClientResult) -> Void) {
+    func getMovies(from endpoint: MovieListEndpoint, completion: @escaping (HTTPClient.Result) -> Void) {
         guard let url = URL(string: "\("https://api.themoviedb.org/3")/movie/\(endpoint.rawValue)") else {
             return
         }
         messages.append((url, completion))
     }
     
-    func getMovie(with id: Int, completion: @escaping (HTTPClientResult) -> Void) {
+    func getMovie(with id: Int, completion: @escaping (HTTPClient.Result) -> Void) {
         messagesID.append((id, completion))
     }
     
@@ -38,7 +38,7 @@ class HTTPClientSpy: HTTPClient {
             httpVersion: nil,
             headerFields: nil
         )!
-        messages[index].completion(.success(data, response))
+        messages[index].completion(.success((data, response)))
     }
     
     func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0, and id: Int) {
@@ -48,7 +48,7 @@ class HTTPClientSpy: HTTPClient {
             httpVersion: nil,
             headerFields: nil
         )!
-        messagesID[index].completion(.success(data, response))
+        messagesID[index].completion(.success((data, response)))
     }
 }
 

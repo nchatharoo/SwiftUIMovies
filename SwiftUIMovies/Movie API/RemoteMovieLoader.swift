@@ -27,7 +27,7 @@ public final class RemoteMovieLoader: MovieLoader {
         client.getMovies(from: endpoint) { [weak self] result in
             guard self != nil else { return }
             switch result {
-            case let .success(data, response):
+            case let .success((data, response)):
                 completion(RemoteMovieLoader.map(data, from: response))
             case .failure:
                 completion(.failure(Error.connectivity))
@@ -38,7 +38,7 @@ public final class RemoteMovieLoader: MovieLoader {
     public func loadMovie(id: Int, completion: @escaping (Result) -> Void) {
         client.getMovie(with: id) { result in
             switch result {
-            case let .success(data, response):
+            case let .success((data, response)):
                 completion(RemoteMovieLoader.map(data, from: response))
             case .failure:
                 completion(.failure(Error.connectivity))
