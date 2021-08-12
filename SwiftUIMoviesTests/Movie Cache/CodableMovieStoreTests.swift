@@ -21,14 +21,14 @@ class CodableMovieStoreTests: XCTestCase {
     
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = makeSUT()
-        expect(sut, toRetrieve: .success((.empty)))
+        expect(sut, toRetrieve: .success((.none)))
     }
     
     func test_retrieve_HasNoSideEffectOnEmptyCache() {
         let sut = makeSUT()
         
-        expect(sut, toRetrieveTwice: .success((.empty)))
-        expect(sut, toRetrieve: .success((.empty)))
+        expect(sut, toRetrieveTwice: .success((.none)))
+        expect(sut, toRetrieve: .success((.none)))
     }
 
     func test_retrieve_deliversFoundValuesOnNonEmptyCache() {
@@ -37,7 +37,7 @@ class CodableMovieStoreTests: XCTestCase {
         let timestamp = Date()
 
         insert((movies, timestamp), to: sut)
-        expect(sut, toRetrieve: .success(.found(movies: movies, timestamp: timestamp)))
+        expect(sut, toRetrieve: .success(CachedMovie(movies: movies, timestamp: timestamp)))
     }
     
     func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
@@ -46,7 +46,7 @@ class CodableMovieStoreTests: XCTestCase {
         let timestamp = Date()
         
         insert((movies, timestamp), to: sut)
-        expect(sut, toRetrieve: .success(.found(movies: movies, timestamp: timestamp)))
+        expect(sut, toRetrieve: .success(CachedMovie(movies: movies, timestamp: timestamp)))
     }
     
     func test_retrieve_deliversFailureOnRetrievalError() {
@@ -77,7 +77,7 @@ class CodableMovieStoreTests: XCTestCase {
         let latestInsertionError = insert((latestFeed,latestTimestamp), to: sut)
         
         XCTAssertNil(latestInsertionError, "Expected to override cache successfully")
-        expect(sut, toRetrieve: .success(.found(movies: latestFeed, timestamp: latestTimestamp)))
+        expect(sut, toRetrieve: .success(CachedMovie(movies: latestFeed, timestamp: latestTimestamp)))
     }
     
     func test_insert_deliversErrorOnInsertionError() {
@@ -96,7 +96,7 @@ class CodableMovieStoreTests: XCTestCase {
         let deletionError = deleteCache(from: sut)
         
         XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
-        expect(sut, toRetrieve: .success(.empty))
+        expect(sut, toRetrieve: .success(.none))
     }
     
     func test_delete_emptiesPreviouslyInsertedCache() {
@@ -107,7 +107,7 @@ class CodableMovieStoreTests: XCTestCase {
         let deletionError = deleteCache(from: sut)
         
         XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
-        expect(sut, toRetrieve: .success(.empty))
+        expect(sut, toRetrieve: .success(.none))
     }
     
     func test_delete_deliversErrorOnDeletionError() {
@@ -116,7 +116,7 @@ class CodableMovieStoreTests: XCTestCase {
         
         let deletionError = deleteCache(from: sut)
         XCTAssertNotNil(deletionError, "Expected empty cache deletion to fail")
-        expect(sut, toRetrieve: .success(.empty))
+        expect(sut, toRetrieve: .success(.none))
     }
     
     func test_storeSideEffects_runSerially() {
@@ -162,10 +162,10 @@ class CodableMovieStoreTests: XCTestCase {
         sut.retrieve { retrievedResult in
             switch (expectedResult, retrievedResult) {
             
-            case (.success(.empty), .success(.empty)), (.failure, .failure):
+            case (.success(.none), .success(.none)), (.failure, .failure):
                 break
                 
-            case let (.success(.found(expected)), (.success(.found(retrieved)))):
+            case let (.success(.some(expected)), (.success(.some(retrieved)))):
                 XCTAssertEqual(retrieved.movies, expected.movies)
                 XCTAssertEqual(retrieved.timestamp, expected.timestamp)
             

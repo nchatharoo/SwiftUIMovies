@@ -57,10 +57,10 @@ class MovieStoreSpy: MovieStore {
     }
     
     func completeRetrievalWithEmptyCache(at index: Int = 0) {
-        retrievalCompletions[index](.success(.empty))
+        retrievalCompletions[index](.success(.none))
     }
     
     func completeRetrieval(with movies: [LocalMovieItem], timestamp: Date, at index: Int = 0) {
-        retrievalCompletions[index](.success(.found(movies: movies, timestamp: timestamp)))
+        retrievalCompletions[index](.success(CachedMovie(movies: movies, timestamp: timestamp)))
     }
 }

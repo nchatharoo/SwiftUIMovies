@@ -7,15 +7,20 @@
 
 import Foundation
 
-public enum CachedMovie {
-    case empty
-    case found(movies: [LocalMovieItem], timestamp: Date)
+public struct CachedMovie {
+    public let movies: [LocalMovieItem]
+    public let timestamp:Date
+    
+    public init(movies: [LocalMovieItem], timestamp: Date) {
+        self.movies = movies
+        self.timestamp = timestamp
+    }
 }
 
 public protocol MovieStore {
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
-    typealias RetrievalResult = Result<CachedMovie, Error>
+    typealias RetrievalResult = Result<CachedMovie?, Error>
     typealias RetrievalCompletion = (RetrievalResult) -> Void
 
     func deleteCachedMovies(completion: @escaping DeletionCompletion)
