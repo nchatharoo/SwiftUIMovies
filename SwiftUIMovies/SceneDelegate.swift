@@ -12,13 +12,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    @ObservedObject private var nowPlaying = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .nowPlaying, client: URLSessionHTTPClient()))
+    @ObservedObject private var nowPlaying = MovieListObservable(remoteLoader: RemoteMovieLoader(endpoint: .nowPlaying,
+                                                                                                 client: URLSessionHTTPClient()), localLoader:
+                                                                                                    LocalMovieLoader(store:
+                                                                                                                        CodableMovieStore(storeURL: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")),
+                                                                                                                     currentDate: Date.init))
     
-    @ObservedObject private var upcoming = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .upcoming, client: URLSessionHTTPClient()))
+    @ObservedObject private var upcoming = MovieListObservable(remoteLoader: RemoteMovieLoader(endpoint: .upcoming,
+                                                                                               client: URLSessionHTTPClient()), localLoader:
+                                                                                                LocalMovieLoader(store:
+                                                                                                                    CodableMovieStore(storeURL: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")),
+                                                                                                                 currentDate: Date.init))
     
-    @ObservedObject private var topRated = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .topRated, client: URLSessionHTTPClient()))
+    @ObservedObject private var topRated = MovieListObservable(remoteLoader: RemoteMovieLoader(endpoint: .topRated,
+                                                                                               client: URLSessionHTTPClient()), localLoader:
+                                                                                                LocalMovieLoader(store:
+                                                                                                                    CodableMovieStore(storeURL: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")),
+                                                                                                                 currentDate: Date.init))
     
-    @ObservedObject private var popular = MovieListObservable(movieLoader: RemoteMovieLoader(endpoint: .popular, client: URLSessionHTTPClient()))
+    @ObservedObject private var popular = MovieListObservable(remoteLoader: RemoteMovieLoader(endpoint: .popular,
+                                                                                              client: URLSessionHTTPClient()), localLoader:
+                                                                                                LocalMovieLoader(store:
+                                                                                                                    CodableMovieStore(storeURL: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")),
+                                                                                                                 currentDate: Date.init))
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
