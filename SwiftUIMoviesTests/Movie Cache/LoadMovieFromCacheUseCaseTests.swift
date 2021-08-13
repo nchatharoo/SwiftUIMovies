@@ -19,7 +19,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     func test_load_requestsCacheRetrieval() {
         let (sut, store) = makeSUT()
         
-        sut.loadMovies { _ in }
+        sut.loadMovies(from: .nowPlaying) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
@@ -75,7 +75,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectsOnRetrievalError() {
         let (sut, store) = makeSUT()
         
-        sut.loadMovies { _ in }
+        sut.loadMovies(from: .nowPlaying) { _ in }
         store.completeRetrieval(with: anyNSError())
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
@@ -84,7 +84,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     func test_load_hasNoSideEffectsOnEmptyCache() {
         let (sut, store) = makeSUT()
         
-        sut.loadMovies { _ in }
+        sut.loadMovies(from: .nowPlaying) { _ in }
         store.completeRetrievalWithEmptyCache()
                 
         XCTAssertEqual(store.receivedMessages, [.retrieve])
@@ -96,7 +96,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         let nonExpiredTimestamp = fixedCurrentDate.minusMoviesCacheMaxAge().adding(seconds: 1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
-        sut.loadMovies { _ in }
+        sut.loadMovies(from: .nowPlaying) { _ in }
         store.completeRetrieval(with: movie.local, timestamp: nonExpiredTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
@@ -108,7 +108,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         let expirationTimestamp = fixedCurrentDate.minusMoviesCacheMaxAge()
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
-        sut.loadMovies { _ in }
+        sut.loadMovies(from: .nowPlaying) { _ in }
         store.completeRetrieval(with: movie.local, timestamp: expirationTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
@@ -120,7 +120,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         let expiredTimestamp = fixedCurrentDate.minusMoviesCacheMaxAge().adding(seconds: -1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
-        sut.loadMovies { _ in }
+        sut.loadMovies(from: .nowPlaying) { _ in }
         store.completeRetrieval(with: movie.local, timestamp: expiredTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
@@ -132,7 +132,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
         
         var receivedResults = [LocalMovieLoader.LoadResult]()
         
-        sut?.loadMovies { receivedResults.append($0) }
+        sut?.loadMovies(from: .nowPlaying) { receivedResults.append($0) }
 
         sut = nil
         store.completeRetrievalWithEmptyCache()
@@ -154,7 +154,7 @@ class LoadMovieFromCacheUseCaseTests: XCTestCase {
     private func expect(_ sut: LocalMovieLoader, toCompleteWith expectedResult: LocalMovieLoader.LoadResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
 
-        sut.loadMovies { receivedResult in
+        sut.loadMovies(from: .nowPlaying) { receivedResult in
             switch (receivedResult, expectedResult) {
             case let (.success(receivedMovies), .success(expectedMovies)):
                 XCTAssertEqual(receivedMovies, expectedMovies, file: file, line: line)

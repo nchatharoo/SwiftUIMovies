@@ -9,6 +9,6 @@ import Foundation
 
 public protocol MovieLoader {
     typealias Result = Swift.Result<[Movie], Error>
-    func loadMovies(completion: @escaping (Result) -> Void)
+    func loadMovies(from endpoint: MovieListEndpoint, completion: @escaping (Result) -> Void)
     func loadMovie(id: Int, completion: @escaping (Result) -> Void)
 }

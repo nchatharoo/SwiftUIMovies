@@ -23,7 +23,7 @@ public final class RemoteMovieLoader: MovieLoader {
         self.client = client
     }
     
-    public func loadMovies(completion: @escaping (Result) -> Void) {
+    public func loadMovies(from endpoint: MovieListEndpoint, completion: @escaping (Result) -> Void) {
         client.getMovies(from: endpoint) { [weak self] result in
             guard self != nil else { return }
             switch result {

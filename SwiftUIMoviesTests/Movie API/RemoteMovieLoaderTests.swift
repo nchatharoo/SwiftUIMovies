@@ -123,7 +123,7 @@ class RemoteMovieLoaderTests: XCTestCase {
         var sut: RemoteMovieLoader? = RemoteMovieLoader(endpoint: endpoint, client: client)
         
         var capturedResults = [RemoteMovieLoader.Result]()
-        sut?.loadMovies { capturedResults.append($0) }
+        sut?.loadMovies(from: endpoint) { capturedResults.append($0) }
         sut?.loadMovie(id: id) { capturedResults.append($0) }
         sut = nil
         client.complete(withStatusCode: 200, data: makeItemsJSON([]))
@@ -160,7 +160,7 @@ class RemoteMovieLoaderTests: XCTestCase {
         
         let exp = expectation(description: "Wait for load completion")
         
-        sut.loadMovies { receivedResult in
+        sut.loadMovies(from: .nowPlaying) { receivedResult in
             switch (receivedResult, expectedResult) {
             case let (.success(receivedItems), .success(expectedItems)):
                 XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
