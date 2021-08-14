@@ -35,7 +35,7 @@ class SwiftUIMoviesAPIEndToEndTests: XCTestCase {
         
         var receivedResult: RemoteMovieLoader.Result?
         
-        loader.loadMovies { result in
+        loader.loadMovies(from: .nowPlaying) { result in
             receivedResult = result
             exp.fulfill()
         }

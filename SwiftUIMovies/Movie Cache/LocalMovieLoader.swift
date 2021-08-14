@@ -48,7 +48,7 @@ extension LocalMovieLoader: MovieCache {
 extension LocalMovieLoader: MovieLoader {
     public typealias LoadResult = MovieLoader.Result
     
-    public func loadMovies(completion: @escaping (LoadResult) -> Void) {
+    public func loadMovies(from endpoint: MovieListEndpoint, completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
             guard let self = self else { return }
             switch result {

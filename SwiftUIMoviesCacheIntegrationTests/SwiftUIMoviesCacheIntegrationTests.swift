@@ -75,7 +75,7 @@ class SwiftUIMoviesCacheIntegrationTests: XCTestCase {
     private func expect(_ sut: LocalMovieLoader, toLoad expectedMovies: [Movie], file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
         
-        sut.loadMovies { result in
+        sut.loadMovies(from: .nowPlaying) { result in
             switch result {
             case let .success(loadedMovies):
                 XCTAssertEqual(loadedMovies, expectedMovies, file: file, line: line)
@@ -103,12 +103,10 @@ class SwiftUIMoviesCacheIntegrationTests: XCTestCase {
     }
 
     private func testSpecificStoreURL() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
+        return cachesDirectory().appendingPathComponent("\(type(of: self)).store")
     }
     
     private func cachesDirectory() -> URL {
         return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     }
-
-
 }
