@@ -19,8 +19,9 @@ Using URLSession
 - [x] EndToEndTest
 
 ### Presentation
-- [ ] UnitTest
-- [ ] Snapshots test
+![Simulator Screen Recording](https://user-images.githubusercontent.com/4942793/129447152-bc09283d-81ce-4b23-8508-a42d64a5ebfc.gif)
+
+
 
 
 ## Thanks for stopping by!
