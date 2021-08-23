@@ -33,7 +33,7 @@ struct MovieDetailListView: View {
                             .font(.footnote)
                             .foregroundColor(Color.gray.opacity(0.8))
                         
-                        Text(movie.yearText)
+                        Text(movie.releaseDate ?? "-")
                             .font(.footnote)
                             .foregroundColor(Color.gray.opacity(0.8))
                         
@@ -45,13 +45,6 @@ struct MovieDetailListView: View {
                 }
                 .padding(.bottom, 50)
                 
-                VStack(alignment: .leading) {
-                    Text("Overview")
-                        .font(.headline)
-                    Text(movie.overview)
-                }
-                .padding([.top, .leading, .trailing])
-                
                 HStack {
                     if !movie.ratingText.isEmpty {
                         Text(movie.ratingText).foregroundColor(.yellow)
@@ -60,10 +53,21 @@ struct MovieDetailListView: View {
                 }
                 .padding([.top, .leading, .trailing])
                 
+                VStack(alignment: .leading) {
+                    Text("Overview")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                    Text(movie.overview)
+                }
+                .padding([.top, .leading, .trailing])
+                
                 HStack(alignment: .top, spacing: 4) {
                     if movie.cast != nil && movie.cast!.count > 0 {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Starring").font(.headline)
+                            Text("Starring")
+                                .font(.title)
+                                .fontWeight(.semibold)
+                            
                             ForEach(self.movie.cast!.prefix(9), id: \.self.id) { cast in
                                 Text(cast.name)
                             }
@@ -75,14 +79,20 @@ struct MovieDetailListView: View {
                     if movie.crew != nil && movie.crew!.count > 0 {
                         VStack(alignment: .leading, spacing: 4) {
                             if movie.directors != nil && movie.directors!.count > 0 {
-                                Text("Director(s)").font(.headline)
+                                Text("Director(s)")
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                
                                 ForEach(self.movie.directors!.prefix(2), id: \.self.id) { crew in
                                     Text(crew.name)
                                 }
                             }
                             
                             if movie.producers != nil && movie.producers!.count > 0 {
-                                Text("Producer(s)").font(.headline)
+                                Text("Producer(s)")
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                    
                                     .padding(.top)
                                 ForEach(self.movie.producers!.prefix(2), id: \.self.id) { crew in
                                     Text(crew.name)
@@ -90,20 +100,26 @@ struct MovieDetailListView: View {
                             }
                             
                             if movie.screenWriters != nil && movie.screenWriters!.count > 0 {
-                                Text("Screenwriter(s)").font(.headline)
+                                Text("Screenwriter(s)")
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                    
                                     .padding(.top)
                                 ForEach(self.movie.screenWriters!.prefix(2), id: \.self.id) { crew in
                                     Text(crew.name)
                                 }
                             }
                         }
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        .padding([.top, .trailing])
                     }
                 }
                 
                 if movie.youtubeTrailers != nil && movie.youtubeTrailers!.count > 0 {
                     VStack(alignment: .leading) {
-                        Text("Trailers").font(.headline)
+                        Text("Trailers")
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
+                            
                             .padding([.top, .leading, .trailing])
                         
                         ForEach(movie.youtubeTrailers!, id: \.self.id) { trailer in
@@ -128,7 +144,6 @@ struct MovieDetailListView: View {
             }
         }
         .cornerRadius(25)
-        .shadow(radius: 10)
     }
 }
 
@@ -163,6 +178,6 @@ struct MovieCardView: View {
 
 struct MovieDetailListView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailListView(movie: Movie.stubbedMovies[1])
+        MovieDetailListView(movie: Movie.stubbedMovies[6])
     }
 }
