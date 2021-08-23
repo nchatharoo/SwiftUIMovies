@@ -64,18 +64,19 @@ extension LocalMovieLoader: MovieLoader {
         }
     }
     
-    public func loadMovie(id: Int, completion: @escaping (LoadResult) -> Void) {
+    public func loadMovie(id: Int, completion: @escaping (UniqueResult) -> Void) {
         store.retrieve { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .failure(error):
                 completion(.failure(error))
                 
-            case let .success(.some(cache)) where MovieCachePolicy.validate(cache.timestamp, against: self.currentDate()):
-                completion(.success(cache.movies.toModels()))
+            case let .success(.some(cache)):
+                let item = self.filter(items: cache.movies.toModels(), for: id)
+                completion(item)
                 
-            case .success:
-                completion(.success([]))
+            case .success(.none):
+                completion(.success(nil))
             }
         }
     }
@@ -94,6 +95,14 @@ extension LocalMovieLoader {
                 
             case .success: break
             }
+        }
+    }
+    
+    public func filter(items: [Movie], for id: Int) -> UniqueResult {
+        if let item = items.filter({ id == $0.id }).first {
+            return .success(Movie(id: item.id, title: item.title, backdropPath: item.backdropPath, posterPath: item.posterPath, overview: item.overview, voteAverage: item.voteAverage, voteCount: item.voteCount, runtime: item.runtime, releaseDate: item.releaseDate, genres: item.genres, credits: item.credits, videos: item.videos))
+        } else {
+            return .failure(NSError(domain: "no movie found", code: 0))
         }
     }
 }

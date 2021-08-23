@@ -7,7 +7,7 @@
 
 import Foundation
 
-public typealias CachedMovie = (movies: [LocalMovieItem], timestamp: Date)
+public typealias CachedMovies = (movies: [LocalMovieItem], timestamp: Date)
 
 public protocol MovieStore {
     typealias DeletionResult = Result<Void,Error>
@@ -16,7 +16,7 @@ public protocol MovieStore {
     typealias InsertionResult = Result<Void,Error>
     typealias InsertionCompletion = (InsertionResult) -> Void
 
-    typealias RetrievalResult = Result<CachedMovie?, Error>
+    typealias RetrievalResult = Result<CachedMovies?, Error>
     typealias RetrievalCompletion = (RetrievalResult) -> Void
 
     func deleteCachedMovies(completion: @escaping DeletionCompletion)
