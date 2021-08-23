@@ -47,7 +47,6 @@ struct MovieListView: View {
                     }
                 }
                 .padding()
-                
             }
             .navigationBarTitle("The MovieDb")
         }
@@ -57,5 +56,35 @@ struct MovieListView: View {
             topRated.loadMovies(from: .topRated)
             popular.loadMovies(from: .popular)
         }
+    }
+}
+
+struct MovieListView_Previews: PreviewProvider {
+    static private var nowPlaying = MovieListObservable(remoteLoader: RemoteMovieLoader(endpoint: .nowPlaying,
+                                                                                                 client: URLSessionHTTPClient()), localLoader:
+                                                                                                    LocalMovieLoader(store:
+                                                                                                                        CodableMovieStore(storeURL: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: CodableMovieStore.self)).store")),
+                                                                                                                     currentDate: Date.init))
+    
+    static private var upcoming = MovieListObservable(remoteLoader: RemoteMovieLoader(endpoint: .upcoming,
+                                                                                               client: URLSessionHTTPClient()), localLoader:
+                                                                                                LocalMovieLoader(store:
+                                                                                                                    CodableMovieStore(storeURL: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: CodableMovieStore.self)).store")),
+                                                                                                                 currentDate: Date.init))
+    
+    static private var topRated = MovieListObservable(remoteLoader: RemoteMovieLoader(endpoint: .topRated,
+                                                                                               client: URLSessionHTTPClient()), localLoader:
+                                                                                                LocalMovieLoader(store:
+                                                                                                                    CodableMovieStore(storeURL: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: CodableMovieStore.self)).store")),
+                                                                                                                 currentDate: Date.init))
+    
+    static private var popular = MovieListObservable(remoteLoader: RemoteMovieLoader(endpoint: .popular,
+                                                                                              client: URLSessionHTTPClient()), localLoader:
+                                                                                                LocalMovieLoader(store:
+                                                                                                                    CodableMovieStore(storeURL: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: CodableMovieStore.self)).store")),
+                                                                                                                 currentDate: Date.init))
+
+    static var previews: some View {
+        MovieListView(nowPlaying: nowPlaying, upcoming: upcoming, topRated: topRated, popular: popular)
     }
 }
