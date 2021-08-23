@@ -5,7 +5,7 @@
 A SwiftUI app using TMDB API to display :
 
 - Movie in list.
-- Show movie detail. (in progress)
+- Show movie detail.
 - Search movie by name. (in progress)
 
 ### Networking
@@ -19,7 +19,7 @@ Using URLSession
 - [x] EndToEndTest
 
 ### Presentation
-![Simulator Screen Recording](https://user-images.githubusercontent.com/4942793/129447152-bc09283d-81ce-4b23-8508-a42d64a5ebfc.gif)
+![Simulator Screen Recording](https://user-images.githubusercontent.com/4942793/130520960-649232b0-b32b-4c4b-b80d-c2ab76ce25cf.gif)
 
 
 
