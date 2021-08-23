@@ -123,8 +123,10 @@ class RemoteMovieLoaderTests: XCTestCase {
         var sut: RemoteMovieLoader? = RemoteMovieLoader(endpoint: endpoint, client: client)
         
         var capturedResults = [RemoteMovieLoader.Result]()
+        var capturedUniqueResult = [MovieLoader.UniqueResult]()
+
         sut?.loadMovies(from: endpoint) { capturedResults.append($0) }
-        sut?.loadMovie(id: id) { capturedResults.append($0) }
+        sut?.loadMovie(id: id) { capturedUniqueResult.append($0) }
         sut = nil
         client.complete(withStatusCode: 200, data: makeItemsJSON([]))
         
@@ -133,12 +135,12 @@ class RemoteMovieLoaderTests: XCTestCase {
     
     func test_load_deliversItemsOn200HTTPResponseWithJSONItemsForMovieID() {
         let (sut, client) = makeSUT()
-        var capturedResults = [RemoteMovieLoader.Result]()
+        var capturedUniqueResult = [MovieLoader.UniqueResult]()
 
         let item1 = makeItem(id: 338762, title: "Bloodshot", backdropPath: "\\/ocUrMYbdjknu2TwzMHKT9PBBQRw.jpg", posterPath: "\\/8WUVHemHFH2ZIP6NWkwlHWsyrEL.jpg", overview: "", voteAverage: 7.1, voteCount: 418, runtime: nil, releaseDate: "2020-03-05", genres: nil, credits: nil, videos: nil)
         
         let items = [item1.model]
-        sut.loadMovie(id: items.first!.id) { capturedResults.append($0) }
+        sut.loadMovie(id: items.first!.id) { capturedUniqueResult.append($0) }
         
         expect(sut, toCompleteWith: .success(items), when: {
             let json = makeItemsJSON([item1.json])

@@ -35,11 +35,11 @@ public final class RemoteMovieLoader: MovieLoader {
         }
     }
     
-    public func loadMovie(id: Int, completion: @escaping (Result) -> Void) {
+    public func loadMovie(id: Int, completion: @escaping (UniqueResult) -> Void) {
         client.getMovie(with: id) { result in
             switch result {
             case let .success((data, response)):
-                completion(RemoteMovieLoader.map(data, from: response))
+                completion(RemoteMovieLoader.decode(data, from: response))
             case .failure:
                 completion(.failure(Error.connectivity))
             }
@@ -50,6 +50,15 @@ public final class RemoteMovieLoader: MovieLoader {
         do {
             let items = try MovieItemsMapper.map(data, from: response)
             return .success(items.toModels())
+        } catch {
+            return .failure(error as! RemoteMovieLoader.Error)
+        }
+    }
+    
+    private static func decode(_ data: Data, from response: HTTPURLResponse) -> UniqueResult {
+        do {
+            let item = try MovieItemsMapper.decode(data, from: response)
+            return .success(Movie(id: item.id, title: item.title, backdropPath: item.backdropPath, posterPath: item.posterPath, overview: item.overview, voteAverage: item.voteAverage, voteCount: item.voteCount, runtime: item.runtime, releaseDate: item.releaseDate, genres: item.genres, credits: item.credits, videos: item.videos))
         } catch {
             return .failure(error as! RemoteMovieLoader.Error)
         }
@@ -79,6 +88,13 @@ final class MovieItemsMapper {
         throw RemoteMovieLoader.Error.invalidData
        }
        return root.results
+   }
+    
+    static func decode(_ data: Data, from response: HTTPURLResponse) throws -> RemoteMovieItem {
+       guard response.statusCode == 200, let remoteMovieItem = try? jsonDecoder.decode(RemoteMovieItem.self, from: data) else {
+        throw RemoteMovieLoader.Error.invalidData
+       }
+        return remoteMovieItem
    }
 }
 
