@@ -195,3 +195,42 @@ public struct MovieVideo: Codable, Identifiable {
         return URL(string: "https://youtube.com/watch?v=\(key)")
     }
 }
+
+struct MovieResponse: Decodable {
+    
+    let results: [Movie]
+}
+
+
+extension Movie {
+    
+    static var stubbedMovies: [Movie] {
+        let response: MovieResponse? = try? Bundle.main.loadAndDecodeJSON(filename: "movie_list")
+        return response!.results
+    }
+    
+    static var stubbedMovie: Movie {
+        stubbedMovies[0]
+    }
+}
+
+extension Bundle {
+    
+    func loadAndDecodeJSON<D: Decodable>(filename: String) throws -> D? {
+        guard let url = self.url(forResource: filename, withExtension: "json") else {
+            return nil
+        }
+        
+        let data = try Data(contentsOf: url)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-mm-dd"
+        
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
+        
+        let decodedModel = try jsonDecoder.decode(D.self, from: data)
+        return decodedModel
+    }
+}

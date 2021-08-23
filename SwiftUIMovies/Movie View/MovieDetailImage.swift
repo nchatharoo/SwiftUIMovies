@@ -26,9 +26,3 @@ struct MovieDetailImage: View {
         }
     }
 }
-
-struct MovieDetailImage_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieDetailImage(imageLoader: ImageLoader(), imageURL: URL(string: "")!)
-    }
-}

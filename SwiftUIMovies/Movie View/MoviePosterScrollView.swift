@@ -33,3 +33,9 @@ struct MoviePosterScrollView: View {
         }
     }
 }
+
+struct MoviePosterScrollView_Previews: PreviewProvider {
+    static var previews: some View {
+        MoviePosterScrollView(title: "Now playing", movies: Movie.stubbedMovies)
+    }
+}
