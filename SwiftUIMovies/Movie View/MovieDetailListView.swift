@@ -98,7 +98,6 @@ struct MovieDetailListView: View {
                             }
                         }
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                        .padding()
                     }
                 }
                 
@@ -128,7 +127,6 @@ struct MovieDetailListView: View {
                 SafariView(url: trailer.youtubeURL!)
             }
         }
-        .background(Color.white)
         .cornerRadius(25)
         .shadow(radius: 10)
     }
@@ -148,7 +146,7 @@ struct MovieCardView: View {
                     .cornerRadius(8)
             } else {
                 Rectangle()
-                    .fill(Color.gray.opacity(0.3))
+                    .fill(Color.gray.opacity(0.8))
                     .cornerRadius(8)
             }
         }
