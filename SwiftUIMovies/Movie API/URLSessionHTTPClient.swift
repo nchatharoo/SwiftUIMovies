@@ -34,7 +34,11 @@ public class URLSessionHTTPClient: HTTPClient {
             return
         }
         
-        let queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
+        var queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
+        let params: [String: String] = [
+            "append_to_response": "videos,credits"
+        ]
+        queryItems.append(contentsOf: params.map { URLQueryItem(name: $0.key, value: $0.value) })
         
         urlComponents.queryItems = queryItems
         
@@ -44,7 +48,7 @@ public class URLSessionHTTPClient: HTTPClient {
         session.dataTask(with: finalURL) { data, response, error in
             completion(Result {
                 if let error = error {
-                throw error
+                    throw error
                 } else if let data = data, let response = response as? HTTPURLResponse {
                     return (data, response)
                 } else {
