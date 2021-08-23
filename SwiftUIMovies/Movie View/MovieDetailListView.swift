@@ -31,15 +31,15 @@ struct MovieDetailListView: View {
                     VStack(alignment: .trailing, spacing: 8) {
                         Text(movie.genreText)
                             .font(.footnote)
-                            .foregroundColor(.gray.opacity(0.8))
+                            .foregroundColor(Color.gray.opacity(0.8))
                         
                         Text(movie.yearText)
                             .font(.footnote)
-                            .foregroundColor(.gray.opacity(0.8))
+                            .foregroundColor(Color.gray.opacity(0.8))
                         
                         Text(movie.durationText)
                             .font(.footnote)
-                            .foregroundColor(.gray.opacity(0.8))
+                            .foregroundColor(Color.gray.opacity(0.8))
                     }
                     .position(x: text.size.width - 90, y: 0)
                 }
