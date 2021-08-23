@@ -22,12 +22,20 @@ struct MoviePosterScrollView: View {
                 .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
+                LazyHStack {
                     ForEach(movies, id: \.self.id) { movie in
-                        MoviePosterView(movie: movie)
+                        NavigationLink(destination: MovieDetailView(movieId: movie.id)) {
+                            MoviePosterView(movie: movie)
+                        }
                     }
                 }
             }
         }
+    }
+}
+
+struct MoviePosterScrollView_Previews: PreviewProvider {
+    static var previews: some View {
+        MoviePosterScrollView(title: "Now playing", movies: Movie.stubbedMovies)
     }
 }

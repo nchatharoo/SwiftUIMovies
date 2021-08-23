@@ -72,7 +72,7 @@ public class CodableMovieStore: MovieStore {
             do {
                 let decoder = JSONDecoder()
                 let cache = try decoder.decode(Cache.self, from: data)
-                completion(.success(CachedMovie(movies: cache.localMovies, timestamp: cache.timestamp)))
+                completion(.success(CachedMovies(movies: cache.localMovies, timestamp: cache.timestamp)))
             } catch {
                 completion(.failure(error))
             }

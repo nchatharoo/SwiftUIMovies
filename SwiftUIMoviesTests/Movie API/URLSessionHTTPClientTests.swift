@@ -161,8 +161,12 @@ class URLSessionHTTPClientTests: XCTestCase {
             return nil
         }
         
-        let queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
-        
+        var queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
+        let params: [String: String] = [
+            "append_to_response": "videos,credits"
+        ]
+        queryItems.append(contentsOf: params.map { URLQueryItem(name: $0.key, value: $0.value) })
+
         urlComponents.queryItems = queryItems
         
         guard let finalURL = urlComponents.url else {

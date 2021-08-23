@@ -37,7 +37,7 @@ class CodableMovieStoreTests: XCTestCase {
         let timestamp = Date()
 
         insert((movies, timestamp), to: sut)
-        expect(sut, toRetrieve: .success(CachedMovie(movies: movies, timestamp: timestamp)))
+        expect(sut, toRetrieve: .success(CachedMovies(movies: movies, timestamp: timestamp)))
     }
     
     func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
@@ -46,7 +46,7 @@ class CodableMovieStoreTests: XCTestCase {
         let timestamp = Date()
         
         insert((movies, timestamp), to: sut)
-        expect(sut, toRetrieve: .success(CachedMovie(movies: movies, timestamp: timestamp)))
+        expect(sut, toRetrieve: .success(CachedMovies(movies: movies, timestamp: timestamp)))
     }
     
     func test_retrieve_deliversFailureOnRetrievalError() {
@@ -77,7 +77,7 @@ class CodableMovieStoreTests: XCTestCase {
         let latestInsertionError = insert((latestFeed,latestTimestamp), to: sut)
         
         XCTAssertNil(latestInsertionError, "Expected to override cache successfully")
-        expect(sut, toRetrieve: .success(CachedMovie(movies: latestFeed, timestamp: latestTimestamp)))
+        expect(sut, toRetrieve: .success(CachedMovies(movies: latestFeed, timestamp: latestTimestamp)))
     }
     
     func test_insert_deliversErrorOnInsertionError() {
