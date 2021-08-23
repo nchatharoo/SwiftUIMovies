@@ -175,7 +175,7 @@ public struct MovieVideoResponse: Codable {
     public let results: [MovieVideo]
 }
 
-public struct MovieVideo: Codable {
+public struct MovieVideo: Codable, Identifiable {
     public init(id: String, key: String, name: String, site: String) {
         self.id = id
         self.key = key

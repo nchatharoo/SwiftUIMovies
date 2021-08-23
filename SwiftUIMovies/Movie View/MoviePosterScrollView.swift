@@ -24,7 +24,9 @@ struct MoviePosterScrollView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(movies, id: \.self.id) { movie in
-                        MoviePosterView(movie: movie)
+                        NavigationLink(destination: MovieDetailView(movieId: movie.id)) {
+                            MoviePosterView(movie: movie)
+                        }
                     }
                 }
             }
