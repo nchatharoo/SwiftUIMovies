@@ -22,7 +22,7 @@ struct MoviePosterScrollView: View {
                 .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
+                LazyHStack {
                     ForEach(movies, id: \.self.id) { movie in
                         NavigationLink(destination: MovieDetailView(movieId: movie.id)) {
                             MoviePosterView(movie: movie)
