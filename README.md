@@ -19,7 +19,7 @@ Using URLSession
 - [x] EndToEndTest
 
 ### Presentation
-![Simulator Screen Recording](https://user-images.githubusercontent.com/4942793/130520960-649232b0-b32b-4c4b-b80d-c2ab76ce25cf.gif)
+![Simulator Screen Recording](https://user-images.githubusercontent.com/4942793/130573196-933afd61-bc37-494e-8ee2-d331d89556e7.gif)
 
 
 
