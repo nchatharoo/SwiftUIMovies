@@ -19,13 +19,29 @@ struct MoviePosterScrollView: View {
             Text(title)
                 .font(.title)
                 .fontWeight(.bold)
-                .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
+                
                 LazyHStack {
+                    
                     ForEach(movies, id: \.self.id) { movie in
+                        
                         NavigationLink(destination: MovieDetailView(movieId: movie.id)) {
-                            MoviePosterView(movie: movie)
+                            
+                            VStack(alignment: .leading) {
+                                
+                                MoviePosterView(movie: movie)
+                                
+                                Text(movie.title).lineLimit(1)
+                                    .foregroundColor(.black)
+                                    .frame(width: 204, alignment: .leading)
+                                
+                                HStack {
+                                    if !movie.ratingText.isEmpty {
+                                        Text(movie.ratingText).foregroundColor(.yellow)
+                                    }
+                                }
+                            }
                         }
                     }
                 }
