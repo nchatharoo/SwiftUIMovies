@@ -33,7 +33,7 @@ struct MoviePosterScrollView: View {
                                 MoviePosterView(movie: movie)
                                 
                                 Text(movie.title).lineLimit(1)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.primary)
                                     .frame(width: 204, alignment: .leading)
                                 
                                 HStack {
