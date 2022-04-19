@@ -26,7 +26,7 @@
 		8E597A3E26D3FD2800F421FC /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E597A3D26D3FD2800F421FC /* MovieDetailView.swift */; };
 		8E597A4026D3FD6500F421FC /* MovieDetailListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E597A3F26D3FD6500F421FC /* MovieDetailListView.swift */; };
 		8E597A4226D4010C00F421FC /* MovieDetailObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E597A4126D4010C00F421FC /* MovieDetailObservable.swift */; };
-		8E597A4426D401C800F421FC /* MovieDetailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E597A4326D401C800F421FC /* MovieDetailImage.swift */; };
+		8E597A4426D401C800F421FC /* MovieBackdropImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E597A4326D401C800F421FC /* MovieBackdropImage.swift */; };
 		8E597A4726D4031300F421FC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E597A4626D4031300F421FC /* SafariView.swift */; };
 		8E597A4B26D43F1E00F421FC /* movie_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E597A4A26D43F1E00F421FC /* movie_list.json */; };
 		8E597A4C26D43F1E00F421FC /* movie_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E597A4A26D43F1E00F421FC /* movie_list.json */; };
@@ -102,7 +102,7 @@
 		8E597A3D26D3FD2800F421FC /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		8E597A3F26D3FD6500F421FC /* MovieDetailListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailListView.swift; sourceTree = "<group>"; };
 		8E597A4126D4010C00F421FC /* MovieDetailObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailObservable.swift; sourceTree = "<group>"; };
-		8E597A4326D401C800F421FC /* MovieDetailImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailImage.swift; sourceTree = "<group>"; };
+		8E597A4326D401C800F421FC /* MovieBackdropImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBackdropImage.swift; sourceTree = "<group>"; };
 		8E597A4626D4031300F421FC /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		8E597A4A26D43F1E00F421FC /* movie_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_list.json; sourceTree = "<group>"; };
 		8E5F402E26680A3C001F01CA /* MovieListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListEndpoint.swift; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 				8E64881426C66EA200F314CA /* MoviePosterView.swift */,
 				8E597A3D26D3FD2800F421FC /* MovieDetailView.swift */,
 				8E597A3F26D3FD6500F421FC /* MovieDetailListView.swift */,
-				8E597A4326D401C800F421FC /* MovieDetailImage.swift */,
+				8E597A4326D401C800F421FC /* MovieBackdropImage.swift */,
 			);
 			path = "Movie View";
 			sourceTree = "<group>";
@@ -597,7 +597,7 @@
 				8E597A4026D3FD6500F421FC /* MovieDetailListView.swift in Sources */,
 				8E6147032643295A00AC06B1 /* URLSessionHTTPClient.swift in Sources */,
 				8E287EB026C1B5D400003ADF /* MovieListObservable.swift in Sources */,
-				8E597A4426D401C800F421FC /* MovieDetailImage.swift in Sources */,
+				8E597A4426D401C800F421FC /* MovieBackdropImage.swift in Sources */,
 				8E597A3E26D3FD2800F421FC /* MovieDetailView.swift in Sources */,
 				8E6AA4512678F08F00FE4859 /* LocalMovieLoader.swift in Sources */,
 				8EBE533E26C54597008CC005 /* SceneDelegate.swift in Sources */,
@@ -672,7 +672,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				INFOPLIST_FILE = SwiftUIMoviesAPIEndToEndTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -693,7 +693,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				INFOPLIST_FILE = SwiftUIMoviesAPIEndToEndTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -714,7 +714,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				INFOPLIST_FILE = SwiftUIMoviesCacheIntegrationTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -735,7 +735,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				INFOPLIST_FILE = SwiftUIMoviesCacheIntegrationTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -800,7 +800,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -855,7 +855,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -876,7 +876,7 @@
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SwiftUIMovies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -900,7 +900,7 @@
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SwiftUIMovies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -922,7 +922,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				INFOPLIST_FILE = SwiftUIMoviesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -946,7 +946,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				INFOPLIST_FILE = SwiftUIMoviesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

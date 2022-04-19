@@ -19,7 +19,7 @@ struct MovieDetailListView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 
-                MovieDetailImage(imageLoader: imageLoader, imageURL: movie.backdropURL)
+                MovieBackdropImage(imageURL: movie.backdropURL)
                 
                 GeometryReader { moviePoster in
                     MovieCardView(movie: movie)
@@ -144,22 +144,22 @@ struct MovieDetailListView: View {
             }
         }
         .cornerRadius(25)
+        .padding(.bottom)
     }
 }
 
 struct MovieCardView: View {
     
     let movie: Movie
-    @ObservedObject var imageLoader = ImageLoader()
     
     var body: some View {
         ZStack {
-            if self.imageLoader.image != nil {
-                Image(uiImage: self.imageLoader.image!)
+            AsyncImage(url: movie.posterURL) { image in
+                image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .cornerRadius(8)
-            } else {
+            } placeholder: {
                 Rectangle()
                     .fill(Color.gray.opacity(0.8))
                     .cornerRadius(8)
@@ -168,9 +168,6 @@ struct MovieCardView: View {
         .frame(width: 100, height: 170)
         .aspectRatio(1, contentMode: .fit)
         .shadow(radius: 8)
-        .onAppear {
-            self.imageLoader.loadImage(with: self.movie.posterURL)
-        }
     }
 }
 
