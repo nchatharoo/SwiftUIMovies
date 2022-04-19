@@ -16,7 +16,8 @@ struct MovieBackdropImage: View {
             AsyncImage(url: imageURL) { image in
                 image.resizable()
             } placeholder: {
-                Rectangle().fill(Color.gray.opacity(0.3))
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
             }
         }
         .aspectRatio(16/9, contentMode: .fit)

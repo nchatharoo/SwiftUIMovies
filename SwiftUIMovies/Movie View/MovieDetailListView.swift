@@ -134,7 +134,8 @@ struct MovieDetailListView: View {
                                 }
                                 .padding([.leading, .trailing])
                             }
-                            .padding([.top, .bottom], 4)
+                            .padding([.top], 4)
+                            .padding(.bottom)
                         }
                     }
                 }
@@ -144,7 +145,6 @@ struct MovieDetailListView: View {
             }
         }
         .cornerRadius(25)
-        .padding(.bottom)
     }
 }
 
