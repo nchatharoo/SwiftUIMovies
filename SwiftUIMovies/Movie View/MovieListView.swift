@@ -48,6 +48,7 @@ struct MovieListView: View {
                 }
                 .padding()
             }
+            .background(Color("Background"))
             .navigationBarTitle("The MovieDb")
         }
         .onAppear {

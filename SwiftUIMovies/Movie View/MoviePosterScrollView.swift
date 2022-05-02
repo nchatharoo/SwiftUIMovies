@@ -38,7 +38,7 @@ struct MoviePosterScrollView: View {
                                 
                                 HStack {
                                     if !movie.ratingText.isEmpty {
-                                        Text(movie.ratingText).foregroundColor(.yellow)
+                                        Text(movie.ratingText).foregroundColor(Color("StarsColor"))
                                     }
                                 }
                             }
